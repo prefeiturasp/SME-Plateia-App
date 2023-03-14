@@ -1,1 +1,3 @@
-# SME-Plateia-App
+# sme_plateia
+
+A new Flutter project.
