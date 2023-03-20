@@ -4,11 +4,11 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sme_plateia/core/errors/exceptions.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
-import 'package:sme_plateia/data/models/autenticao_model.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 
 abstract class IAutenticacaoLocalDataSource {
-  Future<void> cacheToken(AutenticacaoModel loginModel);
-  Future<AutenticacaoModel> getLastToken();
+  Future<void> cacheToken(AutenticacaoDto loginModel);
+  Future<AutenticacaoDto> getLastToken();
 }
 
 @Injectable(as: IAutenticacaoLocalDataSource)
@@ -20,16 +20,16 @@ class AutenticacaoLocalDataSource implements IAutenticacaoLocalDataSource {
   });
 
   @override
-  Future<void> cacheToken(AutenticacaoModel loginModel) {
+  Future<void> cacheToken(AutenticacaoDto loginModel) {
     return sharedPreferences.setString(CACHED_TOKEN, jsonEncode(loginModel));
   }
 
   @override
-  Future<AutenticacaoModel> getLastToken() async {
+  Future<AutenticacaoDto> getLastToken() async {
     String? jsonStr = sharedPreferences.getString(CACHED_TOKEN);
     if (jsonStr == null) {
       throw CacheException();
     }
-    return AutenticacaoModel.fromJson(jsonDecode(jsonStr));
+    return AutenticacaoDto.fromJson(jsonDecode(jsonStr));
   }
 }

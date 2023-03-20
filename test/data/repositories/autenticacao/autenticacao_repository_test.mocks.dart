@@ -16,7 +16,7 @@ import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_re
     as _i7;
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_service.dart'
     as _i2;
-import 'package:sme_plateia/data/models/autenticao_model.dart' as _i5;
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart' as _i5;
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart'
     as _i3;
 
@@ -63,9 +63,9 @@ class _FakeSharedPreferences_2 extends _i1.SmartFake
         );
 }
 
-class _FakeAutenticacaoModel_3 extends _i1.SmartFake
-    implements _i5.AutenticacaoModel {
-  _FakeAutenticacaoModel_3(
+class _FakeAutenticacaoDto_3 extends _i1.SmartFake
+    implements _i5.AutenticacaoDto {
+  _FakeAutenticacaoDto_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -159,7 +159,7 @@ class MockAutenticacaoLocalDataSource extends _i1.Mock
         ),
       ) as _i4.SharedPreferences);
   @override
-  _i8.Future<void> cacheToken(_i5.AutenticacaoModel? loginModel) =>
+  _i8.Future<void> cacheToken(_i5.AutenticacaoDto? loginModel) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheToken,
@@ -169,20 +169,20 @@ class MockAutenticacaoLocalDataSource extends _i1.Mock
         returnValueForMissingStub: _i8.Future<void>.value(),
       ) as _i8.Future<void>);
   @override
-  _i8.Future<_i5.AutenticacaoModel> getLastToken() => (super.noSuchMethod(
+  _i8.Future<_i5.AutenticacaoDto> getLastToken() => (super.noSuchMethod(
         Invocation.method(
           #getLastToken,
           [],
         ),
         returnValue:
-            _i8.Future<_i5.AutenticacaoModel>.value(_FakeAutenticacaoModel_3(
+            _i8.Future<_i5.AutenticacaoDto>.value(_FakeAutenticacaoDto_3(
           this,
           Invocation.method(
             #getLastToken,
             [],
           ),
         )),
-      ) as _i8.Future<_i5.AutenticacaoModel>);
+      ) as _i8.Future<_i5.AutenticacaoDto>);
 }
 
 /// A class which mocks [NetworkInfo].

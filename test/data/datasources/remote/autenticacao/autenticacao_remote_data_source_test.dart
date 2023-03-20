@@ -9,7 +9,7 @@ import 'package:sme_plateia/core/errors/exceptions.dart';
 
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_data_source.dart';
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_service.dart';
-import 'package:sme_plateia/data/models/autenticao_model.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'autenticacao_remote_data_source_test.mocks.dart';
@@ -30,13 +30,13 @@ void main() {
   group('autenticar', () {
     const String tLogin = 'login';
     const String tSenha = 'senha';
-    final AutenticacaoModel tAutenticacaoModel = AutenticacaoModel(token: 'token');
+    final AutenticacaoDto tAutenticacaoDto = AutenticacaoDto(token: 'token');
 
     test('deve retornar o objeto do token do usuario se a requisição for bem sucedida', () async {
       //arrange
       when(mockAutenticacaoRemoteService.autenticar(login: tLogin, senha: tSenha)).thenAnswer(
         (_) async => HttpResponse(
-          AutenticacaoModel.fromJson(jsonDecode(fixture('autenticacao/autenticacao.json'))),
+          AutenticacaoDto.fromJson(jsonDecode(fixture('autenticacao/autenticacao.json'))),
           Response(
             requestOptions: RequestOptions(),
             statusCode: 200,
@@ -48,7 +48,7 @@ void main() {
 
       //assert
 
-      expect(result, equals(tAutenticacaoModel));
+      expect(result, equals(tAutenticacaoDto));
     });
 
     test('should throw an exception if the status code is not 200', () async {

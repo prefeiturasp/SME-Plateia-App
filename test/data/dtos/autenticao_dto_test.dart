@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sme_plateia/data/models/autenticao_model.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
 
 import '../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tAutenticaoModel = AutenticacaoModel(token: "token");
+  final tAutenticaoModel = AutenticacaoDto(token: "token");
 
   test('should be a subclass of User entity', () async {
     //assert
@@ -20,7 +20,7 @@ void main() {
       final Map<String, dynamic> jsonMap = json.decode(fixture('autenticacao/autenticacao.json'));
 
       //Act
-      final result = AutenticacaoModel.fromJson(jsonMap);
+      final result = AutenticacaoDto.fromJson(jsonMap);
 
       //Assert
       expect(result, equals(tAutenticaoModel));

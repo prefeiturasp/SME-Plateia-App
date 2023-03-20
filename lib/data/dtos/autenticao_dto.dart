@@ -3,18 +3,18 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
 
-part 'autenticao_model.g.dart';
+part 'autenticao_dto.g.dart';
 
 @JsonSerializable()
-class AutenticacaoModel extends Autenticacao {
-  AutenticacaoModel({
+class AutenticacaoDto extends Autenticacao {
+  AutenticacaoDto({
     required String token,
   }) : super(
           token: token,
         );
 
-  factory AutenticacaoModel.fromJson(Map<String, dynamic> json) => _$AutenticacaoModelFromJson(json);
+  factory AutenticacaoDto.fromJson(Map<String, dynamic> json) => _$AutenticacaoDtoFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$AutenticacaoModelToJson(this);
+  Map<String, dynamic> toJson() => _$AutenticacaoDtoToJson(this);
 }

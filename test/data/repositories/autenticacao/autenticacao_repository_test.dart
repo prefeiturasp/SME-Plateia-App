@@ -8,7 +8,7 @@ import 'package:sme_plateia/core/errors/failures.dart';
 import 'package:sme_plateia/core/network/network_info.dart';
 import 'package:sme_plateia/data/datasources/local/autenticacao/autenticacao_local_datasource.dart';
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_data_source.dart';
-import 'package:sme_plateia/data/models/autenticao_model.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 import 'package:sme_plateia/data/repositories/autenticacao/autenticacao_repository.dart';
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
 
@@ -39,13 +39,14 @@ void main() {
 
   String tLogin = 'login';
   String tSenha = 'tenha';
-  AutenticacaoModel tAutenticacaoModel = AutenticacaoModel(token: "token");
-  Autenticacao tAutenticacao = tAutenticacaoModel;
+  AutenticacaoDto tAutenticacaoDto = AutenticacaoDto(token: "token");
+  Autenticacao tAutenticacao = tAutenticacaoDto;
 
   group('autenticar', () {
     test('deve verificar se o dispositivo esta online', () async {
       //Arrange
       when(mockNetworkInfo.isConnected).thenAnswer((realInvocation) async => true);
+      when(mockRemoteDataSource.autenticar(login: tLogin, senha: tSenha)).thenAnswer((_) async => tAutenticacao);
       //Act
       repository.autenticar(tLogin, tSenha);
       //Assert
@@ -60,7 +61,7 @@ void main() {
 
     test('deve retornar o token quando o dispositivo esta online', () async {
       //Arrange
-      when(mockRemoteDataSource.autenticar(login: tLogin, senha: tSenha)).thenAnswer((_) async => tAutenticacaoModel);
+      when(mockRemoteDataSource.autenticar(login: tLogin, senha: tSenha)).thenAnswer((_) async => tAutenticacaoDto);
 
       //Act
       final result = await repository.autenticar(tLogin, tSenha);
@@ -72,14 +73,14 @@ void main() {
 
     test('deve salvar em cache o token quando a chamada remota tiver sucesso', () async {
       //Arrange
-      when(mockRemoteDataSource.autenticar(login: tLogin, senha: tSenha)).thenAnswer((_) async => tAutenticacaoModel);
+      when(mockRemoteDataSource.autenticar(login: tLogin, senha: tSenha)).thenAnswer((_) async => tAutenticacaoDto);
 
       //Act
       await repository.autenticar(tLogin, tSenha);
 
       //Assert
       verify(mockRemoteDataSource.autenticar(login: tLogin, senha: tSenha));
-      verify(mockLocalDataSource.cacheToken(tAutenticacaoModel));
+      verify(mockLocalDataSource.cacheToken(tAutenticacaoDto));
     });
 
     test('deve retornar uma falha quando a chama remota nao tiver sucesso', () async {

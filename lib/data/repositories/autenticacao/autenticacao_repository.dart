@@ -6,7 +6,7 @@ import 'package:sme_plateia/core/errors/failures.dart';
 import 'package:sme_plateia/core/network/network_info.dart';
 import 'package:sme_plateia/data/datasources/local/autenticacao/autenticacao_local_datasource.dart';
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_data_source.dart';
-import 'package:sme_plateia/data/models/autenticao_model.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
 import 'package:sme_plateia/domain/repositories/autenticacao/i_authentication_repository.dart';
 
@@ -36,7 +36,7 @@ class AutenticacaoRepository implements IAutenticacaoRepository {
 
         final Autenticacao autenticacao = result;
 
-        autenticacaoLocalDataSource.cacheToken(autenticacao as AutenticacaoModel);
+        autenticacaoLocalDataSource.cacheToken(autenticacao as AutenticacaoDto);
 
         return Right(autenticacao);
       } catch (e) {

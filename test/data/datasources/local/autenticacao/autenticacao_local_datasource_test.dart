@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sme_plateia/core/errors/exceptions.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/data/datasources/local/autenticacao/autenticacao_local_datasource.dart';
-import 'package:sme_plateia/data/models/autenticao_model.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'autenticacao_local_datasource_test.mocks.dart';
@@ -25,8 +25,8 @@ void main() {
   });
 
   group('getLastToken', () {
-    final AutenticacaoModel tAutenticacaoModel =
-        AutenticacaoModel.fromJson(jsonDecode(fixture('autenticacao/autenticacao.json')));
+    final AutenticacaoDto tAutenticacaoDto =
+        AutenticacaoDto.fromJson(jsonDecode(fixture('autenticacao/autenticacao.json')));
 
     test('deve retornar o ultimo token guardado (cacheado)', () async {
       //arrange
@@ -37,7 +37,7 @@ void main() {
 
       //assert
       verify(mockSharedPreferences.getString(CACHED_TOKEN));
-      expect(result, tAutenticacaoModel);
+      expect(result, tAutenticacaoDto);
     });
 
     test('deve retornar CacheException quando não existe nenhum token salvo', () async {
@@ -53,17 +53,17 @@ void main() {
   });
 
   group('cacheToken', () {
-    final AutenticacaoModel tAutenticacaoModel = AutenticacaoModel(token: '123456');
+    final AutenticacaoDto tAutenticacaoDto = AutenticacaoDto(token: '123456');
 
     test('deve salvar o token', () async {
       //arrange
       when(mockSharedPreferences.setString(any, any)).thenAnswer((_) async => true);
 
       //act
-      dataSourceImpl.cacheToken(tAutenticacaoModel);
+      dataSourceImpl.cacheToken(tAutenticacaoDto);
 
       //assert
-      verify(mockSharedPreferences.setString(CACHED_TOKEN, jsonEncode(tAutenticacaoModel)));
+      verify(mockSharedPreferences.setString(CACHED_TOKEN, jsonEncode(tAutenticacaoDto)));
     });
   });
 }
