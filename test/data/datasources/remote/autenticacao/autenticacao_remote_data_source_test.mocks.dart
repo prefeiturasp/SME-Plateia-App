@@ -9,8 +9,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:retrofit/retrofit.dart' as _i2;
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_service.dart'
     as _i3;
-import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart'
-    as _i5;
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -44,7 +43,7 @@ class MockAutenticacaoRemoteService extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.HttpResponse<_i5.Autenticacao>> autenticar({
+  _i4.Future<_i2.HttpResponse<_i5.AutenticacaoDto>> autenticar({
     required String? login,
     required String? senha,
   }) =>
@@ -57,8 +56,8 @@ class MockAutenticacaoRemoteService extends _i1.Mock
             #senha: senha,
           },
         ),
-        returnValue: _i4.Future<_i2.HttpResponse<_i5.Autenticacao>>.value(
-            _FakeHttpResponse_0<_i5.Autenticacao>(
+        returnValue: _i4.Future<_i2.HttpResponse<_i5.AutenticacaoDto>>.value(
+            _FakeHttpResponse_0<_i5.AutenticacaoDto>(
           this,
           Invocation.method(
             #autenticar,
@@ -69,5 +68,5 @@ class MockAutenticacaoRemoteService extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.HttpResponse<_i5.Autenticacao>>);
+      ) as _i4.Future<_i2.HttpResponse<_i5.AutenticacaoDto>>);
 }

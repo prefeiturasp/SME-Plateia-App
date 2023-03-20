@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
+import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
 
 part 'autenticacao_remote_service.g.dart';
 
@@ -12,7 +12,7 @@ abstract class AutenticacaoRemoteService {
   factory AutenticacaoRemoteService(Dio dio, {String baseUrl}) = _AutenticacaoRemoteService;
 
   @POST('/')
-  Future<HttpResponse<Autenticacao>> autenticar({
+  Future<HttpResponse<AutenticacaoDto>> autenticar({
     required String login,
     required String senha,
   });

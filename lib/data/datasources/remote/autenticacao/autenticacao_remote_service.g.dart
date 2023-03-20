@@ -21,7 +21,7 @@ class _AutenticacaoRemoteService implements AutenticacaoRemoteService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<Autenticacao>> autenticar({
+  Future<HttpResponse<AutenticacaoDto>> autenticar({
     required login,
     required senha,
   }) async {
@@ -30,7 +30,7 @@ class _AutenticacaoRemoteService implements AutenticacaoRemoteService {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<Autenticacao>>(Options(
+        _setStreamType<HttpResponse<AutenticacaoDto>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -42,7 +42,7 @@ class _AutenticacaoRemoteService implements AutenticacaoRemoteService {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Autenticacao.fromJson(_result.data!);
+    final value = AutenticacaoDto.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

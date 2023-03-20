@@ -14,7 +14,5 @@ class AutenticacaoDto extends Autenticacao {
         );
 
   factory AutenticacaoDto.fromJson(Map<String, dynamic> json) => _$AutenticacaoDtoFromJson(json);
-
-  @override
   Map<String, dynamic> toJson() => _$AutenticacaoDtoToJson(this);
 }
