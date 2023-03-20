@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
+import 'package:sme_plateia/data/dtos/autenticacao/autenticacao_dto.dart';
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
 
 import '../../fixtures/fixture_reader.dart';

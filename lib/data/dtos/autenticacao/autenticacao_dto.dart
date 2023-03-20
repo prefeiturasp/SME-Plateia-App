@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart';
 
-part 'autenticao_dto.g.dart';
+part 'autenticacao_dto.g.dart';
 
 @JsonSerializable()
 class AutenticacaoDto extends Autenticacao {

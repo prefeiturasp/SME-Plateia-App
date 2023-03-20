@@ -9,7 +9,8 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:retrofit/retrofit.dart' as _i2;
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_service.dart'
     as _i3;
-import 'package:sme_plateia/data/dtos/autenticao_dto.dart' as _i5;
+import 'package:sme_plateia/data/dtos/autenticacao/autenticacao_dto.dart'
+    as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sme_plateia/core/errors/exceptions.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/data/datasources/local/autenticacao/autenticacao_local_datasource.dart';
-import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
+import 'package:sme_plateia/data/dtos/autenticacao/autenticacao_dto.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'autenticacao_local_datasource_test.mocks.dart';

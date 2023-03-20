@@ -9,7 +9,7 @@ import 'package:sme_plateia/core/errors/exceptions.dart';
 
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_data_source.dart';
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_service.dart';
-import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
+import 'package:sme_plateia/data/dtos/autenticacao/autenticacao_dto.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'autenticacao_remote_data_source_test.mocks.dart';

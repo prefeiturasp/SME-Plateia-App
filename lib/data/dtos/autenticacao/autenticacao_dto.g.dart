@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'autenticao_dto.dart';
+part of 'autenticacao_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

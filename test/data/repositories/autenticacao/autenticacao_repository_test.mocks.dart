@@ -16,7 +16,8 @@ import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_re
     as _i7;
 import 'package:sme_plateia/data/datasources/remote/autenticacao/autenticacao_remote_service.dart'
     as _i2;
-import 'package:sme_plateia/data/dtos/autenticao_dto.dart' as _i5;
+import 'package:sme_plateia/data/dtos/autenticacao/autenticacao_dto.dart'
+    as _i5;
 import 'package:sme_plateia/domain/entities/autenticacao/autenticacao.dart'
     as _i3;
 

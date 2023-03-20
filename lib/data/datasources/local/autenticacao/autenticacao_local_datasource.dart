@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sme_plateia/core/errors/exceptions.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
-import 'package:sme_plateia/data/dtos/autenticao_dto.dart';
+import 'package:sme_plateia/data/dtos/autenticacao/autenticacao_dto.dart';
 
 abstract class IAutenticacaoLocalDataSource {
   Future<void> cacheToken(AutenticacaoDto loginModel);
