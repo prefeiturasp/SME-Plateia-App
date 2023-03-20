@@ -18,6 +18,8 @@ dependencies:
   # Core
   equatable: ^2.0.5
   dartz: ^0.10.1
+  internet_connection_checker_plus: ^1.0.1
+  shared_preferences: ^2.0.18
 
   # Injeção de dependencia
   injectable: ^2.1.0
@@ -29,9 +31,17 @@ dependencies:
   # Estados
   mobx: ^2.1.4
   flutter_mobx: ^2.0.6+5 
+  flutter_triple: ^1.2.8-dev.1
   
   # Requisições
   chopper: ^6.1.1
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.0
+  http: ^0.13.5
+  jwt_decode: ^0.3.1
+  # - Retrofit
+  dio: ^5.0.2
+  retrofit: ^4.0.1
   
 dev_dependencies:
   flutter_test:
@@ -42,6 +52,10 @@ dev_dependencies:
   auto_route_generator: ^6.0.0-rc
   mobx_codegen: ^2.1.1
   chopper_generator: ^6.0.0
+  mockito: ^5.3.2
+  freezed: ^2.3.2
+  json_serializable: ^6.6.1
+  retrofit_generator: ^6.0.0+1
 
 
 flutter:

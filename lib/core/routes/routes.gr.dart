@@ -7,8 +7,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
-import 'package:sme_plateia/presentation/pages/eventos_page.dart' as _i3;
-import 'package:sme_plateia/presentation/pages/login_page.dart' as _i2;
+import 'package:sme_plateia/presentation/pages/eventos_page.dart' as _i2;
+import 'package:sme_plateia/presentation/pages/login/login_page.dart' as _i3;
 import 'package:sme_plateia/presentation/pages/splash_page.dart' as _i1;
 
 abstract class $AppRouter extends _i4.RootStackRouter {
@@ -23,21 +23,21 @@ abstract class $AppRouter extends _i4.RootStackRouter {
         child: const _i1.SplashPage(),
       );
     },
+    EventosRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i2.EventosPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
           orElse: () => const LoginRouteArgs());
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.LoginPage(
+        child: _i3.LoginPage(
           key: args.key,
           onLoginResult: args.onLoginResult,
         ),
-      );
-    },
-    EventosRoute.name: (routeData) {
-      return _i4.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i3.EventosPage(),
       );
     },
   };
@@ -58,7 +58,21 @@ class SplashRoute extends _i4.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.LoginPage]
+/// [_i2.EventosPage]
+class EventosRoute extends _i4.PageRouteInfo<void> {
+  const EventosRoute({List<_i4.PageRouteInfo>? children})
+      : super(
+          EventosRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EventosRoute';
+
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.LoginPage]
 class LoginRoute extends _i4.PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     _i5.Key? key,
@@ -93,18 +107,4 @@ class LoginRouteArgs {
   String toString() {
     return 'LoginRouteArgs{key: $key, onLoginResult: $onLoginResult}';
   }
-}
-
-/// generated route for
-/// [_i3.EventosPage]
-class EventosRoute extends _i4.PageRouteInfo<void> {
-  const EventosRoute({List<_i4.PageRouteInfo>? children})
-      : super(
-          EventosRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'EventosRoute';
-
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
 }

@@ -4,6 +4,8 @@ import 'core/di/dependency_injection_conf.dart';
 import 'core/routes/routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   configureDependencies();
 
   runApp(App());
