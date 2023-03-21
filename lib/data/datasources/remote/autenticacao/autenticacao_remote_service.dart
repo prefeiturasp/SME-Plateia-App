@@ -9,7 +9,7 @@ part 'autenticacao_remote_service.g.dart';
 @singleton
 abstract class AutenticacaoRemoteService {
   @factoryMethod
-  factory AutenticacaoRemoteService(Dio dio, {String baseUrl}) = _AutenticacaoRemoteService;
+  factory AutenticacaoRemoteService(Dio dio) = _AutenticacaoRemoteService;
 
   @POST('/')
   Future<HttpResponse<AutenticacaoDto>> autenticar({

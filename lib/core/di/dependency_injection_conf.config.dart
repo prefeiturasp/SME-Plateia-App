@@ -59,10 +59,8 @@ extension GetItInjectableX on _i1.GetIt {
       () => injectionModule.prefs,
       preResolve: true,
     );
-    gh.singleton<_i10.AutenticacaoRemoteService>(_i10.AutenticacaoRemoteService(
-      gh<_i7.Dio>(),
-      baseUrl: gh<String>(),
-    ));
+    gh.singleton<_i10.AutenticacaoRemoteService>(
+        _i10.AutenticacaoRemoteService(gh<_i7.Dio>()));
     gh.factory<_i11.IAutenticacaoLocalDataSource>(() =>
         _i11.AutenticacaoLocalDataSource(
             sharedPreferences: gh<_i9.SharedPreferences>()));
