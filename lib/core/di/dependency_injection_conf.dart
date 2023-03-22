@@ -10,4 +10,4 @@ final sl = GetIt.instance;
   preferRelativeImports: true,
   asExtension: true,
 )
-void configureDependencies() => sl.init();
+Future<void> configureDependencies() async => await sl.init();

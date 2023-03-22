@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:sme_plateia/core/firebase/app_firebase.dart';
 
 import 'core/di/dependency_injection_conf.dart';
 import 'core/routes/routes.dart';
 
-void main() {
+var logger = Logger('Main');
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  configureDependencies();
+  await configureFirebase();
+  await configureDependencies();
 
   runApp(App());
 }

@@ -20,6 +20,7 @@ dependencies:
   dartz: ^0.10.1
   internet_connection_checker_plus: ^1.0.1
   shared_preferences: ^2.0.18
+  logging: ^1.1.1
 
   # Injeção de dependencia
   injectable: ^2.1.0
@@ -42,6 +43,11 @@ dependencies:
   # - Retrofit
   dio: ^5.0.2
   retrofit: ^4.0.1
+
+  # Firebase
+  firebase_core: ^2.8.0
+  firebase_analytics: ^10.1.6
+  firebase_crashlytics: ^3.0.17
   
 dev_dependencies:
   flutter_test:

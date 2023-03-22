@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 16),
             InkWell(
-              onTap: () => _esqueciSenha(),
+              onTap: () async => await _esqueciSenha(),
               child: Text(
                 "Esqueci minha senha",
                 style: TextStyle(
@@ -144,7 +144,6 @@ class _LoginPageState extends State<LoginPage> {
       store: autenticacaoStore,
       builder: (context, triple) {
         return Container(
-          constraints: BoxConstraints(maxWidth: 392),
           decoration: BoxDecoration(
             color: Color.fromARGB(15, 51, 51, 51),
             borderRadius: BorderRadius.circular(12.0),
@@ -180,7 +179,6 @@ class _LoginPageState extends State<LoginPage> {
       store: autenticacaoStore,
       builder: (context, triple) {
         return Container(
-          constraints: BoxConstraints(maxWidth: 392),
           decoration: BoxDecoration(
             color: Color.fromARGB(15, 51, 51, 51),
             borderRadius: BorderRadius.circular(12.0),
@@ -227,7 +225,8 @@ class _LoginPageState extends State<LoginPage> {
     await autenticacaoStore.autenticar(userLogin, userSenha);
   }
 
-  _esqueciSenha() {
+  _esqueciSenha() async {
     //TODO: navegar para esqueci a senha
+    throw Exception();
   }
 }
