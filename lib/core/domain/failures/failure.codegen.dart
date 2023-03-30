@@ -7,7 +7,12 @@ class Failure with _$Failure {
   const factory Failure.localFailure({
     required String message,
   }) = LocalFailure;
+
   const factory Failure.serverFailure({
     required String message,
   }) = ServerFailure;
+
+  const factory Failure.noConnectionFailure({
+    required String message,
+  }) = NoConnectionFailure;
 }

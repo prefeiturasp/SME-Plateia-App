@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 const String BASE_URL = 'https://dev-plateia-api.sme.prefeitura.sp.gov.br/api/v1';
+const String CACHED_TOKEN = 'autenticacao';
 
 class Environment {
   const Environment._();
