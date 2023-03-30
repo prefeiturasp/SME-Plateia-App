@@ -49,7 +49,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "dev.adryanev.template"
+        applicationId "br.gov.sp.prefeitura.sme.plateia"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -80,17 +80,17 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Template"]
+            manifestPlaceholders = [appName: "Plateia"]
         }
         staging {
             dimension "default"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] Template"]
+            manifestPlaceholders = [appName: "[HOM] Plateia"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] Template"]
+            manifestPlaceholders = [appName: "[DEV] Plateia"]
         }
     }
 

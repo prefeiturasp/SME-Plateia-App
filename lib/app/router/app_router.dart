@@ -10,7 +10,13 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
-    AutoRoute(page: CounterRoute.page, path: '/'),
+    AutoRoute(
+      path: '/eventos',
+      page: EventosRoute.page,
+    ),
+    AutoRoute(page: LoginRoute.page, path: '/login'),
+    AutoRoute(page: EsqueceuSenhaRoute.page, path: '/esqueceu-senha'),
+    AutoRoute(page: LandingRoute.page, path: '/'),
     RedirectRoute(path: '*', redirectTo: '/'),
   ];
 }

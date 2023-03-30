@@ -9,6 +9,7 @@ mixin FailureMessageHandler {
     failure.when(
       localFailure: (message) => context.displayFlash(message),
       serverFailure: (message) => context.displayFlash(message),
+      noConnectionFailure: (message) => context.displayFlash(message),
     );
   }
 }
