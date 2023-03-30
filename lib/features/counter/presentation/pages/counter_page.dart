@@ -1,10 +1,3 @@
-// Copyright (c) 2022, Adryan Eka Vandra
-// https://github.com/adryanev/flutter-template-architecture-template
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
