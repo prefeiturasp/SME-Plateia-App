@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:template/features/auth/domain/entities/usuario.dart';
+import 'package:sme_plateia/features/auth/domain/entities/usuario.dart';
 
 class Autenticacao extends Equatable {
   final String refresh;

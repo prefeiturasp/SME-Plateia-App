@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:template/core/domain/failures/value_failure.codegen.dart';
+import 'package:sme_plateia/core/domain/failures/value_failure.codegen.dart';
 
 Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
   if (input.isEmpty) {

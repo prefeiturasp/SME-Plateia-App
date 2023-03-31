@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/core/utils/constants.dart';
-import 'package:template/features/auth/data/models/autenticacao.model.dart';
+import 'package:sme_plateia/core/utils/constants.dart';
+import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
 
 abstract class IAutenticacaoLocalDataSource {
   Future<void> cacheToken(AutenticacaoModel loginModel);

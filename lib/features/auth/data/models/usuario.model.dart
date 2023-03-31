@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template/features/auth/domain/entities/usuario.dart';
+import 'package:sme_plateia/features/auth/domain/entities/usuario.dart';
 
 part 'usuario.model.freezed.dart';
 part 'usuario.model.g.dart';

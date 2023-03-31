@@ -1,14 +1,11 @@
 import 'package:formz/formz.dart';
-import 'package:template/l10n/l10n.dart';
+import 'package:sme_plateia/l10n/l10n.dart';
 
 enum PasswordConfirmationValidationError { mismatch }
 
-class PasswordConfirmationInput
-    extends FormzInput<String, PasswordConfirmationValidationError> {
-  const PasswordConfirmationInput.pure([super.value = '', this._password = ''])
-      : super.pure();
-  const PasswordConfirmationInput.dirty(this._password, [super.value = ''])
-      : super.dirty();
+class PasswordConfirmationInput extends FormzInput<String, PasswordConfirmationValidationError> {
+  const PasswordConfirmationInput.pure([super.value = '', this._password = '']) : super.pure();
+  const PasswordConfirmationInput.dirty(this._password, [super.value = '']) : super.dirty();
 
   final String _password;
   @override

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/core/domain/failures/failure.codegen.dart';
+import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
 
-import 'package:template/app/network/network_info.dart';
-import 'package:template/features/auth/data/datasources/autenticacao_local_datasource.dart';
-import 'package:template/features/auth/data/datasources/autenticacao_remote_data_source.dart';
-import 'package:template/features/auth/data/models/autenticacao.model.dart';
-import 'package:template/features/auth/domain/entities/autenticacao.dart';
-import 'package:template/features/auth/domain/repositories/i_authentication_repository.dart';
+import 'package:sme_plateia/app/network/network_info.dart';
+import 'package:sme_plateia/features/auth/data/datasources/autenticacao_local_datasource.dart';
+import 'package:sme_plateia/features/auth/data/datasources/autenticacao_remote_data_source.dart';
+import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
+import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
+import 'package:sme_plateia/features/auth/domain/repositories/i_authentication_repository.dart';
 
 @LazySingleton(as: IAutenticacaoRepository)
 class AutenticacaoRepository implements IAutenticacaoRepository {

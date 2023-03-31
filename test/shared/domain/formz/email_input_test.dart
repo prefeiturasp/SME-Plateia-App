@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:template/shared/domain/formz/email_input.dart';
+import 'package:sme_plateia/shared/domain/formz/email_input.dart';
 
 void main() {
   group('EmailInput Pure', () {

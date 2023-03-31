@@ -10,20 +10,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
-import 'package:template/features/auth/presentation/pages/esqueceu_senha_page.dart'
-    as _i4;
-import 'package:template/features/auth/presentation/pages/landing_page.dart'
-    as _i3;
-import 'package:template/features/auth/presentation/pages/login_page.dart'
-    as _i2;
-import 'package:template/features/counter/presentation/pages/counter_page.dart'
-    as _i1;
-import 'package:template/features/eventos/presentation/pages/eventos_page.dart'
-    as _i5;
+import 'package:sme_plateia/features/auth/presentation/pages/esqueceu_senha_page.dart' as _i4;
+import 'package:sme_plateia/features/auth/presentation/pages/landing_page.dart' as _i3;
+import 'package:sme_plateia/features/auth/presentation/pages/login_page.dart' as _i2;
+import 'package:sme_plateia/features/counter/presentation/pages/counter_page.dart' as _i1;
+import 'package:sme_plateia/features/eventos/presentation/pages/eventos_page.dart' as _i5;
 
 abstract class $AppRouter extends _i6.RootStackRouter {
-  $AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  $AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, _i6.PageFactory> pagesMap = {

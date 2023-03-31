@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/core/utils/colors.dart';
+import 'package:sme_plateia/core/utils/colors.dart';
 
 class AuthTextField extends StatefulWidget {
   final String hint;

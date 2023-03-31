@@ -4,9 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/core/domain/failures/failure.codegen.dart';
-import 'package:template/features/auth/domain/entities/autenticacao.dart';
-import 'package:template/features/auth/domain/repositories/i_authentication_repository.dart';
+import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
+import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
+import 'package:sme_plateia/features/auth/domain/repositories/i_authentication_repository.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/core/domain/failures/failure.codegen.dart';
-import 'package:template/features/auth/data/models/autenticacao.model.dart';
+import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
+import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
 
 import 'autenticacao_remote_service.dart';
 
