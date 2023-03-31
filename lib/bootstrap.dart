@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:template/injector.dart';
+import 'package:sme_plateia/injector.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -22,6 +25,7 @@ class AppBlocObserver extends BlocObserver {
 Future<void> bootstrap(
   FutureOr<Widget> Function() builder, {
   required String environment,
+  FirebaseOptions? firebaseOptions,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -31,6 +35,21 @@ Future<void> bootstrap(
   };
 
   //Bloc.observer = AppBlocObserver();
+
+  if (firebaseOptions != null) {
+    await Firebase.initializeApp(
+      options: firebaseOptions,
+    );
+
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
 
   await runZonedGuarded(
     () async => runApp(await builder()),
