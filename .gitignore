@@ -143,6 +143,7 @@ app.*.map.json
 !.idea/runConfigurations/
 
 # Firebase
-firebase_options.dart
+firebase_options*.dart
 GoogleService-Info.plist
 google-services.json
+firebase.json
