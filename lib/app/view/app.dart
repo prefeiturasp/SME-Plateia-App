@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:template/app/router/app_router.dart';
-import 'package:template/core/extensions/context_extensions.dart';
-import 'package:template/core/utils/colors.dart';
-import 'package:template/core/utils/constants.dart';
-import 'package:template/features/auth/presentation/cubits/auth/auth_cubit.dart';
-import 'package:template/injector.dart';
-import 'package:template/l10n/l10n.dart';
-import 'package:template/shared/flash/presentation/blocs/cubit/flash_cubit.dart';
+import 'package:sme_plateia/app/router/app_router.dart';
+import 'package:sme_plateia/core/extensions/context_extensions.dart';
+import 'package:sme_plateia/core/utils/colors.dart';
+import 'package:sme_plateia/core/utils/constants.dart';
+import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:sme_plateia/injector.dart';
+import 'package:sme_plateia/l10n/l10n.dart';
+import 'package:sme_plateia/shared/flash/presentation/blocs/cubit/flash_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

@@ -10,16 +10,16 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
-import 'package:template/features/auth/presentation/pages/esqueceu_senha_page.dart'
-    as _i4;
-import 'package:template/features/auth/presentation/pages/landing_page.dart'
+import 'package:sme_plateia/features/auth/presentation/pages/esqueceu_senha_page.dart'
     as _i3;
-import 'package:template/features/auth/presentation/pages/login_page.dart'
+import 'package:sme_plateia/features/auth/presentation/pages/landing_page.dart'
     as _i2;
-import 'package:template/features/counter/presentation/pages/counter_page.dart'
+import 'package:sme_plateia/features/auth/presentation/pages/login_page.dart'
     as _i1;
-import 'package:template/features/eventos/presentation/pages/eventos_page.dart'
+import 'package:sme_plateia/features/counter/presentation/pages/counter_page.dart'
     as _i5;
+import 'package:sme_plateia/features/eventos/presentation/pages/eventos_page.dart'
+    as _i4;
 
 abstract class $AppRouter extends _i6.RootStackRouter {
   $AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
@@ -27,55 +27,41 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 
   @override
   final Map<String, _i6.PageFactory> pagesMap = {
-    CounterRoute.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i1.CounterPage(),
-      );
-    },
     LoginRoute.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.LoginPage(),
+        child: const _i1.LoginPage(),
       );
     },
     LandingRoute.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.LandingPage(),
+        child: const _i2.LandingPage(),
       );
     },
     EsqueceuSenhaRoute.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.EsqueceuSenhaPage(),
+        child: const _i3.EsqueceuSenhaPage(),
       );
     },
     EventosRoute.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.EventosPage(),
+        child: const _i4.EventosPage(),
+      );
+    },
+    CounterRoute.name: (routeData) {
+      return _i6.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i5.CounterPage(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.CounterPage]
-class CounterRoute extends _i6.PageRouteInfo<void> {
-  const CounterRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          CounterRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CounterRoute';
-
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i2.LoginPage]
+/// [_i1.LoginPage]
 class LoginRoute extends _i6.PageRouteInfo<void> {
   const LoginRoute({List<_i6.PageRouteInfo>? children})
       : super(
@@ -89,7 +75,7 @@ class LoginRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.LandingPage]
+/// [_i2.LandingPage]
 class LandingRoute extends _i6.PageRouteInfo<void> {
   const LandingRoute({List<_i6.PageRouteInfo>? children})
       : super(
@@ -103,7 +89,7 @@ class LandingRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.EsqueceuSenhaPage]
+/// [_i3.EsqueceuSenhaPage]
 class EsqueceuSenhaRoute extends _i6.PageRouteInfo<void> {
   const EsqueceuSenhaRoute({List<_i6.PageRouteInfo>? children})
       : super(
@@ -117,7 +103,7 @@ class EsqueceuSenhaRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.EventosPage]
+/// [_i4.EventosPage]
 class EventosRoute extends _i6.PageRouteInfo<void> {
   const EventosRoute({List<_i6.PageRouteInfo>? children})
       : super(
@@ -126,6 +112,20 @@ class EventosRoute extends _i6.PageRouteInfo<void> {
         );
 
   static const String name = 'EventosRoute';
+
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i5.CounterPage]
+class CounterRoute extends _i6.PageRouteInfo<void> {
+  const CounterRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          CounterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CounterRoute';
 
   static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }

@@ -1,6 +1,6 @@
-name: template
-description: A template Flutter Project
-version: 1.0.0+1
+name: sme_plateia
+description: Aplicativo de eventos de São paulo
+version: 1.0.1+1
 publish_to: none
 
 environment:
@@ -29,6 +29,11 @@ dependencies:
   internet_connection_checker_plus: ^1.0.1
   shared_preferences: ^2.0.18
   logging: ^1.1.1
+
+  # Firebase
+  firebase_core: ^2.8.0
+  firebase_analytics: ^10.1.6
+  firebase_crashlytics: ^3.0.17
 
   # Injeção de dependencia
   injectable: ^2.1.0

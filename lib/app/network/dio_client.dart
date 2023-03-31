@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:template/core/utils/constants.dart';
+import 'package:sme_plateia/core/utils/constants.dart';
 
 class DioClient {
   static Future<Dio> setup() async {

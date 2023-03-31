@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/features/auth/domain/entities/rf.dart';
-import 'package:template/features/auth/domain/entities/senha.dart';
-import 'package:template/features/auth/domain/usecases/autenticar_usecase.dart';
-import 'package:template/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:sme_plateia/features/auth/domain/entities/rf.dart';
+import 'package:sme_plateia/features/auth/domain/entities/senha.dart';
+import 'package:sme_plateia/features/auth/domain/usecases/autenticar_usecase.dart';
+import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
 
 part 'login_state.dart';
 part 'login_cubit.freezed.dart';

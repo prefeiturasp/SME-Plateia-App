@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:template/core/utils/web_view.dart';
+import 'package:sme_plateia/core/utils/web_view.dart';
 
 @RoutePage()
 class EsqueceuSenhaPage extends StatefulWidget {

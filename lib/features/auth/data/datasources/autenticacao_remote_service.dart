@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:template/features/auth/data/models/autenticacao.model.dart';
+import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
 
 part 'autenticacao_remote_service.g.dart';
 

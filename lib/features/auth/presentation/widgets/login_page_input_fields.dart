@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template/features/auth/presentation/cubits/login/login_cubit.dart';
+import 'package:sme_plateia/features/auth/presentation/cubits/login/login_cubit.dart';
 
 import 'auth_text_field.dart';
 

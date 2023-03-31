@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:template/app/router/app_router.gr.dart';
-import 'package:template/core/utils/colors.dart';
-import 'package:template/features/auth/presentation/cubits/login/login_cubit.dart';
-import 'package:template/features/auth/presentation/widgets/login_page_input_fields.dart';
-import 'package:template/features/auth/presentation/widgets/snackbar/snackbar_widgets.dart';
-import 'package:template/injector.dart';
+import 'package:sme_plateia/app/router/app_router.gr.dart';
+import 'package:sme_plateia/core/utils/colors.dart';
+import 'package:sme_plateia/features/auth/presentation/cubits/login/login_cubit.dart';
+import 'package:sme_plateia/features/auth/presentation/widgets/login_page_input_fields.dart';
+import 'package:sme_plateia/features/auth/presentation/widgets/snackbar/snackbar_widgets.dart';
+import 'package:sme_plateia/injector.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);

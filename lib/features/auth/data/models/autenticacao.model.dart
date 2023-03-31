@@ -1,7 +1,7 @@
-import 'package:template/features/auth/data/models/usuario.model.dart';
+import 'package:sme_plateia/features/auth/data/models/usuario.model.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:template/features/auth/domain/entities/autenticacao.dart';
+import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
 
 part 'autenticacao.model.freezed.dart';
 part 'autenticacao.model.g.dart';

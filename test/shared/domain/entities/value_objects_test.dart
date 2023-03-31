@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:template/core/domain/failures/value_failure.codegen.dart';
-import 'package:template/core/extensions/dartz_extensions.dart';
-import 'package:template/shared/domain/entities/value_objects.dart';
+import 'package:sme_plateia/core/domain/failures/value_failure.codegen.dart';
+import 'package:sme_plateia/core/extensions/dartz_extensions.dart';
+import 'package:sme_plateia/shared/domain/entities/value_objects.dart';
 
 void main() {
   group('StringSingleLine', () {

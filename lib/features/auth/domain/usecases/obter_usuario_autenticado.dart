@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:template/core/domain/usecases/use_case.dart';
-import 'package:template/core/extensions/dartz_extensions.dart';
-import 'package:template/core/interfaces/i_usecase.dart';
-import 'package:template/features/auth/domain/entities/autenticacao.dart';
-import 'package:template/features/auth/domain/repositories/i_authentication_repository.dart';
+import 'package:sme_plateia/core/domain/usecases/use_case.dart';
+import 'package:sme_plateia/core/extensions/dartz_extensions.dart';
+import 'package:sme_plateia/core/interfaces/i_usecase.dart';
+import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
+import 'package:sme_plateia/features/auth/domain/repositories/i_authentication_repository.dart';
 
 @injectable
 class ObterUsuarioAutenticadoUseCase implements IUseCaseOption<Autenticacao?, NoParams> {

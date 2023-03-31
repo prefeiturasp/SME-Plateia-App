@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:template/core/domain/failures/failure.codegen.dart';
-import 'package:template/features/auth/domain/entities/autenticacao.dart';
+import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
+import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
