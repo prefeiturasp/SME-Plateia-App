@@ -19,8 +19,6 @@ import 'autenticacao_repository_test.mocks.dart';
   NetworkInfo,
 ])
 void main() {
-  String featurePath = 'test/fixtures/autenticacao';
-
   late AutenticacaoRepository repository;
   late MockAutenticacaoRemoteDataSource mockRemoteDataSource;
   late MockAutenticacaoLocalDataSource mockLocalDataSource;
