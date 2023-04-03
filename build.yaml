@@ -11,6 +11,7 @@ targets:
           - lib/**.model.dart
         options:
           # field_rename: snake
+          explicit_to_json: true
       freezed:freezed:
         generate_for:
           - lib/**/blocs/**.dart
