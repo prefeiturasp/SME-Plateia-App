@@ -28,7 +28,7 @@ class AuthTextField extends StatefulWidget {
     this.showError = true,
     this.hasError = false,
     this.autofillHints,
-    this.padding = const EdgeInsets.only(left: 15, right: 15, top: 5),
+    this.padding = const EdgeInsets.only(left: 16, right: 16),
   }) : super(key: key);
 
   @override
@@ -86,6 +86,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
               labelText: widget.isRequiredField ? '${widget.labelText}*' : widget.labelText,
               labelStyle: TextStyle(
                 color: widget.error != null || widget.hasError ? TemaUtil.vermelhoErro : TemaUtil.preto01,
+                fontSize: 16,
               ),
               hintText: widget.isRequiredField ? '${widget.hint}*' : widget.hint,
               border: borderNone,

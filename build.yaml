@@ -15,6 +15,7 @@ targets:
       freezed:freezed:
         generate_for:
           - lib/**/blocs/**.dart
+          - lib/**/cubits/**.dart
           - lib/**.entity.dart
           - lib/**.model.dart
           - lib/**.codegen.dart

@@ -8,6 +8,7 @@ import 'package:sme_plateia/features/auth/presentation/cubits/login/login_cubit.
 import 'package:sme_plateia/features/auth/presentation/forms/login_form.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
 import 'package:sme_plateia/injector.dart';
+import 'package:sme_plateia/shared/presentation/widgets/rodape.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -43,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: LoginForm(),
               ),
             ),
+            Rodape(),
           ],
         ),
       ),
