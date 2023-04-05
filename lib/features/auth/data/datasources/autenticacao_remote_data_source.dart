@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
+import 'package:sme_plateia/app/network/dio_client.dart';
 import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
 
 import 'autenticacao_remote_service.dart';
@@ -27,12 +26,7 @@ class AutenticacaoRemoteDataSource implements IAutenticacaoRemoteDataSource {
 
       return response.data;
     } on DioError catch (e) {
-      debugPrint(e.toString());
-      if (e.response!.statusCode == 401) {
-        throw Failure.serverFailure(message: e.response!.data['errors'][0]);
-      } else {
-        throw Failure.serverFailure(message: e.error.toString());
-      }
+      throw handleNertorkError(e);
     }
   }
 
@@ -42,12 +36,7 @@ class AutenticacaoRemoteDataSource implements IAutenticacaoRemoteDataSource {
       final response = await autenticacaoRemoteService.logout();
       return response.data;
     } on DioError catch (e) {
-      debugPrint(e.toString());
-      if (e.response!.statusCode == 401) {
-        throw Failure.serverFailure(message: e.response!.data['errors'][0]);
-      } else {
-        throw Failure.serverFailure(message: e.error.toString());
-      }
+      throw handleNertorkError(e);
     }
   }
 }

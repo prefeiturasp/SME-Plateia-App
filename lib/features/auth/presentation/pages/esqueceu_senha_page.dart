@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/core/utils/web_view.dart';
+import 'package:sme_plateia/shared/presentation/widgets/rodape.dart';
+import 'package:sme_plateia/shared/presentation/widgets/text_button.dart';
 
 @RoutePage()
 class EsqueceuSenhaPage extends StatefulWidget {
@@ -16,7 +19,10 @@ class _EsqueceuSenhaPageState extends State<EsqueceuSenhaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Esqueci minha senha"),
+        title: const Text(
+          "Esqueci minha senha",
+          style: TextStyle(fontSize: 24),
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -27,34 +33,29 @@ class _EsqueceuSenhaPageState extends State<EsqueceuSenhaPage> {
               child: Center(child: SvgPicture.asset('assets/images/esqueceu_senha.svg')),
             ),
             const SizedBox(height: 36),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  const Text(
-                    "Você será redirecionado(a) para o site do Plateia para recuperar sua senha.",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      await _recuperarSenha();
-                    },
-                    child: Text('Recuperar minha senha'.toUpperCase()),
-                  )
-                ],
-              ),
-            ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Image.asset('assets/images/logo_saopaulo.png'),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    const Text(
+                      "Você será redirecionado(a) para o site do Plateia para recuperar sua senha.",
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    ButtonText(
+                      onPressed: () async {
+                        await _recuperarSenha();
+                      },
+                      text: 'Recuperar minha senha'.toUpperCase(),
+                    )
+                  ],
+                ),
               ),
             ),
+            Rodape(),
           ],
         ),
       ),
@@ -62,6 +63,6 @@ class _EsqueceuSenhaPageState extends State<EsqueceuSenhaPage> {
   }
 
   _recuperarSenha() async {
-    await launchURL(context, "http://identity.sme.prefeitura.sp.gov.br/Account/ForgotPassword");
+    await launchURL(context, Endpoint.recuperarSenha);
   }
 }

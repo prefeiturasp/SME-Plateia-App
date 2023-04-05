@@ -8,6 +8,7 @@ import 'package:sme_plateia/features/auth/presentation/cubits/login/login_cubit.
 import 'package:sme_plateia/features/auth/presentation/widgets/login_page_input_fields.dart';
 import 'package:sme_plateia/features/auth/presentation/widgets/snackbar/snackbar_widgets.dart';
 import 'package:sme_plateia/injector.dart';
+import 'package:sme_plateia/shared/presentation/widgets/text_button.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class LoginForm extends StatelessWidget {
         listener: (context, state) {
           if (state.formStatus.isFailure) {
             ScaffoldMessenger.of(context).showSnackBar(snackBarWhenFailure(
-              snackBarFailureText: 'Erro: ${state.exceptionError}',
+              snackBarFailureText: state.exceptionError,
             ));
           }
         },
@@ -67,11 +68,11 @@ class LoginForm extends StatelessWidget {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : TextButton(
+                    : ButtonText(
                         onPressed: () async {
                           _fazerLogin(context);
                         },
-                        child: const Text('ENTRAR'),
+                        text: 'Entrar'.toUpperCase(),
                       ),
                 const SizedBox(height: 16),
                 InkWell(
@@ -83,14 +84,6 @@ class LoginForm extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Image.asset('assets/images/logo_saopaulo.png'),
-                    ],
                   ),
                 ),
               ],
