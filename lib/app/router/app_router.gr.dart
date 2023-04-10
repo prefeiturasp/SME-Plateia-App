@@ -60,9 +60,13 @@ abstract class $AppRouter extends _i7.RootStackRouter {
       );
     },
     VoucherRoute.name: (routeData) {
+      final args = routeData.argsAs<VoucherRouteArgs>();
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.VoucherPage(),
+        child: _i6.VoucherPage(
+          key: args.key,
+          voucherId: args.voucherId,
+        ),
       );
     },
   };
@@ -140,14 +144,38 @@ class CounterRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.VoucherPage]
-class VoucherRoute extends _i7.PageRouteInfo<void> {
-  const VoucherRoute({List<_i7.PageRouteInfo>? children})
-      : super(
+class VoucherRoute extends _i7.PageRouteInfo<VoucherRouteArgs> {
+  VoucherRoute({
+    _i8.Key? key,
+    required String voucherId,
+    List<_i7.PageRouteInfo>? children,
+  }) : super(
           VoucherRoute.name,
+          args: VoucherRouteArgs(
+            key: key,
+            voucherId: voucherId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'VoucherRoute';
 
-  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
+  static const _i7.PageInfo<VoucherRouteArgs> page =
+      _i7.PageInfo<VoucherRouteArgs>(name);
+}
+
+class VoucherRouteArgs {
+  const VoucherRouteArgs({
+    this.key,
+    required this.voucherId,
+  });
+
+  final _i8.Key? key;
+
+  final String voucherId;
+
+  @override
+  String toString() {
+    return 'VoucherRouteArgs{key: $key, voucherId: $voucherId}';
+  }
 }

@@ -8,6 +8,7 @@ import 'package:sme_plateia/core/extensions/context_extensions.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.dart';
 import 'package:sme_plateia/injector.dart';
 import 'package:sme_plateia/l10n/l10n.dart';
 import 'package:sme_plateia/shared/flash/presentation/blocs/cubit/flash_cubit.dart';
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl<AuthCubit>()),
+        BlocProvider(create: (context) => sl<VoucherCubit>()),
         BlocProvider(create: (context) => sl<FlashCubit>()),
       ],
       child: MultiBlocListener(
@@ -73,17 +75,21 @@ class App extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        minimumSize: Size(MediaQuery.of(context).size.width - 20, 40),
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width - 20, 40),
                       ),
                     ),
                     buttonTheme: ButtonThemeData(
                       buttonColor: Colors.yellow,
                       textTheme: ButtonTextTheme.primary,
-                      colorScheme: Theme.of(context).colorScheme.copyWith(secondary: Colors.white),
+                      colorScheme: Theme.of(context)
+                          .colorScheme
+                          .copyWith(secondary: Colors.white),
                     ),
                   ),
                   child: MediaQuery(
-                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
+                    data:
+                        MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
                     child: widget!,
                   ),
                 );

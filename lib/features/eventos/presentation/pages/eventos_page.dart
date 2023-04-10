@@ -37,7 +37,7 @@ class _EventosPageState extends State<EventosPage> {
         // child: Text(context.read<AuthCubit>().state.toString()),
         child: ButtonText(
           onPressed: () async {
-            context.pushRoute(const VoucherRoute());
+            context.pushRoute(VoucherRoute(voucherId: '234'));
           },
           text: 'Ver voucher'.toUpperCase(),
         ),
