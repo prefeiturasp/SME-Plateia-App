@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:sme_plateia/shared/presentation/widgets/text_button.dart';
 
 @RoutePage()
 class EventosPage extends StatefulWidget {
@@ -31,7 +33,15 @@ class _EventosPageState extends State<EventosPage> {
           child: Text('Sair'),
         ),
       ),
-      body: Center(child: Text(context.read<AuthCubit>().state.toString())),
+      body: Center(
+        // child: Text(context.read<AuthCubit>().state.toString()),
+        child: ButtonText(
+          onPressed: () async {
+            context.pushRoute(const VoucherRoute());
+          },
+          text: 'Ver voucher'.toUpperCase(),
+        ),
+      ),
     );
   }
 }
