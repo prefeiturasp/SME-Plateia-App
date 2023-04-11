@@ -1,5 +1,5 @@
 class Voucher {
-  final String inscricaoId;
+  final String inscricao_id;
   final String nome;
   final String rf;
   final String evento;
@@ -8,11 +8,11 @@ class Voucher {
   final String local;
   final String endereco;
   final String categoria;
-  final String ingressosPorMembro;
+  final String ingressos_por_membro;
   final String qrcode;
 
   Voucher({
-    required this.inscricaoId,
+    required this.inscricao_id,
     required this.nome,
     required this.rf,
     required this.evento,
@@ -21,13 +21,13 @@ class Voucher {
     required this.local,
     required this.endereco,
     required this.categoria,
-    required this.ingressosPorMembro,
+    required this.ingressos_por_membro,
     required this.qrcode,
   });
 
   factory Voucher.fromJson(Map<String, dynamic> json) {
     return Voucher(
-      inscricaoId: json['inscricao_id'],
+      inscricao_id: json['inscricao_id'],
       nome: json['nome'],
       rf: json['rf'],
       evento: json['evento'],
@@ -36,7 +36,7 @@ class Voucher {
       local: json['local'],
       endereco: json['endereco'],
       categoria: json['categoria'],
-      ingressosPorMembro: json['ingressos_por_membro'],
+      ingressos_por_membro: json['ingressos_por_membro'],
       qrcode: json['qrcode'],
     );
   }

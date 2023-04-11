@@ -127,3 +127,35 @@
 //     }
 //   }
 // }
+
+import 'package:dio/dio.dart';
+
+class TestInterceptor extends Interceptor {
+  final Dio _dio;
+  TestInterceptor(this._dio);
+
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    print('REQUEST[${options.method}] => PATH: ${options.path}');
+    var customHeaders = {
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMzEyNDg4LCJpYXQiOjE2ODEyMjYwODgsImp0aSI6ImMyOTdiYzExYWU3ZTQ2ZjNhYjE1MzY3ZDNhNGY1ZDA4IiwidXNlcl9pZCI6IjA3NDkzNDBGLTJCRTMtRTExMS1BNzkxLTAwMTU1RDAyRTcwMiJ9.LmZXhKlEc67bL5LWOgvD8lG1GK3t50TM6B0ahdH10BA'
+    };
+    options.headers.addAll(customHeaders);
+    super.onRequest(options, handler);
+  }
+
+  // @override
+  // void onResponse(Response response, ResponseInterceptorHandler handler) {
+  //   print(
+  //       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+  //   super.onResponse(response, handler);
+  // }
+
+  // @override
+  // Future onError(DioError err, ErrorInterceptorHandler handler) {
+  //   print(
+  //       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+  //   super.onError(err, handler);
+  // }
+}

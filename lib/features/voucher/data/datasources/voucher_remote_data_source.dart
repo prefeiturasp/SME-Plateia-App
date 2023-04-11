@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/app/network/dio_client.dart';
 import 'package:sme_plateia/features/voucher/data/models/voucher.model.dart';
 
@@ -8,11 +9,13 @@ abstract class IVoucherRemoteDataSource {
   Future<VoucherModel> getVoucherById({required String id});
 }
 
-class VoucherRemoteDataSource {
+@Injectable(as: IVoucherRemoteDataSource)
+class VoucherRemoteDataSource implements IVoucherRemoteDataSource {
   VoucherRemoteService voucherRemoteService;
 
   VoucherRemoteDataSource(this.voucherRemoteService);
 
+  @override
   Future<VoucherModel> getVoucherById({
     required String id,
   }) async {

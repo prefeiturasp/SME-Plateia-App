@@ -11,6 +11,6 @@ abstract class VoucherRemoteService {
   @factoryMethod
   factory VoucherRemoteService(Dio dio) = _VoucherRemoteService;
 
-  @GET('/api/v1/inscricao/{id}/voucher')
+  @GET('/inscricao/{id}/voucher')
   Future<HttpResponse<VoucherModel>> getVoucherById(@Path('id') String id);
 }

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
+import 'package:sme_plateia/app/network/dio_interceptors/auth_interceptor.dart';
 
 class DioClient {
   static Future<Dio> setup() async {
@@ -14,8 +15,7 @@ class DioClient {
 
     final dio = Dio(options);
     dio.interceptors.addAll([
-      // AuthInterceptor(dio),
-
+      TestInterceptor(dio),
       PrettyDioLogger(
         compact: true,
       )
@@ -27,7 +27,8 @@ class DioClient {
 
 extension DioErrorX on DioError {
   bool get isNoConnectionError =>
-      type == DioErrorType.unknown && error is SocketException; // import 'dart:io' for SocketException
+      type == DioErrorType.unknown &&
+      error is SocketException; // import 'dart:io' for SocketException
 }
 
 handleNertorkError(DioError e) {

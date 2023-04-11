@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/features/voucher/domain/repositories/i_voucher_repository.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_state.dart';
 
+@injectable
 class VoucherCubit extends Cubit<VoucherState> {
   final IVoucherRepository _repository;
 
-  VoucherCubit({required IVoucherRepository repository})
-      : _repository = repository,
-        super(VoucherInitial());
+  VoucherCubit(this._repository) : super(VoucherInitial());
 
   Future<void> getVoucher(String id) async {
     emit(VoucherLoading());

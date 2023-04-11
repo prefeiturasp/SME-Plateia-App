@@ -1,13 +1,11 @@
 import 'dart:convert';
+import 'package:sme_plateia/injector.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_state.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.dart';
-import 'package:sme_plateia/features/voucher/data/repositories/voucher_repository.dart';
-import 'package:sme_plateia/features/voucher/domain/repositories/i_voucher_repository.dart';
-import 'package:sme_plateia/app/network/network_info.dart';
 
 @RoutePage()
 class VoucherPage extends StatelessWidget {
@@ -23,12 +21,10 @@ class VoucherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final voucherRepository =
-        VoucherRepository(IVoucherRepository, NetworkInfo);
-    final voucherCubit = context.read<VoucherCubit>();
+    final voucherCubit = VoucherCubit(sl());
     voucherCubit.getVoucher(voucherId);
     return BlocProvider<VoucherCubit>(
-        create: (context) => VoucherCubit(repository: voucherRepository),
+        create: (context) => VoucherCubit(sl()),
         child: Scaffold(
           appBar: AppBar(
             title: Text('Voucher'),
@@ -45,6 +41,7 @@ class VoucherPage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is VoucherLoaded) {
+                final voucher = state.voucher;
                 return SingleChildScrollView(
                   child: Card(
                     margin: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
@@ -295,7 +292,7 @@ class VoucherPage extends StatelessWidget {
                 );
               } else if (state is VoucherError) {
                 return Center(
-                  child: Text(state.message),
+                  child: Text('text'),
                 );
               } else {
                 return Container();

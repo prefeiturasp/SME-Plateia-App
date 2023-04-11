@@ -6,7 +6,7 @@ part 'voucher.model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class VoucherModel {
   const VoucherModel({
-    required this.inscricaoId,
+    required this.inscricao_id,
     required this.nome,
     required this.rf,
     required this.evento,
@@ -15,14 +15,14 @@ class VoucherModel {
     required this.local,
     required this.endereco,
     required this.categoria,
-    required this.ingressosPorMembro,
+    required this.ingressos_por_membro,
     required this.qrcode,
   });
 
   factory VoucherModel.fromJson(Map<String, dynamic> json) =>
       _$VoucherModelFromJson(json);
 
-  final String inscricaoId;
+  final String inscricao_id;
   final String nome;
   final String rf;
   final String evento;
@@ -31,11 +31,11 @@ class VoucherModel {
   final String local;
   final String endereco;
   final String categoria;
-  final String ingressosPorMembro;
+  final String ingressos_por_membro;
   final String qrcode;
 
   Voucher toDomain() => Voucher(
-        inscricaoId: inscricaoId,
+        inscricao_id: inscricao_id,
         nome: nome,
         rf: rf,
         evento: evento,
@@ -44,7 +44,7 @@ class VoucherModel {
         local: local,
         endereco: endereco,
         categoria: categoria,
-        ingressosPorMembro: ingressosPorMembro,
+        ingressos_por_membro: ingressos_por_membro,
         qrcode: qrcode,
       );
 }
