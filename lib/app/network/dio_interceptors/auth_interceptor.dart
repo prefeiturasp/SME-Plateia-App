@@ -130,13 +130,13 @@
 
 import 'package:dio/dio.dart';
 
+// OBS: APENAS PARA TESTAR FLUXO DE REQUISIÇÃO.
 class TestInterceptor extends Interceptor {
   final Dio _dio;
   TestInterceptor(this._dio);
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    print('REQUEST[${options.method}] => PATH: ${options.path}');
     var customHeaders = {
       'Authorization':
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMzEyNDg4LCJpYXQiOjE2ODEyMjYwODgsImp0aSI6ImMyOTdiYzExYWU3ZTQ2ZjNhYjE1MzY3ZDNhNGY1ZDA4IiwidXNlcl9pZCI6IjA3NDkzNDBGLTJCRTMtRTExMS1BNzkxLTAwMTU1RDAyRTcwMiJ9.LmZXhKlEc67bL5LWOgvD8lG1GK3t50TM6B0ahdH10BA'
