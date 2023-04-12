@@ -32,10 +32,14 @@ dependencies:
   shared_preferences: ^2.0.18
   logging: ^1.1.1
 
+  # Database
+  sqflite: ^2.2.6
+  floor: ^1.4.1
+
   # Firebase
-  firebase_core: ^2.8.0
-  firebase_analytics: ^10.1.6
-  firebase_crashlytics: ^3.0.17
+  firebase_core: ^2.9.0
+  firebase_analytics: ^10.2.0
+  firebase_crashlytics: ^3.1.0
 
   # Injeção de dependencia
   injectable: ^2.1.0
@@ -87,6 +91,9 @@ dev_dependencies:
 
   # Icones
   flutter_launcher_icons: "^0.12.0"
+
+  # Banco de dados
+  floor_generator: ^1.4.1
 
 dependency_overrides:
   xml: ^6.2.2
