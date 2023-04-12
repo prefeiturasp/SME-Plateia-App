@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_state.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
+import 'package:sme_plateia/core/utils/colors.dart';
 
 @RoutePage()
 class VoucherPage extends StatelessWidget {
@@ -16,6 +17,11 @@ class VoucherPage extends StatelessWidget {
     String base64String =
         encoded.replaceAll(RegExp('data:image\\/\\w+;base64,'), '');
     return base64String;
+  }
+
+  Future<void> handleDownloadPDF(BuildContext context) async {
+    final voucherCubit = BlocProvider.of<VoucherCubit>(context);
+    voucherCubit.getVoucherFile(voucherId);
   }
 
   @override
@@ -36,9 +42,12 @@ class VoucherPage extends StatelessWidget {
       ),
       body: BlocBuilder<VoucherCubit, VoucherState>(
         builder: (context, state) {
+          if (state is VoucherFileLoaded) {
+            print('voucherFile => ${state.voucherFile}');
+          }
           if (state is VoucherLoading) {
             return Center(
-              child: CircularProgressIndicator(color: Color(0xFFC65D00)),
+              child: CircularProgressIndicator(color: TemaUtil.laranja01),
             );
           } else if (state is VoucherLoaded) {
             final voucher = state.voucher;
@@ -119,7 +128,10 @@ class VoucherPage extends StatelessWidget {
                     ),
                     SizedBox(height: 16.0),
                     ButtonIconOutlinedWidget(
-                        title: 'BAIXAR VOUCHER', icon: Icons.download_outlined),
+                      title: 'BAIXAR VOUCHER',
+                      icon: Icons.download_outlined,
+                      callback: handleDownloadPDF(context),
+                    ),
                     Row(
                       children: [
                         Padding(
@@ -132,7 +144,7 @@ class VoucherPage extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,
-                                    color: Color(0xFFC65D00)),
+                                    color: TemaUtil.laranja01),
                               ),
                               SizedBox(height: 8.0),
                               Container(
@@ -187,7 +199,7 @@ class ListItemWidget extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: Icon(icon, color: Color(0xFFC65D00)),
+            child: Icon(icon, color: TemaUtil.laranja01),
           ),
           SizedBox(width: 16.0),
           Expanded(
@@ -220,9 +232,13 @@ class ListItemWidget extends StatelessWidget {
 class ButtonIconOutlinedWidget extends StatelessWidget {
   final String title;
   final IconData icon;
+  final CallbackAction callback;
 
   const ButtonIconOutlinedWidget(
-      {required this.title, required this.icon, Key? key})
+      {required this.title,
+      required this.icon,
+      Key? key,
+      required this.callback})
       : super(key: key);
 
   @override
@@ -234,14 +250,14 @@ class ButtonIconOutlinedWidget extends StatelessWidget {
         children: [
           OutlinedButton(
               onPressed: () {
-                // Função a ser executada quando o botão for pressionado
+                callback;
               },
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
                 side: BorderSide(
-                  color: Color(0xFFC65D00),
+                  color: TemaUtil.laranja01,
                   width: 2,
                 ),
               ),

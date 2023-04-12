@@ -15,7 +15,7 @@ class AppColor {
   static const orange = Color(0xFFF69762);
   static const orangeDark = Color(0xFFDD893C);
   static const orangeDarkest = Color(0xFFC1502C);
-
+// Color(0xFFC65D00)
   static const blueBackgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

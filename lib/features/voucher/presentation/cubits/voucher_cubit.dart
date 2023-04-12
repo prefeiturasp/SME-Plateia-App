@@ -17,4 +17,13 @@ class VoucherCubit extends Cubit<VoucherState> {
       (voucher) => emit(VoucherLoaded(voucher)),
     );
   }
+
+  Future<void> getVoucherFile(String id) async {
+    emit(VoucherLoading());
+    final result = await _repository.getVoucherFileById(id);
+    result.fold(
+      (failure) => emit(VoucherError('Erro ao buscar voucher file')),
+      (voucherFile) => emit(VoucherFileLoaded(voucherFile)),
+    );
+  }
 }
