@@ -41,7 +41,7 @@ class FiltroCubit extends Cubit<FiltroState> {
 
   filtrar() {}
 
-  carregarEventos() {
-    obterEventosUseCase.call(Params());
+  Future<void> carregarEventos() async {
+    await obterEventosUseCase.call(Params());
   }
 }

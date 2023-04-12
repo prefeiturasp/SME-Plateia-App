@@ -1,13 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:floor/floor.dart';
 
-part 'evento_resumo.entity.freezed.dart';
+@Entity()
+class EventoResumo {
+  @PrimaryKey(autoGenerate: true)
+  final int id;
+  final String nome;
+  final DateTime dataHora;
+  final String local;
+  final String urlPoster;
 
-@freezed
-abstract class EventoResumo with _$EventoResumo {
-  factory EventoResumo({
-    required String nome,
-    required DateTime dataHora,
-    required String local,
-    required String urlPoster,
-  }) = _EventoResumo;
+  EventoResumo({
+    required this.id,
+    required this.nome,
+    required this.dataHora,
+    required this.local,
+    required this.urlPoster,
+  });
 }

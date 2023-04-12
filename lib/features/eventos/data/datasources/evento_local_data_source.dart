@@ -1,22 +1,26 @@
 import 'package:injectable/injectable.dart';
+import 'package:sme_plateia/core/database/app_database.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 
 abstract class IEventoLocalDataSource {
+  Future<List<EventoResumo>> findAll();
   Future<void> saveAll(List<EventoResumo> entities);
-  Future<List<EventoResumo>> getAll();
 }
 
 @Injectable(as: IEventoLocalDataSource)
 class EventoLocalDataSource implements IEventoLocalDataSource {
+  final AppDatabase appDatabase;
+
+  EventoLocalDataSource(this.appDatabase);
+
   @override
-  Future<List<EventoResumo>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<List<EventoResumo>> findAll() async {
+    var entities = await appDatabase.eventoResumoDao.findAll();
+    return entities;
   }
 
   @override
-  Future<void> saveAll(List<EventoResumo> entities) {
-    // TODO: implement saveAll
-    throw UnimplementedError();
+  Future<void> saveAll(List<EventoResumo> entities) async {
+    await appDatabase.eventoResumoDao.insertOrUpdateEntities(entities);
   }
 }

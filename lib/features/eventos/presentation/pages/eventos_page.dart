@@ -36,7 +36,7 @@ class _EventosPageState extends State<EventosPage> {
     return Scaffold(
       appBar: Cabecalho(),
       body: BlocProvider(
-        create: (context) => FiltroCubit(sl()),
+        create: (context) => FiltroCubit(sl())..carregarEventos(),
         child: ScrollColumnExpandable(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

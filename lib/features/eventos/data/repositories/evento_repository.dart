@@ -51,7 +51,7 @@ class EventoRepository implements IEventoRepository {
 
         return Right(listEventosResumo);
       } else {
-        return Right(await eventoLocalDataSource.getAll());
+        return Right(await eventoLocalDataSource.findAll());
       }
     } on Failure catch (e) {
       debugPrint(e.toString());

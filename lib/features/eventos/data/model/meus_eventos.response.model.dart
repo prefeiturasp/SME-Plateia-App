@@ -5,7 +5,7 @@ part 'meus_eventos.response.model.freezed.dart';
 part 'meus_eventos.response.model.g.dart';
 
 @freezed
-abstract class MeusEventosResponseModel with _$MeusEventosResponseModel {
+class MeusEventosResponseModel with _$MeusEventosResponseModel {
   factory MeusEventosResponseModel({
     @JsonKey(name: 'count') required int total,
     @JsonKey(name: 'next') String? proximo,
