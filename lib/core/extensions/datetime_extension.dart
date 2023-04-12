@@ -14,6 +14,13 @@ extension DateTimeExtension on DateTime {
     if (locale != null && locale.isNotEmpty) {
       initializeDateFormatting(locale);
     }
-    return DateFormat('yyyy-MM-dd hh:ss', locale).format(this);
+    return DateFormat('yyyy-MM-dd HH:mm', locale).format(this);
+  }
+
+  String formatHHmm([String? locale]) {
+    if (locale != null && locale.isNotEmpty) {
+      initializeDateFormatting(locale);
+    }
+    return DateFormat('HH:mm', locale).format(this);
   }
 }

@@ -1,58 +1,84 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sme_plateia/core/extensions/scroll_controller_extensions.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
+import 'package:sme_plateia/features/eventos/domain/entities/evento_nome.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/filtro/filtro_cubit.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/dropdown_field.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/autocomplete_field.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/evento_card.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/evento_text_field.dart';
-import 'package:sme_plateia/features/eventos/presentation/widgets/scroll_column_expandable.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/sem_eventos.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/sem_resultados.dart';
-import 'package:sme_plateia/injector.dart';
 import 'package:sme_plateia/shared/presentation/widgets/cabecalho.dart';
 import 'package:sme_plateia/shared/presentation/widgets/rodape.dart';
 
 @RoutePage()
-class EventosPage extends StatefulWidget {
+class EventosPage extends HookWidget {
   const EventosPage({super.key});
 
   @override
-  State<EventosPage> createState() => _EventosPageState();
-}
-
-class _EventosPageState extends State<EventosPage> {
-  @override
-  void initState() {
-    FlutterNativeSplash.remove();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final filtroCubit = BlocProvider.of<FiltroCubit>(context);
+    final scrollController = useScrollController();
+
+    useEffect(() {
+      FlutterNativeSplash.remove();
+      filtroCubit.carregarEventos();
+
+      scrollController.onScrollEndsListener(() {
+        filtroCubit.carregarEventos();
+      });
+
+      return scrollController.dispose;
+    }, const []);
+
     return Scaffold(
       appBar: Cabecalho(),
-      body: BlocProvider(
-        create: (context) => FiltroCubit(sl())..carregarEventos(),
-        child: ScrollColumnExpandable(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Column(
           children: [
+            SizedBox(height: 16),
             _buildFiltros(),
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0, left: 16, top: 24),
-              child: Text(
-                'Resultados de busca por "Essa semana"',
-                style: TextStyle(
-                  color: Color(0xffC25F14),
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            Expanded(
-              child: _buildSemEventos(),
+            BlocBuilder<FiltroCubit, FiltroState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => Container(),
+                  loading: () => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  loaded: (resultado) => _buildResult(resultado),
+                  loadedFilter: (eventoNome, resultado) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0, left: 16, top: 24),
+                          child: Text(
+                            'Resultados de busca por "${eventoNome.value}"',
+                            style: TextStyle(
+                              color: Color(0xffC25F14),
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: _buildResult(resultado),
+                        ),
+                      ],
+                    );
+                  },
+                  semEventos: () {
+                    return _buildSemEventos();
+                  },
+                  semEventosFiltrado: () {
+                    return _buildSemResultados();
+                  },
+                );
+              },
             ),
           ],
         ),
@@ -60,44 +86,44 @@ class _EventosPageState extends State<EventosPage> {
     );
   }
 
-  _buildBody() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 16),
-          _buildFiltros(),
-          BlocBuilder<FiltroCubit, FiltroState>(
-            builder: (context, state) {
-              switch (state.pageStatus) {
-                case PageStatus.carregando:
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                case PageStatus.semEventos:
-                  return _buildSemEventos();
-                case PageStatus.comResultado:
-                  return _buildEventos(state.resultado);
-                case PageStatus.semResultado:
-                  return _buildSemResultados();
-                default:
-                  return Container();
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
+  // _buildBody() {
+  //   return SingleChildScrollView(
+  //     child: Column(
+  //       children: [
+  //         SizedBox(height: 16),
+  //         _buildFiltros(),
+  //         BlocBuilder<FiltroCubit, FiltroState>(
+  //           builder: (context, state) {
+  //             switch (state.pageStatus) {
+  //               case PageStatus.carregando:
+  //                 return Center(
+  //                   child: CircularProgressIndicator(),
+  //                 );
+  //               case PageStatus.semEventos:
+  //                 return _buildSemEventos();
+  //               case PageStatus.comResultado:
+  //                 return _buildEventos(state.resultado);
+  //               case PageStatus.semResultado:
+  //                 return _buildSemResultados();
+  //               default:
+  //                 return Container();
+  //             }
+  //           },
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  _buildEventos(List<EventoResumo> resultado) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 48),
-        _biuldResult(),
-      ],
-    );
-  }
+  // _buildEventos(List<EventoResumo> resultado) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       SizedBox(height: 48),
+  //       _buildResult(),
+  //     ],
+  //   );
+  // }
 
   _buildFiltros() {
     return Padding(
@@ -163,13 +189,16 @@ class _EventosPageState extends State<EventosPage> {
     );
   }
 
-  _biuldResult() {
-    return ListView.builder(
-      itemCount: 5,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return EventoCard();
-      },
+  _buildResult(List<EventoResumo> eventos) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView.builder(
+        itemCount: eventos.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return EventoCard(eventos[index]);
+        },
+      ),
     );
   }
 

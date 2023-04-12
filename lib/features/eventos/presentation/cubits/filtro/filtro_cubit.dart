@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_local.dart';
@@ -12,36 +13,41 @@ part 'filtro_cubit.freezed.dart';
 
 @Singleton()
 class FiltroCubit extends Cubit<FiltroState> {
-  FiltroCubit(this.obterEventosUseCase) : super(FiltroState.initial()) {
-    carregarEventos();
-  }
+  FiltroCubit(this.obterEventosUseCase) : super(FiltroState.initial());
 
   final ObterEventosUseCase obterEventosUseCase;
 
-  nomEventoChanged(String value) {
-    final eventoNome = EventoNome.dirty(value);
-    emit(state.copyWith(
-      eventoNome: eventoNome,
-    ));
-  }
+  // nomEventoChanged(String value) {
+  //   final eventoNome = EventoNome.dirty(value);
+  //   emit(state.copyWith(
+  //     eventoNome: eventoNome,
+  //   ));
+  // }
 
-  periodoChanged(String value) {
-    final eventoPeriodo = EventoPeriodo.dirty(value);
-    emit(state.copyWith(
-      eventoPeriodo: eventoPeriodo,
-    ));
-  }
+  // periodoChanged(String value) {
+  //   final eventoPeriodo = EventoPeriodo.dirty(value);
+  //   emit(state.copyWith(
+  //     eventoPeriodo: eventoPeriodo,
+  //   ));
+  // }
 
-  localEventoChanged(String value) {
-    final eventoLocal = EventoLocal.dirty(value);
-    emit(state.copyWith(
-      eventoLocal: eventoLocal,
-    ));
-  }
+  // localEventoChanged(String value) {
+  //   final eventoLocal = EventoLocal.dirty(value);
+  //   emit(state.copyWith(
+  //     eventoLocal: eventoLocal,
+  //   ));
+  // }
 
   filtrar() {}
 
   Future<void> carregarEventos() async {
-    await obterEventosUseCase.call(Params());
+    var eventos = await obterEventosUseCase.call(Params());
+
+    eventos.fold(
+      (l) => debugPrint(l.toString()),
+      (r) {
+        emit(FiltroState.loaded(resultado: r));
+      },
+    );
   }
 }
