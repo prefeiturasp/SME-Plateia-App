@@ -19,10 +19,10 @@ class VoucherPage extends StatelessWidget {
     return base64String;
   }
 
-  Future<void> handleDownloadPDF(BuildContext context) async {
-    final voucherCubit = BlocProvider.of<VoucherCubit>(context);
-    voucherCubit.getVoucherFile(voucherId);
-  }
+  // Future<void> handleDownloadPDF(BuildContext context) async {
+  //   final voucherCubit = BlocProvider.of<VoucherCubit>(context);
+  //   voucherCubit.getVoucherFile(voucherId);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -128,10 +128,7 @@ class VoucherPage extends StatelessWidget {
                     ),
                     SizedBox(height: 16.0),
                     ButtonIconOutlinedWidget(
-                      title: 'BAIXAR VOUCHER',
-                      icon: Icons.download_outlined,
-                      callback: handleDownloadPDF(context),
-                    ),
+                        title: 'BAIXAR VOUCHER', icon: Icons.download_outlined),
                     Row(
                       children: [
                         Padding(
@@ -232,13 +229,10 @@ class ListItemWidget extends StatelessWidget {
 class ButtonIconOutlinedWidget extends StatelessWidget {
   final String title;
   final IconData icon;
-  final CallbackAction callback;
+  final Function? callback;
 
   const ButtonIconOutlinedWidget(
-      {required this.title,
-      required this.icon,
-      Key? key,
-      required this.callback})
+      {required this.title, required this.icon, Key? key, this.callback})
       : super(key: key);
 
   @override

@@ -17,11 +17,11 @@ import 'package:sme_plateia/features/auth/presentation/pages/landing_page.dart'
 import 'package:sme_plateia/features/auth/presentation/pages/login_page.dart'
     as _i1;
 import 'package:sme_plateia/features/counter/presentation/pages/counter_page.dart'
-    as _i5;
-import 'package:sme_plateia/features/eventos/presentation/pages/eventos_page.dart'
-    as _i4;
-import 'package:sme_plateia/features/voucher/presentation/pages/voucher_page.dart'
     as _i6;
+import 'package:sme_plateia/features/eventos/presentation/pages/eventos_page.dart'
+    as _i5;
+import 'package:sme_plateia/features/voucher/presentation/pages/voucher_page.dart'
+    as _i4;
 
 abstract class $AppRouter extends _i7.RootStackRouter {
   $AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
@@ -47,26 +47,26 @@ abstract class $AppRouter extends _i7.RootStackRouter {
         child: const _i3.EsqueceuSenhaPage(),
       );
     },
+    VoucherRoute.name: (routeData) {
+      final args = routeData.argsAs<VoucherRouteArgs>();
+      return _i7.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i4.VoucherPage(
+          key: args.key,
+          voucherId: args.voucherId,
+        ),
+      );
+    },
     EventosRoute.name: (routeData) {
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.EventosPage(),
+        child: const _i5.EventosPage(),
       );
     },
     CounterRoute.name: (routeData) {
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.CounterPage(),
-      );
-    },
-    VoucherRoute.name: (routeData) {
-      final args = routeData.argsAs<VoucherRouteArgs>();
-      return _i7.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i6.VoucherPage(
-          key: args.key,
-          voucherId: args.voucherId,
-        ),
+        child: const _i6.CounterPage(),
       );
     },
   };
@@ -115,35 +115,7 @@ class EsqueceuSenhaRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.EventosPage]
-class EventosRoute extends _i7.PageRouteInfo<void> {
-  const EventosRoute({List<_i7.PageRouteInfo>? children})
-      : super(
-          EventosRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'EventosRoute';
-
-  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i5.CounterPage]
-class CounterRoute extends _i7.PageRouteInfo<void> {
-  const CounterRoute({List<_i7.PageRouteInfo>? children})
-      : super(
-          CounterRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CounterRoute';
-
-  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i6.VoucherPage]
+/// [_i4.VoucherPage]
 class VoucherRoute extends _i7.PageRouteInfo<VoucherRouteArgs> {
   VoucherRoute({
     _i8.Key? key,
@@ -178,4 +150,32 @@ class VoucherRouteArgs {
   String toString() {
     return 'VoucherRouteArgs{key: $key, voucherId: $voucherId}';
   }
+}
+
+/// generated route for
+/// [_i5.EventosPage]
+class EventosRoute extends _i7.PageRouteInfo<void> {
+  const EventosRoute({List<_i7.PageRouteInfo>? children})
+      : super(
+          EventosRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EventosRoute';
+
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i6.CounterPage]
+class CounterRoute extends _i7.PageRouteInfo<void> {
+  const CounterRoute({List<_i7.PageRouteInfo>? children})
+      : super(
+          CounterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CounterRoute';
+
+  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
 }

@@ -31,7 +31,7 @@ class VoucherRemoteDataSource implements IVoucherRemoteDataSource {
   }
 
   @override
-  Future<VoucherModel> getVoucheFilerById({
+  Future<VoucherFileModel> getVoucheFilerById({
     required String id,
   }) async {
     try {
