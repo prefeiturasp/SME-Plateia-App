@@ -78,7 +78,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
                       },
                       child: Icon(
                         _obscureText ? Icons.visibility : Icons.visibility_off,
-                        color: TemaUtil.cinza,
+                        color: TemaUtil.cinza01,
                       ),
                     )
                   : null,

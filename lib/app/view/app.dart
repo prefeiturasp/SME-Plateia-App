@@ -42,6 +42,15 @@ class App extends StatelessWidget {
           builder: (context, child) {
             return MaterialApp.router(
               scaffoldMessengerKey: rootScaffoldMessengerKey,
+              theme: ThemeData(
+                scaffoldBackgroundColor: TemaUtil.corDeFundo,
+                appBarTheme: const AppBarTheme(color: AppColor.primary),
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColor.primary,
+                ),
+                fontFamily: GoogleFonts.poppins().fontFamily,
+                textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp, displayColor: AppColor.primary),
+              ),
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -52,7 +61,7 @@ class App extends StatelessWidget {
                 return Theme(
                   data: ThemeData(
                     primaryColor: TemaUtil.amarelo01,
-                    appBarTheme: const AppBarTheme(
+                    appBarTheme: AppBarTheme(
                       iconTheme: IconThemeData(color: TemaUtil.preto01),
                       foregroundColor: TemaUtil.preto01,
                       color: TemaUtil.amarelo01,
@@ -67,7 +76,7 @@ class App extends StatelessWidget {
                       style: TextButton.styleFrom(
                         backgroundColor: TemaUtil.amarelo01,
                         foregroundColor: TemaUtil.preto02,
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           fontSize: 14,
                         ),
                         shape: RoundedRectangleBorder(

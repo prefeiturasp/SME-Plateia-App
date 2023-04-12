@@ -3,8 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @module
 abstract class StorageModule {
-  @lazySingleton
+  @singleton
   @preResolve
-  Future<SharedPreferences> get sharedPreference async =>
-      SharedPreferences.getInstance();
+  Future<SharedPreferences> get sharedPreference async => SharedPreferences.getInstance();
 }

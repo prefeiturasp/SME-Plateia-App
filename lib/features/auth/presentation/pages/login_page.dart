@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:sme_plateia/core/utils/colors.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:sme_plateia/features/auth/presentation/forms/login_form.dart';
@@ -28,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TemaUtil.corDeFundo,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

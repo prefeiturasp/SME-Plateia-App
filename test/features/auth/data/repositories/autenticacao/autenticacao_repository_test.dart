@@ -39,7 +39,7 @@ void main() {
   String tLogin = 'login';
   String tSenha = 'tenha';
   AutenticacaoModel tAutenticacaoModel = AutenticacaoModel(
-    token: '123456',
+    accessToken: '123456',
     refreshToken: 'refresh',
     usuario: UsuarioModel(
       nome: 'Nome',

@@ -11,7 +11,7 @@ import 'package:sme_plateia/features/auth/domain/repositories/i_authentication_r
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
 
-@LazySingleton()
+@singleton
 class AuthCubit extends Cubit<AuthState> {
   final IAutenticacaoRepository _authenticationRepository;
 

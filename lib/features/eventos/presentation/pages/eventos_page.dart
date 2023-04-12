@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:sme_plateia/shared/presentation/widgets/cabecalho.dart';
 
 @RoutePage()
 class EventosPage extends StatefulWidget {
@@ -22,16 +23,10 @@ class _EventosPageState extends State<EventosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Eventos'),
-        leading: TextButton(
-          onPressed: () {
-            context.read<AuthCubit>().logout();
-          },
-          child: Text('Sair'),
-        ),
+      appBar: Cabecalho(),
+      body: Center(
+        child: Text(context.read<AuthCubit>().state.toString()),
       ),
-      body: Center(child: Text(context.read<AuthCubit>().state.toString())),
     );
   }
 }
