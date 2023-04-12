@@ -11,7 +11,7 @@ class AutenticacaoModel with _$AutenticacaoModel {
   const AutenticacaoModel._();
 
   factory AutenticacaoModel({
-    @JsonKey(name: 'access') required String token,
+    @JsonKey(name: 'access') required String accessToken,
     @JsonKey(name: 'refresh') required String refreshToken,
     @JsonKey(name: 'user') required UsuarioModel usuario,
   }) = _AutenticacaoModel;
@@ -20,7 +20,7 @@ class AutenticacaoModel with _$AutenticacaoModel {
 
   Autenticacao toDomain() {
     return Autenticacao(
-      token: token,
+      accessToken: accessToken,
       refreshToken: refreshToken,
       usuario: usuario.toDomain(),
     );

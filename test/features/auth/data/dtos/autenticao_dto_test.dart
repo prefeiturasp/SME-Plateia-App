@@ -10,7 +10,7 @@ void main() {
   String featurePath = 'test/fixtures/autenticacao';
 
   final tAutenticaoModel = AutenticacaoModel(
-    token: '123456',
+    accessToken: '123456',
     refreshToken: 'refresh',
     usuario: UsuarioModel(
       nome: 'Nome',

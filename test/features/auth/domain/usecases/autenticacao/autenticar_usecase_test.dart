@@ -24,7 +24,7 @@ void main() {
   String tLogin = "login_rf";
   String tSenha = "senha";
   Autenticacao tAutenticacao = Autenticacao(
-    token: '123456',
+    accessToken: '123456',
     refreshToken: 'refresh',
     usuario: Usuario(
       nome: 'Nome',

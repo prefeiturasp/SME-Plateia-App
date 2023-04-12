@@ -183,6 +183,16 @@ class MockAutenticacaoLocalDataSource extends _i1.Mock
         ),
         returnValue: _i7.Future<bool>.value(false),
       ) as _i7.Future<bool>);
+  @override
+  _i7.Future<void> atualizarAccessToken(String? newAccessToken) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #atualizarAccessToken,
+          [newAccessToken],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [NetworkInfo].
