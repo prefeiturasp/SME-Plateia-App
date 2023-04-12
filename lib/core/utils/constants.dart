@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 
 const String CACHED_TOKEN = 'autenticacao';
 
+const String DATABASE_NAME = 'app_database.db';
+
 class Endpoint {
   static const String baseUrl = 'https://dev-plateia-api.sme.prefeitura.sp.gov.br/api/v1';
   static const String recuperarSenha = 'https://plateia.sme.prefeitura.sp.gov.br/Account/Reset';
