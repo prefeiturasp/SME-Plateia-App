@@ -65,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
+  awesome_dio_interceptor:
+    dependency: "direct main"
+    description:
+      name: awesome_dio_interceptor
+      sha256: b65ba5c76f481551683bf0388e8b0a9f87df32f2bcb3f529820729b4fcaa0915
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   bloc:
     dependency: "direct main"
     description:
@@ -214,6 +222,14 @@ packages:
     description:
       name: color
       sha256: ddcdf1b3badd7008233f5acffaf20ca9f5dc2cd0172b75f68f24526a5f5725cb
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  colorize:
+    dependency: transitive
+    description:
+      name: colorize
+      sha256: "584746cd6ba1cba0633b6720f494fe6f9601c4170f0666c1579d2aa2a61071ba"
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
@@ -525,22 +541,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  fresh:
-    dependency: transitive
-    description:
-      name: fresh
-      sha256: ddac8f76fdd51f5edb6c17af784a077b0df7afe5086d126602f8b6ec7e354e20
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.1"
-  fresh_dio:
-    dependency: "direct main"
-    description:
-      name: fresh_dio
-      sha256: "59ea9569ce59da77e7a11d1c3fbe4999453276c3825fd13f60f25df338242039"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -685,14 +685,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.6.1"
-  jwt_decode:
-    dependency: "direct main"
-    description:
-      name: jwt_decode
-      sha256: d2e9f68c052b2225130977429d30f187aa1981d789c76ad104a32243cfdebfbb
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.1"
   lints:
     dependency: transitive
     description:
