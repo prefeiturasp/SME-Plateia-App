@@ -7,22 +7,49 @@ import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.d
 import 'package:sme_plateia/gen/assets.gen.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
 
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+
 @RoutePage()
 class VoucherPage extends StatelessWidget {
   final String voucherId;
 
   const VoucherPage({Key? key, required this.voucherId}) : super(key: key);
 
-  String getSmallImageBase64(String encoded) {
-    String base64String =
-        encoded.replaceAll(RegExp('data:image\\/\\w+;base64,'), '');
+  String getSmallImageBase64(String header, String encoded) {
+    String base64String = encoded.replaceAll(RegExp(header), '');
     return base64String;
   }
 
-  // Future<void> handleDownloadPDF(BuildContext context) async {
-  //   final voucherCubit = BlocProvider.of<VoucherCubit>(context);
-  //   voucherCubit.getVoucherFile(voucherId);
-  // }
+  Future<void> handleDownloadPDF(VoucherCubit voucherCubit) async {
+    voucherCubit.getVoucherFile(voucherId);
+  }
+
+  Future<void> downloadFile(String urlString) async {}
+
+  Future<void> _saveBase64PdfToFile(String base64Pdf) async {
+    try {
+      // Decode the base64 data into bytes
+      final Uint8List bytes = base64.decode(
+          getSmallImageBase64('data:application/pdf;base64,', base64Pdf));
+
+      // Get the device's temporary directory
+      final Directory tempDir = await getTemporaryDirectory();
+
+      // Create a new file in the temporary directory
+      final File file = File('${tempDir.path}/document.pdf');
+
+      // Write the bytes to the file
+      await file.writeAsBytes(bytes);
+
+      await OpenFile.open(file.path);
+    } catch (e) {
+      print('Error saving PDF file: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +70,7 @@ class VoucherPage extends StatelessWidget {
       body: BlocBuilder<VoucherCubit, VoucherState>(
         builder: (context, state) {
           if (state is VoucherFileLoaded) {
-            print('voucherFile => ${state.voucherFile}');
+            _saveBase64PdfToFile(state.voucherFile.voucher);
           }
           if (state is VoucherLoading) {
             return Center(
@@ -80,8 +107,8 @@ class VoucherPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.memory(
-                              base64
-                                  .decode(getSmallImageBase64(voucher.qrcode)),
+                              base64.decode(getSmallImageBase64(
+                                  'data:image\\/\\w+;base64,', voucher.qrcode)),
                               height: 150,
                             ),
                             SizedBox(height: 8.0),
@@ -128,7 +155,12 @@ class VoucherPage extends StatelessWidget {
                     ),
                     SizedBox(height: 16.0),
                     ButtonIconOutlinedWidget(
-                        title: 'BAIXAR VOUCHER', icon: Icons.download_outlined),
+                      title: 'BAIXAR VOUCHER',
+                      icon: Icons.download_outlined,
+                      callback: () {
+                        handleDownloadPDF(voucherCubit);
+                      },
+                    ),
                     Row(
                       children: [
                         Padding(
@@ -229,7 +261,7 @@ class ListItemWidget extends StatelessWidget {
 class ButtonIconOutlinedWidget extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Function? callback;
+  final VoidCallback? callback;
 
   const ButtonIconOutlinedWidget(
       {required this.title, required this.icon, Key? key, this.callback})
@@ -243,9 +275,7 @@ class ButtonIconOutlinedWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           OutlinedButton(
-              onPressed: () {
-                callback;
-              },
+              onPressed: callback,
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),

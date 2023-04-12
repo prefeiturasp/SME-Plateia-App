@@ -22,14 +22,14 @@ dependencies:
   intl: ^0.17.0
   rxdart: ^0.27.5
   uuid: ^3.0.6
-
   # Core
   equatable: ^2.0.5
   dartz: ^0.10.1
   internet_connection_checker_plus: ^1.0.1
   shared_preferences: ^2.0.18
   logging: ^1.1.1
-
+  path_provider: ^2.0.3
+  open_file: ^3.0.2
   # Firebase
   firebase_core: ^2.9.0
   firebase_analytics: ^10.1.6
@@ -107,4 +107,3 @@ flutter:
     - assets/google_fonts/
     - assets/icons/
     - assets/images/
-
