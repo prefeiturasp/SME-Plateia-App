@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:dartz/dartz.dart' as dartz;
@@ -11,12 +10,6 @@ import 'package:sme_plateia/core/domain/repositories/i_download_and_save_file.da
 
 @LazySingleton(as: IDownloadAndSaveFile)
 class DownloadAndSaveFile implements IDownloadAndSaveFile {
-  @override
-  Future<Uint8List> getBinaryDataFromBase64(String encoded) async {
-    final Uint8List bytes = base64.decode(encoded);
-    return bytes;
-  }
-
   @override
   Future<dartz.Either<Failure, void>> openFile(File file) async {
     try {
