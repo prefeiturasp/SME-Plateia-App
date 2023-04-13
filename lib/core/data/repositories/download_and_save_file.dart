@@ -11,8 +11,6 @@ import 'package:sme_plateia/core/domain/repositories/i_download_and_save_file.da
 
 @LazySingleton(as: IDownloadAndSaveFile)
 class DownloadAndSaveFile implements IDownloadAndSaveFile {
-  // DownloadAndSaveFile();
-
   @override
   Future<Uint8List> getBinaryDataFromBase64(String encoded) async {
     final Uint8List bytes = base64.decode(encoded);
@@ -25,7 +23,7 @@ class DownloadAndSaveFile implements IDownloadAndSaveFile {
       await OpenFile.open(file.path);
       return dartz.Right(null);
     } catch (e) {
-      return dartz.Left(e.toString());
+      return dartz.Left(Failure.localFailure(message: e.toString()));
     }
   }
 
@@ -33,18 +31,15 @@ class DownloadAndSaveFile implements IDownloadAndSaveFile {
   Future<dartz.Either<Failure, File>> writeFile(
       String fileName, Uint8List bytesFile) async {
     try {
-      // Get the device's temporary directory
       final Directory tempDir = await getTemporaryDirectory();
 
-      // Create a new file in the temporary directory
       final File file = File('${tempDir.path}/$fileName');
 
-      // Write the bytes to the file
       await file.writeAsBytes(bytesFile);
 
       return dartz.Right(file);
     } catch (e) {
-      return dartz.Left(e.toString());
+      return dartz.Left(Failure.localFailure(message: e.toString()));
     }
   }
 }

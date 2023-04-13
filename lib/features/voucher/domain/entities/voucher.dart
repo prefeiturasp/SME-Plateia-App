@@ -1,4 +1,9 @@
-class Voucher {
+import 'package:equatable/equatable.dart';
+import 'package:floor/floor.dart';
+
+@entity
+class Voucher extends Equatable {
+  @primaryKey
   final String inscricao_id;
   final String nome;
   final String rf;
@@ -25,19 +30,18 @@ class Voucher {
     required this.qrcode,
   });
 
-  factory Voucher.fromJson(Map<String, dynamic> json) {
-    return Voucher(
-      inscricao_id: json['inscricao_id'],
-      nome: json['nome'],
-      rf: json['rf'],
-      evento: json['evento'],
-      data: json['data'],
-      horario: json['horario'],
-      local: json['local'],
-      endereco: json['endereco'],
-      categoria: json['categoria'],
-      ingressos_por_membro: json['ingressos_por_membro'],
-      qrcode: json['qrcode'],
-    );
-  }
+  @override
+  List<Object?> get props => [
+        inscricao_id,
+        nome,
+        rf,
+        evento,
+        data,
+        horario,
+        local,
+        endereco,
+        categoria,
+        ingressos_por_membro,
+        qrcode
+      ];
 }

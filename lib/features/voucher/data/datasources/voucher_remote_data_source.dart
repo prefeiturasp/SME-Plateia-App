@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/app/network/dio_client.dart';
 import 'package:sme_plateia/features/voucher/data/models/voucher.model.dart';
 import 'package:sme_plateia/features/voucher/data/models/voucher_file.model.dart';
-
 import 'voucher_remote_service.dart';
 
 abstract class IVoucherRemoteDataSource {

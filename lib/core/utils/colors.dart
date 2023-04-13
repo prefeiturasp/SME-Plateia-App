@@ -15,7 +15,9 @@ class AppColor {
   static const orange = Color(0xFFF69762);
   static const orangeDark = Color(0xFFDD893C);
   static const orangeDarkest = Color(0xFFC1502C);
-// Color(0xFFC65D00)
+
+  static const grayLighter = Color(0xffE6E6E6);
+
   static const blueBackgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -29,7 +31,7 @@ class AppColor {
 
 abstract class TemaUtil {
   //! CORES
-  static const corDeFundo = Color(0xFFFFFFFF);
+  static const corDeFundo = Color(0xffE5E5E5);
 
   static const appBar = Color(0xFFFFD037);
 
@@ -43,8 +45,8 @@ abstract class TemaUtil {
   static const laranja04 = Color(0xFFF9A82F);
   static const vermelhoErro = Color(0xFFF92F57);
   static const branco = Colors.white;
-  static const cinza = Colors.grey;
-  static const cinza02 = Color(0xff737373);
+  static const cinza01 = Colors.grey;
+  static const cinza02 = Color(0xffE6E6E6);
   static const preto = Colors.black;
   static final preto2 = Colors.black.withOpacity(0.7);
   static const pretoSemFoco = Colors.black54;

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -7,49 +6,11 @@ import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.d
 import 'package:sme_plateia/gen/assets.gen.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
 
-import 'dart:async';
-import 'dart:io';
-import 'package:flutter/services.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
-
 @RoutePage()
 class VoucherPage extends StatelessWidget {
   final String voucherId;
 
   const VoucherPage({Key? key, required this.voucherId}) : super(key: key);
-
-  String getSmallImageBase64(String header, String encoded) {
-    String base64String = encoded.replaceAll(RegExp(header), '');
-    return base64String;
-  }
-
-  Future<void> handleDownloadPDF(VoucherCubit voucherCubit) async {
-    voucherCubit.getVoucherFile(voucherId);
-  }
-
-  Future<void> downloadFile(String urlString) async {}
-
-  Future<void> _saveBase64PdfToFile(String base64Pdf) async {
-    try {
-      // Decode the base64 data into bytes
-      final Uint8List bytes = base64.decode(
-          getSmallImageBase64('data:application/pdf;base64,', base64Pdf));
-
-      // Get the device's temporary directory
-      final Directory tempDir = await getTemporaryDirectory();
-
-      // Create a new file in the temporary directory
-      final File file = File('${tempDir.path}/document.pdf');
-
-      // Write the bytes to the file
-      await file.writeAsBytes(bytes);
-
-      await OpenFile.open(file.path);
-    } catch (e) {
-      print('Error saving PDF file: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +30,6 @@ class VoucherPage extends StatelessWidget {
       ),
       body: BlocBuilder<VoucherCubit, VoucherState>(
         builder: (context, state) {
-          if (state is VoucherFileLoaded) {
-            _saveBase64PdfToFile(state.voucherFile.voucher);
-          }
           if (state is VoucherLoading) {
             return Center(
               child: CircularProgressIndicator(color: TemaUtil.laranja01),
@@ -107,8 +65,7 @@ class VoucherPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.memory(
-                              base64.decode(getSmallImageBase64(
-                                  'data:image\\/\\w+;base64,', voucher.qrcode)),
+                              voucherCubit.getBase64QrcodeImage(voucher.qrcode),
                               height: 150,
                             ),
                             SizedBox(height: 8.0),
@@ -158,7 +115,7 @@ class VoucherPage extends StatelessWidget {
                       title: 'BAIXAR VOUCHER',
                       icon: Icons.download_outlined,
                       callback: () {
-                        handleDownloadPDF(voucherCubit);
+                        voucherCubit.openVoucherFile(voucherId);
                       },
                     ),
                     Row(
