@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:floor/floor.dart';
+import 'package:sme_plateia/features/voucher/domain/entities/voucher.dart';
+import 'package:sme_plateia/features/voucher/domain/entities/voucher_file.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../../features/eventos/data/datasources/evento_local_dao.dart';
@@ -15,6 +17,8 @@ part 'app_database.g.dart';
 @Database(
   version: 1,
   entities: [
+    Voucher,
+    VoucherFile,
     EventoResumo,
   ],
 )

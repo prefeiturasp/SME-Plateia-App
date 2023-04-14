@@ -15,6 +15,8 @@ import 'package:sme_plateia/features/eventos/presentation/widgets/evento_text_fi
 import 'package:sme_plateia/features/eventos/presentation/widgets/sem_eventos.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/sem_resultados.dart';
 import 'package:sme_plateia/injector.dart';
+import 'package:sme_plateia/app/router/app_router.gr.dart';
+import 'package:sme_plateia/shared/presentation/widgets/text_button.dart';
 import 'package:sme_plateia/shared/presentation/widgets/cabecalho.dart';
 import 'package:sme_plateia/shared/presentation/widgets/rodape.dart';
 
@@ -242,7 +244,12 @@ class EventosPage extends HookWidget {
       padding: EdgeInsets.only(top: 16, right: 16, left: 16),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
-          (context, index) => EventoCard(eventos[index]),
+          (context, index) => EventoCard(
+            eventos[index],
+            onTap: () {
+              context.pushRoute(VoucherRoute(voucherId: '41584'));
+            },
+          ),
           childCount: eventos.length,
         ),
       ),
