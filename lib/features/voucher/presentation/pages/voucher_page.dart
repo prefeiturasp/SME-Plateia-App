@@ -69,7 +69,7 @@ class VoucherPage extends StatelessWidget {
                               height: 150,
                             ),
                             SizedBox(height: 8.0),
-                            Text('N ${voucher.inscricao_id}',
+                            Text('N ${voucher.inscricaoId}',
                                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14))
                           ],
                         )
@@ -96,7 +96,7 @@ class VoucherPage extends StatelessWidget {
                                     title: voucher.local, subtitle: voucher.endereco, icon: Icons.pin_drop_outlined),
                                 SizedBox(height: 16.0),
                                 ListItemWidget(
-                                    title: voucher.ingressos_por_membro, icon: Icons.confirmation_num_outlined),
+                                    title: voucher.ingressosPorMembro, icon: Icons.confirmation_num_outlined),
                               ])),
                         ),
                       ],
@@ -165,7 +165,7 @@ class ListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Row(
         children: [
@@ -210,7 +210,7 @@ class ButtonIconOutlinedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

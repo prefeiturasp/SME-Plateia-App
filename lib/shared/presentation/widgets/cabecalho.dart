@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/features/auth/data/datasources/autenticacao_local_datasource.dart';
+import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
 import 'package:sme_plateia/injector.dart';
 
@@ -30,9 +32,22 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Paloma Souza",
-                  style: TextStyle(fontSize: 14),
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    String nome = '';
+
+                    state.mapOrNull(
+                      authenticated: (value) {
+                        var nomeCompleto = value.usuario.usuario.nome.split(' ');
+                        nome = '${nomeCompleto.first} ${nomeCompleto.last}';
+                      },
+                    );
+
+                    return Text(
+                      nome,
+                      style: TextStyle(fontSize: 14),
+                    );
+                  },
                 ),
                 Assets.images.logoTransparente.image(
                   height: 17,

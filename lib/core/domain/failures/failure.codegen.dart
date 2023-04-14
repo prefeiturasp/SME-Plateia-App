@@ -13,6 +13,6 @@ class Failure with _$Failure {
   }) = ServerFailure;
 
   const factory Failure.noConnectionFailure({
-    required String message,
+    @Default('Sem conexão com a internet') String message,
   }) = NoConnectionFailure;
 }
