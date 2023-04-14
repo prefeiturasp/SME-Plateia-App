@@ -35,8 +35,8 @@ class EventoRemoteDataSource implements IEventoRemoteDataSource {
         nome: nome,
         local: local,
         pagina: pagina,
-        periodoInicio: periodoInicio?.toRemote(),
-        periodoFim: periodoFim?.toRemote(),
+        periodoInicio: periodoInicio?.formatyyyyMMddHHmm(),
+        periodoFim: periodoFim?.formatyyyyMMddHHmm(),
       );
 
       return response.data.resultados;

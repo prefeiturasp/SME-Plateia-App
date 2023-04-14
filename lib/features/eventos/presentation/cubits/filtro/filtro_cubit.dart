@@ -2,9 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sme_plateia/features/eventos/domain/entities/evento_local.dart';
-import 'package:sme_plateia/features/eventos/domain/entities/evento_nome.dart';
-import 'package:sme_plateia/features/eventos/domain/entities/evento_periodo.dart';
+import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/features/eventos/domain/usecases/obter_eventos_usecase.dart';
 
@@ -16,37 +14,64 @@ class FiltroCubit extends Cubit<FiltroState> {
   FiltroCubit(this.obterEventosUseCase) : super(FiltroState.initial());
 
   final ObterEventosUseCase obterEventosUseCase;
+  int _page = 1;
+  List<EventoResumo> _data = [];
 
-  // nomEventoChanged(String value) {
-  //   final eventoNome = EventoNome.dirty(value);
-  //   emit(state.copyWith(
-  //     eventoNome: eventoNome,
-  //   ));
-  // }
+  changeNomeEvento(String nomeEvento) {
+    emit(state.copyWith(
+      nomeEvento: nomeEvento,
+    ));
+  }
 
-  // periodoChanged(String value) {
-  //   final eventoPeriodo = EventoPeriodo.dirty(value);
-  //   emit(state.copyWith(
-  //     eventoPeriodo: eventoPeriodo,
-  //   ));
-  // }
+  changePeriodoEvento(EnumEventoPeriodo periodoEvento) {
+    emit(state.copyWith(
+      periodoEvento: periodoEvento,
+    ));
+  }
 
-  // localEventoChanged(String value) {
-  //   final eventoLocal = EventoLocal.dirty(value);
-  //   emit(state.copyWith(
-  //     eventoLocal: eventoLocal,
-  //   ));
-  // }
+  changeLocalEvento(String localEvento) {
+    emit(state.copyWith(
+      localEvento: localEvento,
+    ));
+  }
 
-  filtrar() {}
+  Future<void> carregarEventos({bool filtro = false}) async {
+    emit(state.copyWith(
+      pageStatus: EnumPageStatus.carregando,
+    ));
 
-  Future<void> carregarEventos() async {
-    var eventos = await obterEventosUseCase.call(Params());
+    if (filtro) {
+      _data = [];
+    }
+
+    var eventos = await obterEventosUseCase.call(
+      Params(
+        nome: state.nomeEvento,
+        periodo: state.periodoEvento,
+        local: state.localEvento,
+        pagina: _page,
+      ),
+    );
+    final noMoreData = eventos.length() < 20;
 
     eventos.fold(
-      (l) => debugPrint(l.toString()),
-      (r) {
-        emit(FiltroState.loaded(resultado: r));
+      (erro) => debugPrint(erro.toString()),
+      (result) {
+        if (result.isEmpty) {
+          emit(state.copyWith(
+            pageStatus: EnumPageStatus.semResultado,
+            resultadoNomeBusca: state.nomeEvento,
+          ));
+        } else {
+          _data.addAll(result);
+
+          emit(state.copyWith(
+            pageStatus: EnumPageStatus.comResultado,
+            resultado: _data,
+            resultadoNomeBusca: state.nomeEvento,
+            noMoreData: noMoreData,
+          ));
+        }
       },
     );
   }

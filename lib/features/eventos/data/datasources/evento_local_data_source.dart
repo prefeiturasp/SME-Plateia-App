@@ -5,6 +5,7 @@ import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entit
 abstract class IEventoLocalDataSource {
   Future<List<EventoResumo>> findAll();
   Future<void> saveAll(List<EventoResumo> entities);
+  Future<void> deleteAll();
 }
 
 @Injectable(as: IEventoLocalDataSource)
@@ -22,5 +23,10 @@ class EventoLocalDataSource implements IEventoLocalDataSource {
   @override
   Future<void> saveAll(List<EventoResumo> entities) async {
     await appDatabase.eventoResumoDao.insertOrUpdateEntities(entities);
+  }
+
+  @override
+  Future<void> deleteAll() async {
+    await appDatabase.eventoResumoDao.deleteAll();
   }
 }

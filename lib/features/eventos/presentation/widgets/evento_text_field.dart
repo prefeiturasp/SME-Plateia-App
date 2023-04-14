@@ -4,12 +4,16 @@ import 'package:sme_plateia/core/utils/colors.dart';
 class EventoTextField extends StatelessWidget {
   EventoTextField({
     super.key,
+    this.controller,
     this.hintText,
     this.onChanged,
+    this.onSubmitted,
   });
 
+  final TextEditingController? controller;
   final String? hintText;
   final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +27,10 @@ class EventoTextField extends StatelessWidget {
         ),
       ),
       child: TextField(
+        style: TextStyle(
+          fontSize: 14,
+        ),
+        controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
@@ -36,6 +44,7 @@ class EventoTextField extends StatelessWidget {
           ),
         ),
         onChanged: onChanged,
+        onSubmitted: onSubmitted,
       ),
     );
   }

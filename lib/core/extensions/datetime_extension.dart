@@ -10,7 +10,7 @@ extension DateTimeExtension on DateTime {
   }
 
   ///YYYY-MM-DD HH:MM
-  String toRemote([String? locale]) {
+  String formatyyyyMMddHHmm([String? locale]) {
     if (locale != null && locale.isNotEmpty) {
       initializeDateFormatting(locale);
     }

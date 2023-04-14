@@ -13,10 +13,10 @@ abstract class EventoRemoteService {
 
   @GET('/meus_eventos')
   Future<HttpResponse<MeusEventosResponseModel>> obterEventos({
-    @Field('local') String? local,
-    @Field('nome') String? nome,
-    @Field('page') int? pagina,
-    @Field('periodo_inicio') String? periodoInicio,
-    @Field('periodo_fim') String? periodoFim,
+    @Query('local') String? local,
+    @Query('nome') String? nome,
+    @Query('page') int? pagina,
+    @Query('periodo_inicio') String? periodoInicio,
+    @Query('periodo_fim') String? periodoFim,
   });
 }

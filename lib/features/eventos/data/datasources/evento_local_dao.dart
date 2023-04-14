@@ -12,4 +12,7 @@ abstract class EventoResumoDao extends ICrud<EventoResumo> {
 
   @Query('SELECT * FROM EventoResumo')
   Stream<List<EventoResumo>> findAllAsStream();
+
+  @Query('DELETE FROM EventoResumo')
+  Future<void> deleteAll();
 }

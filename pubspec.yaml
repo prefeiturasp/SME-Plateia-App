@@ -1,6 +1,6 @@
 name: sme_plateia
 description: Aplicativo de eventos de São paulo
-version: 1.0.3+1
+version: 1.0.4+1
 publish_to: none
 
 environment:
@@ -32,6 +32,8 @@ dependencies:
   internet_connection_checker_plus: ^1.0.1
   shared_preferences: ^2.0.18
   logging: ^1.1.1
+  easy_autocomplete: #^1.6.0
+    git: https://github.com/SlayerDF/flutter_easy_autocomplete.git
 
   # Database
   sqflite: ^2.2.6

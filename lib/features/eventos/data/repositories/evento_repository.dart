@@ -30,7 +30,7 @@ class EventoRepository implements IEventoRepository {
         DateTime? inicio;
         DateTime? fim;
 
-        if (periodo != null) {
+        if (periodo != null && periodo != EnumEventoPeriodo.todos) {
           var hoje = DateTime.now();
           inicio = hoje.subtract(Duration(days: periodo.dias));
           fim = hoje;
@@ -47,6 +47,7 @@ class EventoRepository implements IEventoRepository {
         final List<EventoResumoModel> listEventosResumoModel = result;
         var listEventosResumo = listEventosResumoModel.map((e) => e.toDomain()).toList();
 
+        await eventoLocalDataSource.deleteAll();
         await eventoLocalDataSource.saveAll(listEventosResumo);
 
         return Right(listEventosResumo);

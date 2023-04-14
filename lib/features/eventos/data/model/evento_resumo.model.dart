@@ -32,7 +32,7 @@ class EventoResumoModel with _$EventoResumoModel {
 
     return EventoResumo(
       id: id,
-      dataHora: dataApresentacao,
+      dataHora: dataHora,
       nome: evento.nome,
       local: local,
       urlPoster: urlPoster,
