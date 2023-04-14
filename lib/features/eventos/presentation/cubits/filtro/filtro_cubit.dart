@@ -53,6 +53,7 @@ class FiltroCubit extends Cubit<FiltroState> {
       ),
     );
     final noMoreData = eventos.length() < 20;
+    _page++;
 
     eventos.fold(
       (erro) => debugPrint(erro.toString()),

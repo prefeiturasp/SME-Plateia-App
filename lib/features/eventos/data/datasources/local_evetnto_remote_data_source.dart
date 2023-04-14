@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/app/network/dio_client.dart';
-import 'package:sme_plateia/app/network/network_info.dart';
 
 import 'local_evento_remote_service.dart';
 

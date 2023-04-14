@@ -37,7 +37,8 @@ class EventosPage extends HookWidget {
       filtroCubit.carregarEventos();
 
       scrollController.onScrollEndsListener(() {
-        filtroCubit.carregarEventos();
+        debugPrint('Carregando mais dados');
+        filtroCubit.carregarEventos(filtro: true);
       });
 
       return scrollController.dispose;
@@ -176,25 +177,56 @@ class EventosPage extends HookWidget {
                 }
               },
             ),
-            // Sem Resultado
-            SliverFillRemaining(
+
+            // Sinal de carregando mais dados
+            SliverToBoxAdapter(
               child: BlocBuilder<FiltroCubit, FiltroState>(
                 builder: (context, state) {
-                  switch (state.pageStatus) {
-                    case EnumPageStatus.carregando:
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    case EnumPageStatus.semResultado:
-                      if (state.resultadoNomeBusca.isEmpty) {
-                        return _buildSemEventos();
-                      } else {
-                        return _buildSemResultados();
-                      }
-                    default:
-                      return SizedBox.shrink();
+                  if (!state.noMoreData) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 14, bottom: 32),
+                      child: CupertinoActivityIndicator(),
+                    );
                   }
+
+                  return SizedBox.shrink();
                 },
+              ),
+            ),
+
+            // Sem Resultado
+            BlocBuilder<FiltroCubit, FiltroState>(
+              builder: (context, state) {
+                switch (state.pageStatus) {
+                  case EnumPageStatus.carregando:
+                    return SliverFillRemaining(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  case EnumPageStatus.semResultado:
+                    if (state.resultadoNomeBusca.isEmpty) {
+                      return SliverFillRemaining(
+                        child: _buildSemEventos(),
+                      );
+                    } else {
+                      return SliverFillRemaining(
+                        child: _buildSemResultados(),
+                      );
+                    }
+                  default:
+                    return SliverToBoxAdapter(
+                      child: SizedBox.shrink(),
+                    );
+                }
+              },
+            ),
+
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [Rodape()],
               ),
             ),
           ],
@@ -214,31 +246,6 @@ class EventosPage extends HookWidget {
           childCount: eventos.length,
         ),
       ),
-    );
-  }
-
-  Widget _buildArticles(
-    ScrollController scrollController,
-    List<EventoResumo> eventos,
-    bool noMoreData,
-  ) {
-    return CustomScrollView(
-      controller: scrollController,
-      slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => EventoCard(eventos[index]),
-            childCount: eventos.length,
-          ),
-        ),
-        if (!noMoreData)
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(top: 14, bottom: 32),
-              child: CupertinoActivityIndicator(),
-            ),
-          )
-      ],
     );
   }
 

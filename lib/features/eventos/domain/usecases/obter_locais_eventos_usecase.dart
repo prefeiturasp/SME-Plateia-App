@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
 import 'package:sme_plateia/core/domain/usecases/use_case.dart';
-import 'package:sme_plateia/features/eventos/data/repositories/local_evento_repository.dart';
 import 'package:sme_plateia/features/eventos/domain/repositories/i_local_evento_repository.dart';
 
 @LazySingleton()

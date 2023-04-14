@@ -1,7 +1,6 @@
 import 'package:easy_autocomplete/easy_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
-import 'package:sme_plateia/shared/presentation/widgets/text_field_search.dart';
 
 class AutocompleteField extends StatelessWidget {
   AutocompleteField({
