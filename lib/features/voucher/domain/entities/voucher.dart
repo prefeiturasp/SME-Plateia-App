@@ -4,7 +4,7 @@ import 'package:floor/floor.dart';
 @entity
 class Voucher extends Equatable {
   @primaryKey
-  final String inscricao_id;
+  final String inscricaoId;
   final String nome;
   final String rf;
   final String evento;
@@ -13,11 +13,11 @@ class Voucher extends Equatable {
   final String local;
   final String endereco;
   final String categoria;
-  final String ingressos_por_membro;
+  final String ingressosPorMembro;
   final String qrcode;
 
   Voucher({
-    required this.inscricao_id,
+    required this.inscricaoId,
     required this.nome,
     required this.rf,
     required this.evento,
@@ -26,11 +26,11 @@ class Voucher extends Equatable {
     required this.local,
     required this.endereco,
     required this.categoria,
-    required this.ingressos_por_membro,
+    required this.ingressosPorMembro,
     required this.qrcode,
   });
 
   @override
   List<Object?> get props =>
-      [inscricao_id, nome, rf, evento, data, horario, local, endereco, categoria, ingressos_por_membro, qrcode];
+      [inscricaoId, nome, rf, evento, data, horario, local, endereco, categoria, ingressosPorMembro, qrcode];
 }

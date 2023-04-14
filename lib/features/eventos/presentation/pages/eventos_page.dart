@@ -115,7 +115,6 @@ class EventosPage extends HookWidget {
                             return AutocompleteField(
                               controller: controllerLocalEvento,
                               hintText: 'Busque pelo local do evento',
-                              // suggestions: state.locais,
                               asyncSuggestions: (value) async {
                                 return state.locais;
                               },

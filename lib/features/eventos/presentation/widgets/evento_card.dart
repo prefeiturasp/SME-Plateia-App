@@ -30,9 +30,7 @@ class EventoCard extends StatelessWidget {
           ],
         ),
         child: InkWell(
-          onTap: () {
-            debugPrint("navegando para o evento");
-          },
+          onTap: onTap,
           customBorder: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

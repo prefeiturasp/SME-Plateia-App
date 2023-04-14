@@ -18,7 +18,7 @@ class VoucherFileModel {
   VoucherFile toDomain() {
     return VoucherFile(
       voucher: voucher,
-      voucher_id: voucherId,
+      voucherId: voucherId,
     );
   }
 }
