@@ -21,8 +21,7 @@ class DownloadAndSaveFile implements IDownloadAndSaveFile {
   }
 
   @override
-  Future<dartz.Either<Failure, File>> writeFile(
-      String fileName, Uint8List bytesFile) async {
+  Future<dartz.Either<Failure, File>> writeFile(String fileName, Uint8List bytesFile) async {
     try {
       final Directory tempDir = await getTemporaryDirectory();
 

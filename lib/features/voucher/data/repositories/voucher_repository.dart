@@ -41,8 +41,7 @@ class VoucherRepository implements IVoucherRepository {
         return Left(ServerFailure(message: e.message));
       }
     } else {
-      return Left(
-          Failure.noConnectionFailure(message: 'Sem conexão com a internet'));
+      return Left(Failure.noConnectionFailure(message: 'Sem conexão com a internet'));
     }
   }
 
@@ -62,8 +61,7 @@ class VoucherRepository implements IVoucherRepository {
         return Left(ServerFailure(message: e.message));
       }
     } else {
-      return Left(
-          Failure.noConnectionFailure(message: 'Sem conexão com a internet'));
+      return Left(Failure.noConnectionFailure(message: 'Sem conexão com a internet'));
     }
   }
 }

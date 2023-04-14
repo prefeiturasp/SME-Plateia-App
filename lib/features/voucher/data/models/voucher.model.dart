@@ -19,8 +19,7 @@ class VoucherModel {
     required this.qrcode,
   });
 
-  factory VoucherModel.fromJson(Map<String, dynamic> json) =>
-      _$VoucherModelFromJson(json);
+  factory VoucherModel.fromJson(Map<String, dynamic> json) => _$VoucherModelFromJson(json);
 
   final String inscricao_id;
   final String nome;

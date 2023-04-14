@@ -10,22 +10,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
-import 'package:sme_plateia/features/auth/presentation/pages/esqueceu_senha_page.dart'
-    as _i3;
-import 'package:sme_plateia/features/auth/presentation/pages/landing_page.dart'
-    as _i2;
-import 'package:sme_plateia/features/auth/presentation/pages/login_page.dart'
-    as _i1;
-import 'package:sme_plateia/features/counter/presentation/pages/counter_page.dart'
-    as _i6;
-import 'package:sme_plateia/features/eventos/presentation/pages/eventos_page.dart'
-    as _i5;
-import 'package:sme_plateia/features/voucher/presentation/pages/voucher_page.dart'
-    as _i4;
+import 'package:sme_plateia/features/auth/presentation/pages/esqueceu_senha_page.dart' as _i3;
+import 'package:sme_plateia/features/auth/presentation/pages/landing_page.dart' as _i2;
+import 'package:sme_plateia/features/auth/presentation/pages/login_page.dart' as _i1;
+import 'package:sme_plateia/features/counter/presentation/pages/counter_page.dart' as _i6;
+import 'package:sme_plateia/features/eventos/presentation/pages/eventos_page.dart' as _i5;
+import 'package:sme_plateia/features/voucher/presentation/pages/voucher_page.dart' as _i4;
 
 abstract class $AppRouter extends _i7.RootStackRouter {
-  $AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+  $AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, _i7.PageFactory> pagesMap = {
@@ -132,8 +125,7 @@ class VoucherRoute extends _i7.PageRouteInfo<VoucherRouteArgs> {
 
   static const String name = 'VoucherRoute';
 
-  static const _i7.PageInfo<VoucherRouteArgs> page =
-      _i7.PageInfo<VoucherRouteArgs>(name);
+  static const _i7.PageInfo<VoucherRouteArgs> page = _i7.PageInfo<VoucherRouteArgs>(name);
 }
 
 class VoucherRouteArgs {

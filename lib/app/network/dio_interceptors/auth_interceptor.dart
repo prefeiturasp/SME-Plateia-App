@@ -9,38 +9,29 @@ import 'package:sme_plateia/features/auth/data/datasources/autenticacao_local_da
 import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
 import 'package:sme_plateia/injector.dart';
 
-enum TokenErrorType {
-  tokenNotFound,
-  refreshTokenHasExpired,
-  failedToRegenerateAccessToken,
-  invalidAccessToken
-}
+enum TokenErrorType { tokenNotFound, refreshTokenHasExpired, failedToRegenerateAccessToken, invalidAccessToken }
 
 enum TokenHeader { none }
 
 class AuthInterceptor extends QueuedInterceptor {
-  final _autenticacaoLocalDataSource = sl<
-      IAutenticacaoLocalDataSource>(); // helper class to access your local storage
+  final _autenticacaoLocalDataSource = sl<IAutenticacaoLocalDataSource>(); // helper class to access your local storage
 
   AuthInterceptor();
 
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     if (options.headers["requiresToken"] == false) {
       options.headers.remove("requiresToken");
       return handler.next(options);
     }
 
-    AutenticacaoModel? authData =
-        await _autenticacaoLocalDataSource.getLastToken();
+    AutenticacaoModel? authData = await _autenticacaoLocalDataSource.getLastToken();
 
     if (authData == null) {
       await _performLogout();
 
       final error = DioError(
-        requestOptions: options
-          ..extra["tokenErrorType"] = TokenErrorType.tokenNotFound,
+        requestOptions: options..extra["tokenErrorType"] = TokenErrorType.tokenNotFound,
         type: DioErrorType.unknown,
         message: 'Token nao encontrado',
       );
@@ -59,8 +50,7 @@ class AuthInterceptor extends QueuedInterceptor {
       _performLogout();
 
       options.extra["tokenErrorType"] = TokenErrorType.refreshTokenHasExpired;
-      final error =
-          DioError(requestOptions: options, type: DioErrorType.unknown);
+      final error = DioError(requestOptions: options, type: DioErrorType.unknown);
 
       return handler.reject(error);
     } else if (accessTokenHasExpired) {
@@ -84,9 +74,7 @@ class AuthInterceptor extends QueuedInterceptor {
       return handler.next(options);
     } else {
       final error = DioError(
-        requestOptions: options
-          ..extra["tokenErrorType"] =
-              TokenErrorType.failedToRegenerateAccessToken,
+        requestOptions: options..extra["tokenErrorType"] = TokenErrorType.failedToRegenerateAccessToken,
         type: DioErrorType.unknown,
         message: 'Falha ao regenerar o token de acesso',
       );
@@ -101,8 +89,7 @@ class AuthInterceptor extends QueuedInterceptor {
 
       err = DioError(
         type: DioErrorType.unknown,
-        requestOptions: err.requestOptions
-          ..extra["tokenErrorType"] = TokenErrorType.invalidAccessToken,
+        requestOptions: err.requestOptions..extra["tokenErrorType"] = TokenErrorType.invalidAccessToken,
         message: 'Token de acesso inválido',
       );
     }

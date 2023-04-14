@@ -31,17 +31,6 @@ class Voucher extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-        inscricao_id,
-        nome,
-        rf,
-        evento,
-        data,
-        horario,
-        local,
-        endereco,
-        categoria,
-        ingressos_por_membro,
-        qrcode
-      ];
+  List<Object?> get props =>
+      [inscricao_id, nome, rf, evento, data, horario, local, endereco, categoria, ingressos_por_membro, qrcode];
 }

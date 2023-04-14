@@ -84,21 +84,17 @@ class App extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        minimumSize:
-                            Size(MediaQuery.of(context).size.width - 20, 40),
+                        minimumSize: Size(MediaQuery.of(context).size.width - 20, 40),
                       ),
                     ),
                     buttonTheme: ButtonThemeData(
                       buttonColor: Colors.yellow,
                       textTheme: ButtonTextTheme.primary,
-                      colorScheme: Theme.of(context)
-                          .colorScheme
-                          .copyWith(secondary: Colors.white),
+                      colorScheme: Theme.of(context).colorScheme.copyWith(secondary: Colors.white),
                     ),
                   ),
                   child: MediaQuery(
-                    data:
-                        MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
                     child: widget!,
                   ),
                 );

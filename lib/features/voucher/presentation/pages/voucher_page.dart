@@ -70,8 +70,7 @@ class VoucherPage extends StatelessWidget {
                             ),
                             SizedBox(height: 8.0),
                             Text('N ${voucher.inscricao_id}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 14))
+                                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14))
                           ],
                         )
                       ],
@@ -85,27 +84,19 @@ class VoucherPage extends StatelessWidget {
                               width: double.infinity,
                               color: Color(0xFFF3F3F3),
                               child: Column(children: [
-                                ListItemWidget(
-                                    title: voucher.nome,
-                                    icon: Icons.person_outlined),
+                                ListItemWidget(title: voucher.nome, icon: Icons.person_outlined),
+                                SizedBox(height: 16.0),
+                                ListItemWidget(title: 'RF ${voucher.rf}', icon: Icons.badge_outlined),
                                 SizedBox(height: 16.0),
                                 ListItemWidget(
-                                    title: 'RF ${voucher.rf}',
-                                    icon: Icons.badge_outlined),
-                                SizedBox(height: 16.0),
-                                ListItemWidget(
-                                    title:
-                                        '${voucher.data} às ${voucher.horario}',
+                                    title: '${voucher.data} às ${voucher.horario}',
                                     icon: Icons.calendar_today_outlined),
                                 SizedBox(height: 16.0),
                                 ListItemWidget(
-                                    title: voucher.local,
-                                    subtitle: voucher.endereco,
-                                    icon: Icons.pin_drop_outlined),
+                                    title: voucher.local, subtitle: voucher.endereco, icon: Icons.pin_drop_outlined),
                                 SizedBox(height: 16.0),
                                 ListItemWidget(
-                                    title: voucher.ingressos_por_membro,
-                                    icon: Icons.confirmation_num_outlined),
+                                    title: voucher.ingressos_por_membro, icon: Icons.confirmation_num_outlined),
                               ])),
                         ),
                       ],
@@ -127,10 +118,7 @@ class VoucherPage extends StatelessWidget {
                             children: [
                               Text(
                                 'Informações',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: TemaUtil.laranja01),
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: TemaUtil.laranja01),
                               ),
                               SizedBox(height: 8.0),
                               Container(
@@ -173,9 +161,7 @@ class ListItemWidget extends StatelessWidget {
   final String? subtitle;
   final IconData icon;
 
-  const ListItemWidget(
-      {required this.title, required this.icon, this.subtitle, Key? key})
-      : super(key: key);
+  const ListItemWidget({required this.title, required this.icon, this.subtitle, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -220,9 +206,7 @@ class ButtonIconOutlinedWidget extends StatelessWidget {
   final IconData icon;
   final VoidCallback? callback;
 
-  const ButtonIconOutlinedWidget(
-      {required this.title, required this.icon, Key? key, this.callback})
-      : super(key: key);
+  const ButtonIconOutlinedWidget({required this.title, required this.icon, Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

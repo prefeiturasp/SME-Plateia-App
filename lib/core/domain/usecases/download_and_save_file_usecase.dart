@@ -11,8 +11,7 @@ class DownloadAndSaveFileUseCase {
 
   DownloadAndSaveFileUseCase(this._downloadAndSaveFile);
 
-  Future<Either<Failure, File>> writeFile(
-      String fileName, Uint8List bytesFile) async {
+  Future<Either<Failure, File>> writeFile(String fileName, Uint8List bytesFile) async {
     return await _downloadAndSaveFile.writeFile(fileName, bytesFile);
   }
 

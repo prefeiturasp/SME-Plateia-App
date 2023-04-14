@@ -16,6 +16,5 @@ abstract class VoucherRemoteService {
   Future<HttpResponse<VoucherModel>> getVoucherById(@Path('id') String id);
 
   @GET('/inscricao/{id}/voucher/pdf')
-  Future<HttpResponse<VoucherFileModel>> getVoucherFileById(
-      @Path('id') String id);
+  Future<HttpResponse<VoucherFileModel>> getVoucherFileById(@Path('id') String id);
 }

@@ -12,9 +12,7 @@ class VoucherCubit extends Cubit<VoucherState> {
   final DownloadAndSaveFileUseCase downloadAndSaveFileUseCase;
   final Base64Utils base64Utils;
 
-  VoucherCubit(
-      this.voucherUseCase, this.base64Utils, this.downloadAndSaveFileUseCase)
-      : super(VoucherInitial());
+  VoucherCubit(this.voucherUseCase, this.base64Utils, this.downloadAndSaveFileUseCase) : super(VoucherInitial());
 
   Future<void> getVoucher(String id) async {
     emit(VoucherLoading());
@@ -40,12 +38,9 @@ class VoucherCubit extends Cubit<VoucherState> {
     result.fold(
       (failure) => emit(VoucherError('Erro ao buscar voucher file')),
       (voucherFile) async {
-        String base64Formatted = base64Utils.removeBase64Header(
-            'data:application/pdf;base64,', voucherFile.voucher);
-        Uint8List bytesFile =
-            base64Utils.getBinaryDataFromBase64(base64Formatted);
-        final resultBinaryData = await downloadAndSaveFileUseCase.writeFile(
-            'voucher.pdf', bytesFile);
+        String base64Formatted = base64Utils.removeBase64Header('data:application/pdf;base64,', voucherFile.voucher);
+        Uint8List bytesFile = base64Utils.getBinaryDataFromBase64(base64Formatted);
+        final resultBinaryData = await downloadAndSaveFileUseCase.writeFile('voucher.pdf', bytesFile);
         resultBinaryData.fold((failure) => null, (file) async {
           downloadAndSaveFileUseCase.openFile(file);
         });
@@ -54,8 +49,7 @@ class VoucherCubit extends Cubit<VoucherState> {
   }
 
   Uint8List getBase64QrcodeImage(String base64) {
-    final normalized =
-        base64Utils.removeBase64Header('data:image\\/\\w+;base64,', base64);
+    final normalized = base64Utils.removeBase64Header('data:image\\/\\w+;base64,', base64);
     return base64Utils.getBinaryDataFromBase64(normalized);
   }
 }
