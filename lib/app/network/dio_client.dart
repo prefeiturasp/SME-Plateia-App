@@ -6,8 +6,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
 import 'package:sme_plateia/core/storages/local_storages.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
-
-import 'dio_interceptors/auth_interceptor.dart';
+import 'package:sme_plateia/app/network/dio_interceptors/auth_interceptor.dart';
 
 @module
 abstract class DioClient {

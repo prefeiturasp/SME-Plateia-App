@@ -5,4 +5,6 @@ import 'package:sme_plateia/injector.config.dart';
 final sl = GetIt.instance;
 
 @InjectableInit(generateForDir: ['lib', 'test'])
-Future<void> configureDependencies({required String environment}) async => sl.init(environment: environment);
+Future<void> configureDependencies({required String environment}) async {
+  await sl.init(environment: environment);
+}
