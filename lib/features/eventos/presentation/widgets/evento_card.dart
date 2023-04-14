@@ -5,7 +5,13 @@ import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entit
 
 class EventoCard extends StatelessWidget {
   final EventoResumo eventoResumo;
-  const EventoCard(this.eventoResumo, {super.key});
+  final void Function()? onTap;
+
+  const EventoCard(
+    this.eventoResumo, {
+    super.key,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

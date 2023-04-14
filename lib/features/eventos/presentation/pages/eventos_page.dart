@@ -4,23 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/core/extensions/scroll_controller_extensions.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
+import 'package:sme_plateia/features/eventos/presentation/cubits/autocomplete_local/autocomplete_local_cubit.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/filtro/filtro_cubit.dart';
-import 'package:sme_plateia/features/eventos/presentation/widgets/dropdown_field.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/autocomplete_field.dart';
+import 'package:sme_plateia/features/eventos/presentation/widgets/dropdown_field.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/evento_card.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/evento_text_field.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/sem_eventos.dart';
 import 'package:sme_plateia/features/eventos/presentation/widgets/sem_resultados.dart';
 import 'package:sme_plateia/injector.dart';
-import 'package:sme_plateia/app/router/app_router.gr.dart';
-import 'package:sme_plateia/shared/presentation/widgets/text_button.dart';
 import 'package:sme_plateia/shared/presentation/widgets/cabecalho.dart';
 import 'package:sme_plateia/shared/presentation/widgets/rodape.dart';
-
-import '../cubits/autocomplete_local/autocomplete_local_cubit.dart';
 
 @RoutePage()
 class EventosPage extends HookWidget {

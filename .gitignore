@@ -125,6 +125,7 @@ app.*.map.json
 **.config.dart
 **.freezed.dart
 **.g.dart
+**.gr.dart
 **.gen.dart
 
 # Exceptions to the above rules.

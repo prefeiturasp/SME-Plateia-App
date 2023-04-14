@@ -8,8 +8,6 @@ import 'package:sme_plateia/core/storages/local_storages.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/app/network/dio_interceptors/auth_interceptor.dart';
 
-import 'dio_interceptors/auth_interceptor.dart';
-
 @module
 abstract class DioClient {
   @PostConstruct(preResolve: true)

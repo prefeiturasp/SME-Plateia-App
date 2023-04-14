@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
-import 'package:sme_plateia/core/domain/repositories/i_download_and_save_file.dart';
+import 'package:sme_plateia/shared/openfile/domain/repositories/i_download_and_save_file.dart';
 
 @Singleton()
 class DownloadAndSaveFileUseCase {

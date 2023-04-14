@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sme_plateia/core/domain/usecases/download_and_save_file_usecase.dart';
 import 'package:sme_plateia/core/utils/base64.dart';
 import 'package:sme_plateia/features/voucher/domain/usecases/voucher_usecase.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_state.dart';
+import 'package:sme_plateia/shared/openfile/domain/usecases/download_and_save_file_usecase.dart';
 
 @singleton
 class VoucherCubit extends Cubit<VoucherState> {

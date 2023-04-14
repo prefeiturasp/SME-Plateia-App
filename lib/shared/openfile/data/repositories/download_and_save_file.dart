@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
-import 'package:sme_plateia/core/domain/repositories/i_download_and_save_file.dart';
+import 'package:sme_plateia/shared/openfile/domain/repositories/i_download_and_save_file.dart';
 
 @LazySingleton(as: IDownloadAndSaveFile)
 class DownloadAndSaveFile implements IDownloadAndSaveFile {
