@@ -50,7 +50,7 @@ class EventosPage extends HookWidget {
         BlocProvider(create: (context) => AutocompleteLocalCubit(sl())),
       ],
       child: Scaffold(
-        appBar: Cabecalho(),
+        appBar: Cabecalho('Meus Eventos'),
         body: CustomScrollView(
           controller: scrollController,
           slivers: [
@@ -245,7 +245,8 @@ class EventosPage extends HookWidget {
           (context, index) => EventoCard(
             eventos[index],
             onTap: () {
-              context.pushRoute(VoucherRoute(voucherId: '41584'));
+              // context.pushRoute(VoucherRoute(voucherId: '41584'));
+              context.pushRoute(EventoDetalhesRoute(idEvento: eventos[index].id));
             },
           ),
           childCount: eventos.length,

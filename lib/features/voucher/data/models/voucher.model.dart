@@ -5,7 +5,7 @@ part 'voucher.model.freezed.dart';
 part 'voucher.model.g.dart';
 
 @freezed
-abstract class VoucherModel with _$VoucherModel {
+class VoucherModel with _$VoucherModel {
   const VoucherModel._();
 
   factory VoucherModel({
