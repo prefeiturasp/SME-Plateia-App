@@ -22,6 +22,7 @@ abstract class AutenticacaoRemoteService {
   Future<HttpResponse<void>> logout();
 
   @POST('/autenticacao/token/atualizar')
+  @Headers({'requiresToken': false})
   Future<HttpResponse<AutenticacaoModel>> refreshToken({
     @Field('refresh') required String token,
   });

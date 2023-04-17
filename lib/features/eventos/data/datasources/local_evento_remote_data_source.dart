@@ -10,7 +10,7 @@ abstract class ILocalEventoRemoteDataSource {
   });
 }
 
-@Injectable(as: ILocalEventoRemoteDataSource)
+@LazySingleton(as: ILocalEventoRemoteDataSource)
 class LocalEventoRemoteDataSource implements ILocalEventoRemoteDataSource {
   final LocalEventoRemoteService localEventoRemoteService;
 

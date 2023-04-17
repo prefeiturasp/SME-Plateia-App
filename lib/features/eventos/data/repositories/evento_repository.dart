@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/app/network/network_info.dart';
 import 'package:sme_plateia/features/eventos/data/datasources/evento_local_data_source.dart';
 import 'package:sme_plateia/features/eventos/data/datasources/evento_remote_data_source.dart';
-import 'package:sme_plateia/features/eventos/data/model/evento_resumo.model.dart';
+import 'package:sme_plateia/features/eventos/data/models/evento_resumo.model.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';

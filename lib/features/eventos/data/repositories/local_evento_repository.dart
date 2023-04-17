@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:sme_plateia/app/network/network_info.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
-import 'package:sme_plateia/features/eventos/data/datasources/local_evetnto_remote_data_source.dart';
+import 'package:sme_plateia/features/eventos/data/datasources/local_evento_remote_data_source.dart';
 import 'package:sme_plateia/features/eventos/domain/repositories/i_local_evento_repository.dart';
 
 @LazySingleton(as: ILocalEventoRepository)

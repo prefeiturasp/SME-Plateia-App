@@ -20,7 +20,15 @@ abstract class DioClient {
     final dio = Dio(options);
 
     dio.interceptors.add(AuthInterceptor());
-    dio.interceptors.add(PrettyDioLogger(compact: true));
+    dio.interceptors.add(PrettyDioLogger(
+      compact: true,
+      error: true,
+      request: false,
+      responseBody: false,
+      responseHeader: false,
+      requestBody: false,
+      requestHeader: false,
+    ));
 
     return dio;
   }
@@ -40,11 +48,13 @@ handleNertorkError(DioError e) {
     String message = 'Erro desconhecido';
     switch (e.response!.statusCode) {
       case 401:
+      case 403:
         if ((e.response!.data as Map).containsKey('errors')) {
           message = e.response!.data['errors'][0];
         } else {
           message = e.response!.data['detail'];
         }
+
         break;
     }
 

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sme_plateia/features/eventos/data/model/evento_resumo.model.dart';
+import 'package:sme_plateia/features/eventos/data/models/evento_resumo.model.dart';
 
 part 'meus_eventos.response.model.freezed.dart';
 part 'meus_eventos.response.model.g.dart';

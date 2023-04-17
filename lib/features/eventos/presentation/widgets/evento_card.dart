@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
+import 'package:sme_plateia/gen/assets.gen.dart';
 
 class EventoCard extends StatelessWidget {
   final EventoResumo eventoResumo;
@@ -81,14 +82,18 @@ class EventoCard extends StatelessWidget {
   Widget _buildImagem() {
     return CachedNetworkImage(
       imageUrl: eventoResumo.urlPoster,
+      fit: BoxFit.cover,
       width: 122,
       height: 88,
+      cacheKey: eventoResumo.id.toString(),
       progressIndicatorBuilder: (context, url, downloadProgress) {
-        return CircularProgressIndicator(value: downloadProgress.progress);
+        return Center(child: CircularProgressIndicator(value: downloadProgress.progress));
       },
       errorWidget: (context, url, error) {
         debugPrint("Erro: URL: $url");
-        return Placeholder();
+        return Assets.images.eventoGenerico.image(
+          fit: BoxFit.cover,
+        );
       },
     );
   }
@@ -96,6 +101,8 @@ class EventoCard extends StatelessWidget {
   Widget _buildTitulo() {
     return Text(
       eventoResumo.nome,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: Color(0xffC25F14),
         fontSize: 14,
@@ -146,6 +153,8 @@ class EventoCard extends StatelessWidget {
   Widget _buildLocal() {
     return Text(
       eventoResumo.local,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: 14,
         color: Color(
