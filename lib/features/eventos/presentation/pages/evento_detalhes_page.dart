@@ -7,6 +7,7 @@ import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 import 'package:sme_plateia/core/extensions/int_extensions.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
+import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_detalhes.entity.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/evento_detalhes/evento_detalhes_cubit.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
@@ -111,30 +112,45 @@ class EventoDetalhesPage extends HookWidget {
           const SizedBox(
             height: 24,
           ),
-          TextButton(
-            onPressed: () {
-              context.pushRoute(VoucherRoute(
-                inscricaoId: eventoDetalhes.inscricaoId,
-                inscricaoData: eventoDetalhes.inscricaoData,
-                eventoNome: eventoDetalhes.nome,
-                ingressosPorMembro: eventoDetalhes.numeroDeTicket,
-                local: eventoDetalhes.local,
-                endereco: eventoDetalhes.endereco,
-                dataHora: eventoDetalhes.dataHora,
-                userRF: '13455',
-                userNome: 'Rayane',
-              ));
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Voucher'.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              String nome = '';
+              String rf = '';
+
+              state.mapOrNull(
+                authenticated: (value) {
+                  var nomeCompleto = value.usuario.usuario.nome.split(' ');
+                  nome = '${nomeCompleto.first} ${nomeCompleto.last}';
+                  rf = value.usuario.usuario.rf;
+                },
+              );
+
+              return TextButton(
+                onPressed: () {
+                  context.pushRoute(VoucherRoute(
+                    inscricaoId: eventoDetalhes.inscricaoId,
+                    inscricaoData: eventoDetalhes.inscricaoData,
+                    eventoNome: eventoDetalhes.nome,
+                    ingressosPorMembro: eventoDetalhes.numeroDeTicket,
+                    local: eventoDetalhes.local,
+                    endereco: eventoDetalhes.endereco,
+                    dataHora: eventoDetalhes.dataHora,
+                    userRF: rf,
+                    userNome: nome,
+                  ));
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'Voucher'.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
           SizedBox(
             height: 40,
