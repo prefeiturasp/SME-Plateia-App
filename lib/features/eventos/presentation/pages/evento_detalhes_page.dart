@@ -34,22 +34,22 @@ class EventoDetalhesPage extends HookWidget {
 
     return Scaffold(
       appBar: Cabecalho('Evento $idEvento'),
-      body: SingleChildScrollView(
-        child: BlocBuilder<EventoDetalhesCubit, EventoDetalhesState>(
-          builder: (context, state) {
-            return state.maybeWhen(
-              loaded: (eventoDetalhes) {
-                return _buildDetalhes(context, eventoDetalhes);
-              },
-              loading: () {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              orElse: () => SizedBox.shrink(),
-            );
-          },
-        ),
+      body: BlocBuilder<EventoDetalhesCubit, EventoDetalhesState>(
+        builder: (context, state) {
+          return state.maybeWhen(
+            loaded: (eventoDetalhes) {
+              return SingleChildScrollView(
+                child: _buildDetalhes(context, eventoDetalhes),
+              );
+            },
+            loading: () {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            orElse: () => SizedBox.shrink(),
+          );
+        },
       ),
     );
   }

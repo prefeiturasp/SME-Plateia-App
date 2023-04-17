@@ -15,6 +15,8 @@ class EventoDetalhesCubit extends Cubit<EventoDetalhesState> {
   EventoDetalhesCubit(this._obterDetalheEventoUsecase) : super(EventoDetalhesState.initial());
 
   void carregarDetalhes(int eventoId) async {
+    emit(EventoDetalhesState.loading());
+
     var result = await _obterDetalheEventoUsecase(Params(eventoId: eventoId));
 
     result.fold(
