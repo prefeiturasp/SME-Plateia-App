@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.gov.sp.prefeitura.sme.plateia">
-   <application
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
         android:label="${appName}"
         android:icon="@mipmap/ic_launcher">
         <activity

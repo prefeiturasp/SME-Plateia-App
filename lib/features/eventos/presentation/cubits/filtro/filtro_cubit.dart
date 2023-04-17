@@ -42,6 +42,7 @@ class FiltroCubit extends Cubit<FiltroState> {
 
     if (filtro) {
       _data = [];
+      _page = 1;
     }
 
     var eventos = await obterEventosUseCase.call(

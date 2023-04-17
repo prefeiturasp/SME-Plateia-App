@@ -40,8 +40,8 @@ class AutenticacaoRepository implements IAutenticacaoRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await autenticacaoRemoteDataSource.autenticar(
-          login: login,
-          senha: senha,
+          login: login.trim(),
+          senha: senha.trim(),
         );
 
         final AutenticacaoModel autenticacaoModel = result;

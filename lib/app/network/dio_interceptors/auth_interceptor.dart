@@ -84,7 +84,7 @@ class AuthInterceptor extends QueuedInterceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 403 || err.response?.statusCode == 401) {
+    if (err.response?.statusCode == 401) {
       _performLogout();
 
       err = DioError(

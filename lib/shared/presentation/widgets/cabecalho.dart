@@ -8,10 +8,12 @@ import 'package:sme_plateia/gen/assets.gen.dart';
 import 'package:sme_plateia/injector.dart';
 
 class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
+  final String titulo;
+
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight + 8 * 5);
 
-  const Cabecalho({super.key});
+  const Cabecalho(this.titulo, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +63,14 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Meus Eventos",
-                  style: TextStyle(fontSize: 24),
+                Row(
+                  children: [
+                    _buildBackButton(context),
+                    Text(
+                      titulo,
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ],
                 ),
                 InkWell(
                   onTap: () async {
@@ -87,5 +94,22 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
     );
+  }
+
+  _buildBackButton(BuildContext context) {
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
+
+    final bool canPop = parentRoute?.canPop ?? false;
+
+    if ((canPop) || (parentRoute?.impliesAppBarDismissal ?? false)) {
+      return IconButton(
+        onPressed: () {
+          Navigator.maybePop(context);
+        },
+        icon: Assets.icons.arrowBack.svg(width: 16),
+      );
+    }
+
+    return SizedBox.shrink();
   }
 }

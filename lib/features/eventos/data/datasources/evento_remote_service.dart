@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:sme_plateia/features/eventos/data/model/meus_eventos.response.model.dart';
+import 'package:sme_plateia/features/eventos/data/models/meus_eventos.response.model.dart';
 
 part 'evento_remote_service.g.dart';
 

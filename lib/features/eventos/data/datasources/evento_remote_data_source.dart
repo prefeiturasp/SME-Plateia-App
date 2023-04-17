@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/app/network/dio_client.dart';
-import 'package:sme_plateia/features/eventos/data/model/evento_resumo.model.dart';
+import 'package:sme_plateia/features/eventos/data/models/evento_resumo.model.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 
 import 'evento_remote_service.dart';
