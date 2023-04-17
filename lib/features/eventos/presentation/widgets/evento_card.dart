@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
+import 'package:sme_plateia/gen/assets.gen.dart';
 
 class EventoCard extends StatelessWidget {
   final EventoResumo eventoResumo;
@@ -85,13 +86,13 @@ class EventoCard extends StatelessWidget {
       fit: BoxFit.cover,
       width: 122,
       height: 88,
+      cacheKey: eventoResumo.id.toString(),
       progressIndicatorBuilder: (context, url, downloadProgress) {
         return Center(child: CircularProgressIndicator(value: downloadProgress.progress));
       },
       errorWidget: (context, url, error) {
         debugPrint("Erro: URL: $url");
-        return CachedNetworkImage(
-          imageUrl: Endpoint.fallbackImage,
+        return Assets.images.eventoGenerico.image(
           fit: BoxFit.cover,
         );
       },
@@ -101,6 +102,8 @@ class EventoCard extends StatelessWidget {
   Widget _buildTitulo() {
     return Text(
       eventoResumo.nome,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: Color(0xffC25F14),
         fontSize: 14,

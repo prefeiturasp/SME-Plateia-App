@@ -21,14 +21,8 @@ class AppRouter extends $AppRouter {
       page: EventosRoute.page,
     ),
     // Evento
-    AutoRoute(
-      path: '/evento',
-      page: EventoDetalhesRoute.page,
-      children: [
-        RedirectRoute(path: '', redirectTo: '/eventos'),
-        AutoRoute(path: ':id', page: EventoDetalhesRoute.page),
-      ],
-    ),
+    AutoRoute(path: '/evento/:id/detalhes/', page: EventoDetalhesRoute.page),
+    AutoRoute(path: '/evento/:id/endereco/', page: EventoEnderecoRoute.page),
 
     // Auth
     AutoRoute(page: LoginRoute.page, path: '/login'),

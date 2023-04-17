@@ -97,9 +97,11 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
   }
 
   _buildBackButton(BuildContext context) {
-    bool canPop = ModalRoute.of(context)?.canPop ?? false;
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
-    if (canPop) {
+    final bool canPop = parentRoute?.canPop ?? false;
+
+    if ((canPop) || (parentRoute?.impliesAppBarDismissal ?? false)) {
       return IconButton(
         onPressed: () {
           Navigator.maybePop(context);

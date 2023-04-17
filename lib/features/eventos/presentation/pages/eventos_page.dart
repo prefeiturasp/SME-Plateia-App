@@ -245,8 +245,10 @@ class EventosPage extends HookWidget {
           (context, index) => EventoCard(
             eventos[index],
             onTap: () {
-              // context.pushRoute(VoucherRoute(voucherId: '41584'));
-              context.pushRoute(EventoDetalhesRoute(idEvento: eventos[index].id));
+              context.pushRoute(EventoDetalhesRoute(
+                key: Key(eventos[index].id.toString()),
+                idEvento: eventos[index].id,
+              ));
             },
           ),
           childCount: eventos.length,

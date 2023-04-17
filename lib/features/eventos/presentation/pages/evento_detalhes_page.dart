@@ -7,7 +7,6 @@ import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 import 'package:sme_plateia/core/extensions/int_extensions.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
-import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_detalhes.entity.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/evento_detalhes/evento_detalhes_cubit.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
@@ -19,9 +18,9 @@ class EventoDetalhesPage extends HookWidget {
   final int idEvento;
 
   const EventoDetalhesPage({
-    Key? key,
+    super.key,
     @PathParam('id') required this.idEvento,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class EventoDetalhesPage extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: Cabecalho('Evento'),
+      appBar: Cabecalho('Evento $idEvento'),
       body: SingleChildScrollView(
         child: BlocBuilder<EventoDetalhesCubit, EventoDetalhesState>(
           builder: (context, state) {
@@ -62,6 +61,7 @@ class EventoDetalhesPage extends HookWidget {
         CachedNetworkImage(
           imageUrl: eventoDetalhes.urlPoster,
           height: 196,
+          cacheKey: eventoDetalhes.id.toString(),
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
           progressIndicatorBuilder: (context, url, downloadProgress) {
@@ -69,8 +69,7 @@ class EventoDetalhesPage extends HookWidget {
           },
           errorWidget: (context, url, error) {
             debugPrint("Erro: URL: $url");
-            return CachedNetworkImage(
-              imageUrl: Endpoint.fallbackImage,
+            return Assets.images.eventoGenerico.image(
               fit: BoxFit.cover,
             );
           },
@@ -109,7 +108,7 @@ class EventoDetalhesPage extends HookWidget {
           const SizedBox(
             height: 16,
           ),
-          _buildLocalizacao(eventoDetalhes),
+          _buildLocalizacao(context, eventoDetalhes),
           const SizedBox(
             height: 24,
           ),
@@ -160,7 +159,7 @@ class EventoDetalhesPage extends HookWidget {
     );
   }
 
-  _buildLocalizacao(EventoDetalhes eventoDetalhes) {
+  _buildLocalizacao(BuildContext context, EventoDetalhes eventoDetalhes) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -197,6 +196,12 @@ class EventoDetalhesPage extends HookWidget {
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   ),
                 ),
+                onTap: () {
+                  context.pushRoute(EventoEnderecoRoute(
+                    eventoId: eventoDetalhes.id,
+                    endereco: eventoDetalhes.endereco,
+                  ));
+                },
               ),
             ],
           ),
