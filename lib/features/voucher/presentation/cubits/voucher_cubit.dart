@@ -14,38 +14,17 @@ class VoucherCubit extends Cubit<VoucherState> {
 
   VoucherCubit(this.voucherUseCase, this.base64Utils, this.downloadAndSaveFileUseCase) : super(VoucherInitial());
 
-  Future<void> getVoucher(String id) async {
+  Future<void> getVoucher(int inscricaoId) async {
     emit(VoucherLoading());
-    final result = await voucherUseCase.getVoucherById(id);
+    final result = await voucherUseCase.getVoucherById(inscricaoId);
     result.fold(
       (failure) => emit(VoucherError('Erro ao buscar voucher')),
       (voucher) => emit(VoucherLoaded(voucher)),
     );
   }
 
-  Future<void> getVoucherFile(String id) async {
-    emit(VoucherLoading());
-    final result = await voucherUseCase.getVoucherFileById(id);
-    result.fold(
-      (failure) => emit(VoucherError('Erro ao buscar voucher file')),
-      (voucherFile) => emit(VoucherFileLoaded(voucherFile)),
-    );
-  }
-
-  Future<void> openVoucherFile(String id) async {
-    emit(VoucherLoading());
-    final result = await voucherUseCase.getVoucherFileById(id);
-    result.fold(
-      (failure) => emit(VoucherError('Erro ao buscar voucher file')),
-      (voucherFile) async {
-        String base64Formatted = base64Utils.removeBase64Header('data:application/pdf;base64,', voucherFile.voucher);
-        Uint8List bytesFile = base64Utils.getBinaryDataFromBase64(base64Formatted);
-        final resultBinaryData = await downloadAndSaveFileUseCase.writeFile('voucher.pdf', bytesFile);
-        resultBinaryData.fold((failure) => null, (file) async {
-          downloadAndSaveFileUseCase.openFile(file);
-        });
-      },
-    );
+  Future<void> openVoucherPDF(String base64PDF) async {
+    await voucherUseCase.openVoucherPDF(base64PDF);
   }
 
   Uint8List getBase64QrcodeImage(String base64) {

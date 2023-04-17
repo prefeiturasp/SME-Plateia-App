@@ -113,7 +113,17 @@ class EventoDetalhesPage extends HookWidget {
           ),
           TextButton(
             onPressed: () {
-              context.pushRoute(VoucherRoute(voucherId: eventoDetalhes.voucherId.toString()));
+              context.pushRoute(VoucherRoute(
+                inscricaoId: eventoDetalhes.inscricaoId,
+                inscricaoData: eventoDetalhes.inscricaoData,
+                eventoNome: eventoDetalhes.nome,
+                ingressosPorMembro: eventoDetalhes.numeroDeTicket,
+                local: eventoDetalhes.local,
+                endereco: eventoDetalhes.endereco,
+                dataHora: eventoDetalhes.dataHora,
+                userRF: '13455',
+                userNome: 'Rayane',
+              ));
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8),

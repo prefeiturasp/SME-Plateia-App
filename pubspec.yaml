@@ -24,7 +24,7 @@ dependencies:
 
   # Hooks
   flutter_hooks: ^0.18.6
-  
+
   # Fontes
   google_fonts: ^3.0.1
 
@@ -82,7 +82,6 @@ dependencies:
   latlong2: ^0.8.1
   maps_launcher: ^2.2.0
 
-
 dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
@@ -110,8 +109,6 @@ dev_dependencies:
 
   # Banco de dados
   floor_generator: ^1.4.1
-
-
 
 dependency_overrides:
   xml: ^6.2.2

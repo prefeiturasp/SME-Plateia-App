@@ -21,7 +21,8 @@ class EventoDetalhesModel with _$EventoDetalhesModel {
     @JsonKey(name: "updatedate") required DateTime updateDate,
     @JsonKey(name: "showid") required EventoModel evento,
     @JsonKey(name: "cityid") required EventoCidadeModel cidade,
-    @JsonKey(name: "inscriptionid") required int voucherId,
+    @JsonKey(name: "inscriptionid") required int inscricaoId,
+    @JsonKey(name: "inscriptiondate") required DateTime inscricaoData,
   }) = _EventoDetalhesModel;
   factory EventoDetalhesModel.fromJson(Map<String, dynamic> json) => _$EventoDetalhesModelFromJson(json);
 
@@ -33,22 +34,22 @@ class EventoDetalhesModel with _$EventoDetalhesModel {
     }
 
     return EventoDetalhes(
-      id: id,
-      nome: evento.nome,
-      dataHora: dataHora,
-      local: local,
-      urlPoster: urlPoster,
-      endereco: endereco,
-      numeroDeTicket: numeroDeTicket,
-      cidade: cidade.nome,
-      sinopse: evento.sinopse,
-      classificacao: evento.classificacao,
-      duracao: evento.duracao,
-      tipo: evento.tipo?.nome ?? '',
-      genero: evento.genero?.nome ?? '',
-      createDate: createDate,
-      updateDate: updateDate,
-      voucherId: voucherId,
-    );
+        id: id,
+        nome: evento.nome,
+        dataHora: dataHora,
+        local: local,
+        urlPoster: urlPoster,
+        endereco: endereco,
+        numeroDeTicket: numeroDeTicket,
+        cidade: cidade.nome,
+        sinopse: evento.sinopse,
+        classificacao: evento.classificacao,
+        duracao: evento.duracao,
+        tipo: evento.tipo?.nome ?? '',
+        genero: evento.genero?.nome ?? '',
+        createDate: createDate,
+        updateDate: updateDate,
+        inscricaoId: inscricaoId,
+        inscricaoData: inscricaoData);
   }
 }

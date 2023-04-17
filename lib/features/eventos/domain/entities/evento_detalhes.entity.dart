@@ -24,7 +24,8 @@ class EventoDetalhes extends Equatable {
   final String tipo;
   final String genero;
 
-  final int voucherId;
+  final int inscricaoId;
+  final DateTime inscricaoData;
 
   final DateTime createDate;
   final DateTime updateDate;
@@ -45,7 +46,8 @@ class EventoDetalhes extends Equatable {
     required this.genero,
     required this.createDate,
     required this.updateDate,
-    required this.voucherId,
+    required this.inscricaoId,
+    required this.inscricaoData,
   });
 
   @override

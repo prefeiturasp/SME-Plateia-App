@@ -8,7 +8,7 @@ import 'package:sme_plateia/features/eventos/data/datasources/evento_local_dao.d
 import 'package:sme_plateia/features/eventos/domain/entities/evento_detalhes.entity.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/features/voucher/domain/entities/voucher.dart';
-import 'package:sme_plateia/features/voucher/domain/entities/voucher_file.dart';
+import 'package:sme_plateia/features/voucher/data/datasources/voucher_local_dao.dart';
 
 import 'converters/date_time_converter.dart';
 import 'converters/list_string_converter.dart';
@@ -23,7 +23,6 @@ part 'app_database.g.dart';
   version: 1,
   entities: [
     Voucher,
-    VoucherFile,
     EventoResumo,
     EventoDetalhes,
   ],
@@ -31,4 +30,5 @@ part 'app_database.g.dart';
 abstract class AppDatabase extends FloorDatabase {
   EventoResumoDao get eventoResumoDao;
   EventoDetalhesDao get eventoDetalhesDao;
+  VoucherDao get voucherDao;
 }
