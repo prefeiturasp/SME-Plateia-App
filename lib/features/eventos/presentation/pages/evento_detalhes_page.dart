@@ -33,7 +33,7 @@ class EventoDetalhesPage extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: Cabecalho('Evento $idEvento'),
+      appBar: Cabecalho('Evento'),
       body: BlocBuilder<EventoDetalhesCubit, EventoDetalhesState>(
         builder: (context, state) {
           return state.maybeWhen(
@@ -76,9 +76,8 @@ class EventoDetalhesPage extends HookWidget {
         ),
         _buildResumo(context, eventoDetalhes),
         _buildInformacoes(eventoDetalhes),
-        Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(child: Rodape()),
+        Center(
+          child: Rodape(),
         ),
       ],
     );
@@ -200,6 +199,7 @@ class EventoDetalhesPage extends HookWidget {
                   context.pushRoute(EventoEnderecoRoute(
                     eventoId: eventoDetalhes.id,
                     endereco: eventoDetalhes.endereco,
+                    local: eventoDetalhes.local,
                   ));
                 },
               ),
@@ -233,10 +233,11 @@ class EventoDetalhesPage extends HookWidget {
             children: [
               Flexible(
                 flex: 6,
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Gênero: ',
+                      'Gênero:',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -253,10 +254,11 @@ class EventoDetalhesPage extends HookWidget {
               ),
               Flexible(
                 flex: 6,
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Classificação: ',
+                      'Classificação:',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

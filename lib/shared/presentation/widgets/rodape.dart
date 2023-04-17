@@ -9,6 +9,7 @@ class Rodape extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        SizedBox(height: 24.h),
         Image.asset('assets/images/logo_saopaulo.png'),
         SizedBox(height: 24.h),
       ],

@@ -24,7 +24,6 @@ dependencies:
 
   # Hooks
   flutter_hooks: ^0.18.6
-  osm_flutter_hooks: ^1.3.0
   
   # Fontes
   google_fonts: ^3.0.1
@@ -76,6 +75,14 @@ dependencies:
   # Navegação
   flutter_custom_tabs: ^1.0.4
 
+  # Mapas
+  osm_nominatim: ^2.0.1
+
+  flutter_map: ^4.0.0-dev.1
+  latlong2: ^0.8.1
+  maps_launcher: ^2.2.0
+
+
 dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
@@ -104,8 +111,7 @@ dev_dependencies:
   # Banco de dados
   floor_generator: ^1.4.1
 
-  # Mapas
-  flutter_osm_plugin: ^0.53.4
+
 
 dependency_overrides:
   xml: ^6.2.2

@@ -24,6 +24,10 @@ abstract class DioClient {
       compact: true,
       error: true,
       request: false,
+      responseBody: false,
+      responseHeader: false,
+      requestBody: false,
+      requestHeader: false,
     ));
 
     return dio;

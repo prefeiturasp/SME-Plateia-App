@@ -9,6 +9,7 @@ import 'package:sme_plateia/core/utils/colors.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/evento_detalhes/evento_detalhes_cubit.dart';
+import 'package:sme_plateia/features/eventos/presentation/cubits/evento_endereco/evento_endereco_cubit.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/filtro/filtro_cubit.dart';
 import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.dart';
 import 'package:sme_plateia/injector.dart';
@@ -27,6 +28,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => sl<FlashCubit>()),
         BlocProvider(create: (context) => sl<FiltroCubit>()),
         BlocProvider(create: (context) => sl<EventoDetalhesCubit>()),
+        BlocProvider(create: (context) => sl<EventoEnderecoCubit>()),
       ],
       child: MultiBlocListener(
         listeners: [

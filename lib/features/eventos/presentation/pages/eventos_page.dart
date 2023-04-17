@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:sme_plateia/app/router/app_router.gr.dart';
-import 'package:sme_plateia/core/extensions/scroll_controller_extensions.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/autocomplete_local/autocomplete_local_cubit.dart';
@@ -37,10 +36,10 @@ class EventosPage extends HookWidget {
       FlutterNativeSplash.remove();
       filtroCubit.carregarEventos();
 
-      scrollController.onScrollEndsListener(() {
-        debugPrint('Carregando mais dados');
-        filtroCubit.carregarEventos(filtro: true);
-      });
+      // scrollController.onScrollEndsListener(() {
+      //   debugPrint('Carregando mais dados');
+      //   filtroCubit.carregarEventos(filtro: true);
+      // });
 
       return scrollController.dispose;
     }, const []);
@@ -164,6 +163,7 @@ class EventosPage extends HookWidget {
                 },
               ),
             ),
+
             // Lista de resultados
             BlocBuilder<FiltroCubit, FiltroState>(
               builder: (context, state) {
@@ -226,7 +226,9 @@ class EventosPage extends HookWidget {
               hasScrollBody: false,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [Rodape()],
+                children: [
+                  Rodape(),
+                ],
               ),
             ),
           ],
@@ -271,37 +273,31 @@ class EventosPage extends HookWidget {
   }
 
   _buildSemEventos() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 32),
-      child: Container(
-        color: Color(0xffFBF2D0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: SemEventos(),
-            ),
-            Rodape(),
-          ],
-        ),
+    return Container(
+      color: Color(0xffFBF2D0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: SemEventos(),
+          ),
+          Rodape(),
+        ],
       ),
     );
   }
 
   _buildSemResultados() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 32),
-      child: Container(
-        color: Color(0xffFBF2D0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: SemResultados(),
-            ),
-            Rodape(),
-          ],
-        ),
+    return Container(
+      color: Color(0xffFBF2D0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: SemResultados(),
+          ),
+          Rodape(),
+        ],
       ),
     );
   }
