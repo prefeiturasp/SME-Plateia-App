@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
@@ -80,18 +80,15 @@ class EventoCard extends StatelessWidget {
   }
 
   Widget _buildImagem() {
-    return CachedNetworkImage(
-      imageUrl: eventoResumo.urlPoster,
+    return FastCachedImage(
+      url: eventoResumo.urlPoster,
       fit: BoxFit.cover,
       width: 122,
       height: 88,
-      cacheKey: eventoResumo.id.toString(),
-      progressIndicatorBuilder: (context, url, downloadProgress) {
-        return Center(child: CircularProgressIndicator(value: downloadProgress.progress));
-      },
-      errorWidget: (context, url, error) {
-        debugPrint("Erro: URL: $url");
+      errorBuilder: (context, error, stackTrace) {
         return Assets.images.eventoGenerico.image(
+          width: 122,
+          height: 88,
           fit: BoxFit.cover,
         );
       },

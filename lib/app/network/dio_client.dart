@@ -19,14 +19,25 @@ abstract class DioClient {
 
     final dio = Dio(options);
 
-    dio.interceptors.add(AuthInterceptor());
-    dio.interceptors.add(PrettyDioLogger(
+    final dioAuth = Dio(dio.options);
+    dioAuth.interceptors.add(PrettyDioLogger(
       compact: true,
       error: true,
       request: false,
       responseBody: false,
       responseHeader: false,
       requestBody: false,
+      requestHeader: false,
+    ));
+
+    dio.interceptors.add(AuthInterceptor(dioAuth));
+    dio.interceptors.add(PrettyDioLogger(
+      compact: true,
+      error: true,
+      request: false,
+      responseBody: true,
+      requestBody: false,
+      responseHeader: false,
       requestHeader: false,
     ));
 

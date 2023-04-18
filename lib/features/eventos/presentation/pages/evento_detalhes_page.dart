@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -59,28 +59,27 @@ class EventoDetalhesPage extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CachedNetworkImage(
-          imageUrl: eventoDetalhes.urlPoster,
-          height: 196,
-          cacheKey: eventoDetalhes.id.toString(),
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-          progressIndicatorBuilder: (context, url, downloadProgress) {
-            return CircularProgressIndicator(value: downloadProgress.progress);
-          },
-          errorWidget: (context, url, error) {
-            debugPrint("Erro: URL: $url");
-            return Assets.images.eventoGenerico.image(
-              fit: BoxFit.cover,
-            );
-          },
-        ),
+        _buildImage(context, eventoDetalhes),
         _buildResumo(context, eventoDetalhes),
         _buildInformacoes(eventoDetalhes),
         Center(
           child: Rodape(),
         ),
       ],
+    );
+  }
+
+  _buildImage(BuildContext context, EventoDetalhes eventoDetalhes) {
+    return FastCachedImage(
+      url: eventoDetalhes.urlPoster,
+      fit: BoxFit.cover,
+      height: 196,
+      width: MediaQuery.of(context).size.height,
+      errorBuilder: (context, error, stackTrace) {
+        return Assets.images.eventoGenerico.image(
+          fit: BoxFit.cover,
+        );
+      },
     );
   }
 

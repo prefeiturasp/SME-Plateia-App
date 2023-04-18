@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:jwt_decode/jwt_decode.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sme_plateia/app/router/app_router.dart';
 import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
@@ -14,9 +13,10 @@ enum TokenErrorType { tokenNotFound, refreshTokenHasExpired, failedToRegenerateA
 enum TokenHeader { none }
 
 class AuthInterceptor extends QueuedInterceptor {
-  final _autenticacaoLocalDataSource = sl<IAutenticacaoLocalDataSource>(); // helper class to access your local storage
+  final _autenticacaoLocalDataSource = sl<IAutenticacaoLocalDataSource>();
+  final Dio _dio;
 
-  AuthInterceptor();
+  AuthInterceptor(this._dio);
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
@@ -105,16 +105,10 @@ class AuthInterceptor extends QueuedInterceptor {
   Future<String?> _regenerateAccessToken() async {
     debugPrint('Atualizando AccessToken');
 
-    var dio = Dio();
-
-    if (kDebugMode) {
-      dio.interceptors.add(PrettyDioLogger());
-    }
-
     var authData = await _autenticacaoLocalDataSource.getLastToken();
     final refreshToken = authData!.refreshToken;
 
-    final response = await dio.post(
+    final response = await _dio.post(
       "${Endpoint.baseUrl}/autenticacao/token/atualizar/",
       data: {'refresh': refreshToken},
     );
