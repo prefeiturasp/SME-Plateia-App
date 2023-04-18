@@ -1,5 +1,6 @@
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sme_plateia/core/extensions/datetime_extension.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/gen/assets.gen.dart';
@@ -8,7 +9,7 @@ class EventoCard extends StatelessWidget {
   final EventoResumo eventoResumo;
   final void Function()? onTap;
 
-  const EventoCard(
+  EventoCard(
     this.eventoResumo, {
     super.key,
     this.onTap,
@@ -19,6 +20,7 @@ class EventoCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 24),
       child: Ink(
+        height: 88.h,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
@@ -26,50 +28,40 @@ class EventoCard extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               blurRadius: 10,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: Offset(0, 2),
             ),
           ],
         ),
         child: InkWell(
           onTap: onTap,
-          customBorder: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Row(
               children: [
                 _buildImagem(),
-                const SizedBox(
-                  width: 8,
-                ),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildTitulo(),
-                      SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _buildData(),
-                          _buildHorario(),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      _buildLocal(),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildTitulo(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildData(),
+                            _buildHorario(),
+                          ],
+                        ),
+                        _buildLocal(),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  color: Theme.of(context).primaryColor,
-                ),
-                const SizedBox(
-                  width: 8,
+                Assets.icons.arrowCard.svg(width: 12),
+                SizedBox(
+                  width: 16.w,
                 ),
               ],
             ),
@@ -83,12 +75,12 @@ class EventoCard extends StatelessWidget {
     return FastCachedImage(
       url: eventoResumo.urlPoster,
       fit: BoxFit.cover,
-      width: 122,
-      height: 88,
+      width: 122.w,
+      height: 88.h,
       errorBuilder: (context, error, stackTrace) {
         return Assets.images.eventoGenerico.image(
-          width: 122,
-          height: 88,
+          width: 122.w,
+          height: 88.h,
           fit: BoxFit.cover,
         );
       },
@@ -117,7 +109,7 @@ class EventoCard extends StatelessWidget {
           color: Color(0xffC25F14),
           size: 16,
         ),
-        const SizedBox(
+        SizedBox(
           width: 4,
         ),
         Text(
@@ -136,7 +128,7 @@ class EventoCard extends StatelessWidget {
           color: Color(0xffC25F14),
           size: 16,
         ),
-        const SizedBox(
+        SizedBox(
           width: 4,
         ),
         Text(
