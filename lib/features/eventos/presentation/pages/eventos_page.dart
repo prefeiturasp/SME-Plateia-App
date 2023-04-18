@@ -51,102 +51,7 @@ class EventosPage extends HookWidget {
         body: CustomScrollView(
           slivers: [
             // Formulario de filtro
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      "Encontre seu evento",
-                      style: TextStyle(
-                        color: Color(0xffC25F14),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Column(
-                      children: [
-                        EventoTextField(
-                          hintText: 'Busque pelo nome do evento',
-                          controller: controllerNomeEvento,
-                          onChanged: (nome) {
-                            context.read<FiltroCubit>().changeNomeEvento(nome);
-                          },
-                          onSubmitted: (value) {
-                            context.read<FiltroCubit>().requestMoreDate(
-                                  pagingController: pagingController,
-                                  resetFilter: true,
-                                );
-                          },
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        BlocBuilder<FiltroCubit, FiltroState>(
-                          builder: (context, state) {
-                            return DropdownField<EnumEventoPeriodo>(
-                              hintText: 'Selecione o período',
-                              value: state.periodoEvento,
-                              buildItems: () {
-                                return EnumEventoPeriodo.values.map<DropdownMenuItem<EnumEventoPeriodo>>((value) {
-                                  return DropdownMenuItem(
-                                    value: value,
-                                    child: Text(value.nome, style: TextStyle(fontSize: 14)),
-                                  );
-                                }).toList();
-                              },
-                              onChanged: (value) {
-                                context.read<FiltroCubit>().changePeriodoEvento(value!);
-                              },
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        BlocBuilder<AutocompleteLocalCubit, AutocompleteLocalState>(
-                          builder: (context, state) {
-                            return AutocompleteField(
-                              controller: controllerLocalEvento,
-                              hintText: 'Busque pelo local do evento',
-                              asyncSuggestions: (value) async {
-                                return state.locais;
-                              },
-                              onChanged: (value) {
-                                context.read<AutocompleteLocalCubit>().buscarLocal(value);
-                              },
-                              onSubmitted: (value) {
-                                context.read<FiltroCubit>().changeLocalEvento(value);
-                              },
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        TextButton(
-                          child: Text(
-                            'Buscar'.toUpperCase(),
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          onPressed: () {
-                            context.read<FiltroCubit>().requestMoreDate(
-                                  pagingController: pagingController,
-                                  resetFilter: true,
-                                );
-                          },
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _buildFormularioFiltro(context, controllerNomeEvento, controllerLocalEvento, pagingController),
 
             // Texto de filtro
             SliverToBoxAdapter(
@@ -254,6 +159,110 @@ class EventosPage extends HookWidget {
           ),
           Rodape(),
         ],
+      ),
+    );
+  }
+
+  _buildFormularioFiltro(
+    BuildContext context,
+    TextEditingController controllerNomeEvento,
+    TextEditingController controllerLocalEvento,
+    PagingController<int, EventoResumo> pagingController,
+  ) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              "Encontre seu evento",
+              style: TextStyle(
+                color: Color(0xffC25F14),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 16),
+            Column(
+              children: [
+                EventoTextField(
+                  hintText: 'Busque pelo nome do evento',
+                  controller: controllerNomeEvento,
+                  onChanged: (nome) {
+                    context.read<FiltroCubit>().changeNomeEvento(nome);
+                  },
+                  onSubmitted: (value) {
+                    context.read<FiltroCubit>().requestMoreDate(
+                          pagingController: pagingController,
+                          resetFilter: true,
+                        );
+                  },
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                BlocBuilder<FiltroCubit, FiltroState>(
+                  builder: (context, state) {
+                    return DropdownField<EnumEventoPeriodo>(
+                      hintText: 'Selecione o período',
+                      value: state.periodoEvento,
+                      buildItems: () {
+                        return EnumEventoPeriodo.values.map<DropdownMenuItem<EnumEventoPeriodo>>((value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value.nome, style: TextStyle(fontSize: 14)),
+                          );
+                        }).toList();
+                      },
+                      onChanged: (value) {
+                        context.read<FiltroCubit>().changePeriodoEvento(value!);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                BlocBuilder<AutocompleteLocalCubit, AutocompleteLocalState>(
+                  builder: (context, state) {
+                    return AutocompleteField(
+                      controller: controllerLocalEvento,
+                      hintText: 'Busque pelo local do evento',
+                      asyncSuggestions: (value) async {
+                        return state.locais;
+                      },
+                      onChanged: (value) {
+                        context.read<AutocompleteLocalCubit>().buscarLocal(value);
+                      },
+                      onSubmitted: (value) {
+                        context.read<FiltroCubit>().changeLocalEvento(value);
+                      },
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextButton(
+                  child: Text(
+                    'Buscar'.toUpperCase(),
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  onPressed: () {
+                    context.read<FiltroCubit>().requestMoreDate(
+                          pagingController: pagingController,
+                          resetFilter: true,
+                        );
+                  },
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
