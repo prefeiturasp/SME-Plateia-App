@@ -2,7 +2,6 @@ part of 'filtro_cubit.dart';
 
 enum EnumPageStatus {
   inicial,
-  carregando,
   comResultado,
   semResultado,
   erro,

@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hookified_infinite_scroll_pagination/hookified_infinite_scroll_pagination.dart';
 
 import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
@@ -27,21 +27,19 @@ class EventosPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final filtroCubit = BlocProvider.of<FiltroCubit>(context);
-    final scrollController = useScrollController();
+    final pagingController = usePagingController<int, EventoResumo>(
+      firstPageKey: 1,
+      onPageRequest: (pageKey, pagingController) {
+        filtroCubit.requestMoreDate(pageKey: pageKey, pagingController: pagingController);
+      },
+    );
 
     final controllerNomeEvento = useTextEditingController();
     final controllerLocalEvento = useTextEditingController();
 
     useEffect(() {
       FlutterNativeSplash.remove();
-      filtroCubit.carregarEventos();
-
-      // scrollController.onScrollEndsListener(() {
-      //   debugPrint('Carregando mais dados');
-      //   filtroCubit.carregarEventos(filtro: true);
-      // });
-
-      return scrollController.dispose;
+      return pagingController.dispose;
     }, const []);
 
     return MultiBlocProvider(
@@ -51,7 +49,6 @@ class EventosPage extends HookWidget {
       child: Scaffold(
         appBar: Cabecalho('Meus Eventos'),
         body: CustomScrollView(
-          controller: scrollController,
           slivers: [
             // Formulario de filtro
             SliverToBoxAdapter(
@@ -81,7 +78,10 @@ class EventosPage extends HookWidget {
                             context.read<FiltroCubit>().changeNomeEvento(nome);
                           },
                           onSubmitted: (value) {
-                            context.read<FiltroCubit>().carregarEventos(filtro: true);
+                            context.read<FiltroCubit>().requestMoreDate(
+                                  pagingController: pagingController,
+                                  resetFilter: true,
+                                );
                           },
                         ),
                         SizedBox(
@@ -135,7 +135,10 @@ class EventosPage extends HookWidget {
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           onPressed: () {
-                            context.read<FiltroCubit>().carregarEventos(filtro: true);
+                            context.read<FiltroCubit>().requestMoreDate(
+                                  pagingController: pagingController,
+                                  resetFilter: true,
+                                );
                           },
                         )
                       ],
@@ -144,6 +147,7 @@ class EventosPage extends HookWidget {
                 ),
               ),
             ),
+
             // Texto de filtro
             SliverToBoxAdapter(
               child: BlocBuilder<FiltroCubit, FiltroState>(
@@ -164,96 +168,48 @@ class EventosPage extends HookWidget {
               ),
             ),
 
-            // Lista de resultados
-            BlocBuilder<FiltroCubit, FiltroState>(
-              builder: (context, state) {
-                switch (state.pageStatus) {
-                  case EnumPageStatus.comResultado:
-                    return _buildEventos(state.resultado);
-                  default:
-                    return SliverToBoxAdapter(
-                      child: SizedBox.shrink(),
+            SliverPadding(
+              padding: EdgeInsets.only(top: 16, right: 16, left: 16),
+              sliver: PagedSliverList<int, EventoResumo>(
+                pagingController: pagingController,
+                shrinkWrapFirstPageIndicators: true,
+                builderDelegate: PagedChildBuilderDelegate<EventoResumo>(
+                  noItemsFoundIndicatorBuilder: (context) {
+                    return Container();
+                  },
+                  itemBuilder: (context, item, index) {
+                    return EventoCard(
+                      item,
+                      onTap: () {
+                        context.pushRoute(EventoDetalhesRoute(
+                          key: Key(item.id.toString()),
+                          idEvento: item.id,
+                        ));
+                      },
                     );
-                }
-              },
-            ),
-
-            // Sinal de carregando mais dados
-            SliverToBoxAdapter(
-              child: BlocBuilder<FiltroCubit, FiltroState>(
-                builder: (context, state) {
-                  if (!state.noMoreData) {
-                    return Padding(
-                      padding: EdgeInsets.only(top: 14, bottom: 32),
-                      child: CupertinoActivityIndicator(),
-                    );
-                  }
-
-                  return SizedBox.shrink();
-                },
+                  },
+                ),
               ),
-            ),
-
-            // Sem Resultado
-            BlocBuilder<FiltroCubit, FiltroState>(
-              builder: (context, state) {
-                switch (state.pageStatus) {
-                  case EnumPageStatus.carregando:
-                    return SliverFillRemaining(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  case EnumPageStatus.semResultado:
-                    if (state.resultadoNomeBusca.isEmpty) {
-                      return SliverFillRemaining(
-                        child: _buildSemEventos(),
-                      );
-                    } else {
-                      return SliverFillRemaining(
-                        child: _buildSemResultados(),
-                      );
-                    }
-                  default:
-                    return SliverToBoxAdapter(
-                      child: SizedBox.shrink(),
-                    );
-                }
-              },
             ),
 
             SliverFillRemaining(
               hasScrollBody: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Rodape(),
-                ],
+              child: BlocBuilder<FiltroCubit, FiltroState>(
+                builder: (context, state) {
+                  switch (state.pageStatus) {
+                    case EnumPageStatus.semResultado:
+                      if (state.resultadoNomeBusca.isEmpty) {
+                        return _buildSemEventos();
+                      } else {
+                        return _buildSemResultados();
+                      }
+                    default:
+                      return Rodape();
+                  }
+                },
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  _buildEventos(
-    List<EventoResumo> eventos,
-  ) {
-    return SliverPadding(
-      padding: EdgeInsets.only(top: 16, right: 16, left: 16),
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) => EventoCard(
-            eventos[index],
-            onTap: () {
-              context.pushRoute(EventoDetalhesRoute(
-                key: Key(eventos[index].id.toString()),
-                idEvento: eventos[index].id,
-              ));
-            },
-          ),
-          childCount: eventos.length,
         ),
       ),
     );
@@ -272,7 +228,7 @@ class EventosPage extends HookWidget {
     );
   }
 
-  _buildSemEventos() {
+  Widget _buildSemEventos() {
     return Container(
       color: Color(0xffFBF2D0),
       child: Column(
@@ -287,7 +243,7 @@ class EventosPage extends HookWidget {
     );
   }
 
-  _buildSemResultados() {
+  Widget _buildSemResultados() {
     return Container(
       color: Color(0xffFBF2D0),
       child: Column(

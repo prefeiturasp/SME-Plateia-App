@@ -20,7 +20,7 @@ class EventoEnderecoPage extends HookWidget {
 
   EventoEnderecoPage({
     Key? key,
-    @PathParam('id') required this.eventoId,
+    required this.eventoId,
     required this.endereco,
     required this.local,
   }) : super(key: key);

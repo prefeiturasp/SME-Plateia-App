@@ -1,21 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:sme_plateia/features/eventos/domain/entities/enums/evento_periodo.enum.dart';
 import 'package:sme_plateia/features/eventos/domain/entities/evento_resumo.entity.dart';
 import 'package:sme_plateia/features/eventos/domain/usecases/obter_eventos_usecase.dart';
 
-part 'filtro_state.dart';
 part 'filtro_cubit.freezed.dart';
+part 'filtro_state.dart';
 
 @Singleton()
 class FiltroCubit extends Cubit<FiltroState> {
-  FiltroCubit(this.obterEventosUseCase) : super(FiltroState.initial());
-
   final ObterEventosUseCase obterEventosUseCase;
-  int _page = 1;
-  List<EventoResumo> _data = [];
+  int pageSize = 10;
+
+  FiltroCubit(this.obterEventosUseCase) : super(FiltroState.initial());
 
   changeNomeEvento(String nomeEvento) {
     emit(state.copyWith(
@@ -35,46 +36,52 @@ class FiltroCubit extends Cubit<FiltroState> {
     ));
   }
 
-  Future<void> carregarEventos({bool filtro = false}) async {
+  void requestMoreDate({
+    required PagingController<int, EventoResumo> pagingController,
+    int pageKey = 0,
+    bool resetFilter = false,
+  }) async {
     emit(state.copyWith(
-      pageStatus: EnumPageStatus.carregando,
+      pageStatus: EnumPageStatus.inicial,
+      resultadoNomeBusca: state.nomeEvento,
     ));
 
-    if (filtro) {
-      _data = [];
-      _page = 1;
+    if (resetFilter) {
+      pagingController.refresh();
     }
 
-    var eventos = await obterEventosUseCase.call(
-      Params(
-        nome: state.nomeEvento,
-        periodo: state.periodoEvento,
-        local: state.localEvento,
-        pagina: _page,
-      ),
-    );
-    final noMoreData = eventos.length() < 20;
-    _page++;
+    try {
+      var result = await obterEventosUseCase.call(
+        Params(
+          nome: state.nomeEvento,
+          periodo: state.periodoEvento,
+          local: state.localEvento,
+          pagina: pageKey,
+        ),
+      );
 
-    eventos.fold(
-      (erro) => debugPrint(erro.toString()),
-      (result) {
-        if (result.isEmpty) {
-          emit(state.copyWith(
-            pageStatus: EnumPageStatus.semResultado,
-            resultadoNomeBusca: state.nomeEvento,
-          ));
-        } else {
-          _data.addAll(result);
+      result.fold(
+        (l) => null,
+        (newItems) {
+          final isLastPage = newItems.length < pageSize;
+          if (isLastPage) {
+            pagingController.appendLastPage(newItems);
+          } else {
+            final nextPageKey = pageKey + 1;
+            pagingController.appendPage(newItems, nextPageKey);
+          }
 
-          emit(state.copyWith(
-            pageStatus: EnumPageStatus.comResultado,
-            resultado: _data,
-            resultadoNomeBusca: state.nomeEvento,
-            noMoreData: noMoreData,
-          ));
-        }
-      },
-    );
+          // Sem resultados para busca
+          if (pagingController.value.itemList != null && pagingController.value.itemList!.isEmpty) {
+            emit(state.copyWith(
+              pageStatus: EnumPageStatus.semResultado,
+              resultadoNomeBusca: state.nomeEvento,
+            ));
+          }
+        },
+      );
+    } catch (error) {
+      pagingController.error = error;
+    }
   }
 }
