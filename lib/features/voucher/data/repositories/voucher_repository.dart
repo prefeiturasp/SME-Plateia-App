@@ -61,12 +61,13 @@ class VoucherRepository implements IVoucherRepository {
   }
 
   @override
-  Future<void> openVoucherPDF(String base64PDF) async {
+  Future<Either<Failure, void>> openVoucherPDF(String base64PDF) async {
     String base64Formatted = base64Utils.removeBase64Header('data:application/pdf;base64,', base64PDF);
     Uint8List bytesFile = base64Utils.getBinaryDataFromBase64(base64Formatted);
     final resultBinaryData = await downloadAndSaveFileUseCase.writeFile('voucher.pdf', bytesFile);
-    resultBinaryData.fold((failure) => null, (file) async {
-      downloadAndSaveFileUseCase.openFile(file);
+    return resultBinaryData.fold((failure) => Left(failure), (file) async {
+      final resultOpenFile = await downloadAndSaveFileUseCase.openFile(file);
+      return resultOpenFile.fold((failure) => Left(failure), (void _) => Right(null));
     });
   }
 }

@@ -5,8 +5,11 @@ class ButtonIconOutlinedWidget extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback? callback;
+  final bool loading;
 
-  const ButtonIconOutlinedWidget({required this.title, required this.icon, Key? key, this.callback}) : super(key: key);
+  const ButtonIconOutlinedWidget(
+      {required this.title, required this.icon, this.loading = false, Key? key, this.callback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +29,26 @@ class ButtonIconOutlinedWidget extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Icon(icon, color: Colors.black),
-                ],
-              )),
+              child: loading
+                  ? SizedBox(
+                      height: 20.0,
+                      width: 20.0,
+                      child: CircularProgressIndicator(strokeWidth: 2, color: TemaUtil.preto))
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Icon(icon, color: Colors.black),
+                      ],
+                    )),
         ],
       ),
     );
