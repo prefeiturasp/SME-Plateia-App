@@ -14,7 +14,7 @@ class VoucherUseCase {
     return await _repository.getVoucherById(inscricaoId);
   }
 
-  Future<void> openVoucherPDF(String base64PDF) {
+  Future<Either<Failure, void>> openVoucherPDF(String base64PDF) {
     return _repository.openVoucherPDF(base64PDF);
   }
 }
