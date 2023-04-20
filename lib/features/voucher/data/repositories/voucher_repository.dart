@@ -36,27 +36,30 @@ class VoucherRepository implements IVoucherRepository {
   Future<Either<Failure, Voucher>> getVoucherById(
     int inscricaoId,
   ) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await voucherRemoteDataSource.getVoucherById(id: inscricaoId);
+    try {
+      final result = await voucherRemoteDataSource.getVoucherById(id: inscricaoId);
 
-        final VoucherModel voucherModel = result;
+      final VoucherModel voucherModel = result;
 
-        await voucherLocalDataSource.insertOrUpdateEntity(voucherModel.toDomain());
+      await voucherLocalDataSource.insertOrUpdateEntity(voucherModel.toDomain());
 
-        return Right(voucherModel.toDomain());
-      } on Failure catch (e) {
-        debugPrint(e.toString());
-        return Left(ServerFailure(message: e.message));
-      }
+      return Right(voucherModel.toDomain());
+    } on Failure catch (e) {
+      debugPrint(e.toString());
+      return Left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Voucher>> getLocalVoucherById(
+    int inscricaoId,
+  ) async {
+    var voucherCache = await voucherLocalDataSource.findById(inscricaoId);
+
+    if (voucherCache != null) {
+      return Right(voucherCache);
     } else {
-      var voucherCache = await voucherLocalDataSource.findById(inscricaoId);
-
-      if (voucherCache != null) {
-        return Right(voucherCache);
-      } else {
-        return Left(Failure.localFailure(message: 'Cache não encontrado para o voucher ID $inscricaoId'));
-      }
+      return Left(Failure.localFailure(message: 'Cache não encontrado para o voucher ID $inscricaoId'));
     }
   }
 
