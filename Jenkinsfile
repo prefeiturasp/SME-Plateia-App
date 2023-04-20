@@ -116,7 +116,7 @@ pipeline {
 
       stage('Tag Github Dev') {
         agent { label 'master' }
-        when { anyOf {  branch 'development'; }}
+        when { anyOf {  branch 'develop'; }}
         steps{
           script{
             try {
@@ -167,7 +167,7 @@ pipeline {
 
       stage('Release Github Dev') {
         agent { label 'master' }
-        when { anyOf {  branch 'development'; }}
+        when { anyOf {  branch 'develop'; }}
         steps{
           script{
             try {
