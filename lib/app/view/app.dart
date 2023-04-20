@@ -25,6 +25,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => sl<AuthCubit>()),
         BlocProvider(create: (context) => sl<VoucherCubit>()),
+        BlocProvider(create: (context) => sl<VoucherFileCubit>()),
         BlocProvider(create: (context) => sl<FlashCubit>()),
         BlocProvider(create: (context) => sl<FiltroCubit>()),
         BlocProvider(create: (context) => sl<EventoDetalhesCubit>()),

@@ -29,3 +29,24 @@ class VoucherError extends VoucherState {
   @override
   List<Object?> get props => [message];
 }
+
+abstract class VoucherFileOpenState extends Equatable {
+  const VoucherFileOpenState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class VoucherFileOpenInitial extends VoucherFileOpenState {}
+
+class VoucherFileOpenError extends VoucherFileOpenState {
+  final String title;
+  final String message;
+
+  const VoucherFileOpenError(this.title, this.message);
+
+  @override
+  List<Object?> get props => [title, message];
+}
+
+class VoucherFileLoading extends VoucherFileOpenState {}
