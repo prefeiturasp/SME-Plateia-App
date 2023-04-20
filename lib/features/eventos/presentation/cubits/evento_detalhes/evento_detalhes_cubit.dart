@@ -22,7 +22,7 @@ class EventoDetalhesCubit extends Cubit<EventoDetalhesState> {
     result.fold(
       (l) {
         debugPrint(l.toString());
-        emit(EventoDetalhesState.error(l.toString()));
+        emit(EventoDetalhesState.error(l.message));
       },
       (r) {
         emit(EventoDetalhesState.loaded(r));

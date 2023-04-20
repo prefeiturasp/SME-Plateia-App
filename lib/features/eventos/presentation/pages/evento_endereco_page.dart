@@ -51,6 +51,9 @@ class EventoEnderecoPage extends HookWidget {
               child: BlocBuilder<EventoEnderecoCubit, EventoEnderecoState>(
                 builder: (context, state) {
                   return state.maybeWhen(
+                    offline: () {
+                      return SizedBox.shrink();
+                    },
                     loading: () => Center(
                       child: CircularProgressIndicator(),
                     ),

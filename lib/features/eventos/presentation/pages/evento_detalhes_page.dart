@@ -38,6 +38,20 @@ class EventoDetalhesPage extends HookWidget {
       body: BlocBuilder<EventoDetalhesCubit, EventoDetalhesState>(
         builder: (context, state) {
           return state.maybeWhen(
+            error: (mensagem) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.images.semEventos.svg(),
+                  SizedBox(
+                    height: 36,
+                  ),
+                  Center(
+                    child: Text(mensagem),
+                  ),
+                ],
+              );
+            },
             loaded: (eventoDetalhes) {
               return SingleChildScrollView(
                 child: _buildDetalhes(context, eventoDetalhes),
