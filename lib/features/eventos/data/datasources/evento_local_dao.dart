@@ -7,10 +7,10 @@ abstract class EventoResumoDao extends ICrud<EventoResumo> {
   @Query('SELECT * FROM EventoResumo WHERE id = :id')
   Future<EventoResumo?> findObjById(int id);
 
-  @Query('SELECT * FROM EventoResumo')
+  @Query('SELECT * FROM EventoResumo ORDER BY dataHora DESC')
   Future<List<EventoResumo>> findAll();
 
-  @Query('SELECT * FROM EventoResumo')
+  @Query('SELECT * FROM EventoResumo ORDER BY dataHora DESC')
   Stream<List<EventoResumo>> findAllAsStream();
 
   @Query('DELETE FROM EventoResumo')
