@@ -23,6 +23,15 @@ class VoucherCubit extends Cubit<VoucherState> {
     );
   }
 
+  Future<void> getLocalVoucherById(int inscricaoId) async {
+    emit(VoucherLoading());
+    final result = await voucherUseCase.getLocalVoucherById(inscricaoId);
+    result.fold(
+      (failure) => emit(VoucherError('Erro ao buscar voucher')),
+      (voucher) => emit(VoucherLoaded(voucher)),
+    );
+  }
+
   Uint8List getBase64QrcodeImage(String base64) {
     final normalized = base64Utils.removeBase64Header('data:image\\/\\w+;base64,', base64);
     return base64Utils.getBinaryDataFromBase64(normalized);

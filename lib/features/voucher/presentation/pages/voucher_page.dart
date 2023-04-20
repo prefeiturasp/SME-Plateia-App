@@ -50,7 +50,7 @@ class VoucherPageState extends State<VoucherPage> {
     super.initState();
     _voucherCubit = BlocProvider.of<VoucherCubit>(context);
     _voucherFileCubit = BlocProvider.of<VoucherFileCubit>(context);
-    _voucherCubit.getVoucher(widget.inscricaoId);
+    _voucherCubit.getLocalVoucherById(widget.inscricaoId);
   }
 
   void showAlert(BuildContext context, String title, String message) {
@@ -150,7 +150,7 @@ class VoucherPageState extends State<VoucherPage> {
                                   child: Column(children: [
                                     ListItemWidget(title: widget.userNome, icon: Icons.person_outlined),
                                     SizedBox(height: 16.0),
-                                    ListItemWidget(title: 'RF $widget.userRF', icon: Icons.badge_outlined),
+                                    ListItemWidget(title: 'RF ${widget.userRF}', icon: Icons.badge_outlined),
                                     SizedBox(height: 16.0),
                                     ListItemWidget(
                                         title: '${widget.dataHora.formatddMMyyy()} às ${widget.dataHora.formatHHmm()}',

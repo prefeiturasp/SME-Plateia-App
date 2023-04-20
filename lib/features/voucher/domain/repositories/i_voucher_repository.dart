@@ -4,5 +4,6 @@ import 'package:sme_plateia/features/voucher/domain/entities/voucher.dart';
 
 abstract class IVoucherRepository {
   Future<Either<Failure, Voucher>> getVoucherById(int id);
+  Future<Either<Failure, Voucher>> getLocalVoucherById(int id);
   Future<Either<Failure, void>> openVoucherPDF(String base64PDF);
 }

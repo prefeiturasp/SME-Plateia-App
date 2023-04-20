@@ -20,7 +20,6 @@ class VoucherRemoteDataSource implements IVoucherRemoteDataSource {
   }) async {
     try {
       final response = await voucherRemoteService.getVoucherById(id);
-
       return response.data;
     } on DioError catch (e) {
       throw handleNertorkError(e);
