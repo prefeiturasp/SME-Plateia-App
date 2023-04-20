@@ -31,7 +31,7 @@ class EventoDetalhesRepository implements IEventoDetalhesRepository {
         if (eventoCache != null) {
           return Right(eventoCache);
         } else {
-          return Left(Failure.localFailure(message: 'Cache não encontrado para o evento ID $eventoId'));
+          return Left(Failure.localFailure(message: 'Detalhes do evento não disponível offline'));
         }
       }
     } on Failure catch (e) {

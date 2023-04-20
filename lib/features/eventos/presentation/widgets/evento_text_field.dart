@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
+import 'package:sme_plateia/gen/assets.gen.dart';
 
 class EventoTextField extends StatelessWidget {
   EventoTextField({
@@ -32,15 +33,16 @@ class EventoTextField extends StatelessWidget {
         ),
         controller: controller,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(top: 16),
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 14,
             color: Color(0xffA4A4A4),
           ),
-          suffixIcon: Icon(
-            Icons.search,
-            color: Color(0xff9D9D9C),
+          suffixIcon: Container(
+            margin: EdgeInsets.all(16),
+            child: Assets.icons.procurar.svg(),
           ),
         ),
         onChanged: onChanged,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
+import 'package:sme_plateia/gen/assets.gen.dart';
 
 class DropdownField<T> extends StatelessWidget {
   const DropdownField({
@@ -18,7 +19,7 @@ class DropdownField<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 16, right: 16),
+      padding: EdgeInsets.only(left: 16, right: 3),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(4),
@@ -28,6 +29,10 @@ class DropdownField<T> extends StatelessWidget {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<T>(
+          icon: Container(
+            margin: EdgeInsets.all(16),
+            child: Assets.icons.dropdown.svg(),
+          ),
           isExpanded: true,
           items: buildItems(),
           value: value,
