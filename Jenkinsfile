@@ -44,7 +44,7 @@ pipeline {
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONDEV} android/app/src/development/google-services.json'
-            sh 'f [ ! -d "lib/app/firebase" ]; then mkdir lib/app/firebase; fi'
+            sh 'mkdir -p lib/app/firebase'
             sh 'cp ${FIREBASEDEV} lib/app/firebase/firebase_options_development.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
@@ -73,7 +73,7 @@ pipeline {
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONHOM} android/app/src/staging/google-services.json'
-            sh 'f [ ! -d "lib/app/firebase" ]; then mkdir lib/app/firebase; fi'
+            sh 'mkdir -p lib/app/firebase'
             sh 'cp ${FIREBASEHOM} lib/app/firebase/firebase_options_staging.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
@@ -100,7 +100,7 @@ pipeline {
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONPROD} android/app/src/production/google-services.json'
-            sh 'f [ ! -d "lib/app/firebase" ]; then mkdir lib/app/firebase; fi'
+            sh 'mkdir -p lib/app/firebase'
             sh 'cp ${FIREBASEPROD} lib/app/firebase/firebase_options_production.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
