@@ -10,6 +10,10 @@ on:
       - master
       - release
 
+env:
+  URL_API: http://site
+  URL_RECUPERAR_SENHA: http://site
+
 jobs:
   semantic-pull-request:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
