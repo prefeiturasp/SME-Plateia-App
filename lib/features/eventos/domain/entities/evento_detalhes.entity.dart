@@ -7,7 +7,8 @@ class EventoDetalhes extends Equatable {
   @PrimaryKey()
   final int id;
   final String nome;
-  final DateTime dataHora;
+  final DateTime dataHoraApresentacao;
+  final DateTime dataHoraProgramada;
   final String local;
   final String urlPoster;
 
@@ -33,7 +34,8 @@ class EventoDetalhes extends Equatable {
   EventoDetalhes({
     required this.id,
     required this.nome,
-    required this.dataHora,
+    required this.dataHoraApresentacao,
+    required this.dataHoraProgramada,
     required this.local,
     required this.urlPoster,
     required this.endereco,

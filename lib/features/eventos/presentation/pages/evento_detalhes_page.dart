@@ -147,7 +147,8 @@ class EventoDetalhesPage extends HookWidget {
                     ingressosPorMembro: eventoDetalhes.numeroDeTicket,
                     local: eventoDetalhes.local,
                     endereco: eventoDetalhes.endereco,
-                    dataHora: eventoDetalhes.dataHora,
+                    dataHoraApresentacao: eventoDetalhes.dataHoraApresentacao,
+                    dataHoraProgramada: eventoDetalhes.dataHoraProgramada,
                     userRF: rf,
                     userNome: nome,
                   ));
@@ -181,7 +182,7 @@ class EventoDetalhesPage extends HookWidget {
           children: [
             Assets.icons.calendario.svg(width: 16),
             SizedBox(width: 8),
-            Text(eventoDetalhes.dataHora.formatddMMyyy()),
+            Text(eventoDetalhes.dataHoraApresentacao.formatddMMyyy()),
           ],
         ),
         SizedBox(width: 24),
@@ -189,7 +190,7 @@ class EventoDetalhesPage extends HookWidget {
           children: [
             Assets.icons.relogio.svg(width: 16),
             SizedBox(width: 8),
-            Text(eventoDetalhes.dataHora.formatHHmm()),
+            Text(eventoDetalhes.dataHoraProgramada.formatHHmm()),
           ],
         ),
         Container(),

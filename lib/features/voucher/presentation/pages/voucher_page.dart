@@ -20,7 +20,8 @@ class VoucherPage extends StatefulWidget {
   final int ingressosPorMembro;
   final String local;
   final String endereco;
-  final DateTime dataHora;
+  final DateTime dataHoraProgramada;
+  final DateTime dataHoraApresentacao;
   final String userRF;
   final String userNome;
 
@@ -32,7 +33,8 @@ class VoucherPage extends StatefulWidget {
       required this.ingressosPorMembro,
       required this.local,
       required this.endereco,
-      required this.dataHora,
+      required this.dataHoraProgramada,
+      required this.dataHoraApresentacao,
       required this.userRF,
       required this.userNome})
       : super(key: key);
@@ -153,7 +155,8 @@ class VoucherPageState extends State<VoucherPage> {
                                     ListItemWidget(title: 'RF ${widget.userRF}', icon: Icons.badge_outlined),
                                     SizedBox(height: 16.0),
                                     ListItemWidget(
-                                        title: '${widget.dataHora.formatddMMyyy()} às ${widget.dataHora.formatHHmm()}',
+                                        title:
+                                            '${widget.dataHoraApresentacao.formatddMMyyy()} às ${widget.dataHoraProgramada.formatHHmm()}',
                                         icon: Icons.calendar_today_outlined),
                                     SizedBox(height: 16.0),
                                     ListItemWidget(

@@ -113,7 +113,7 @@ class EventoCard extends StatelessWidget {
           width: 4,
         ),
         Text(
-          eventoResumo.dataHora.formatddMMyyy(),
+          eventoResumo.dataHoraApresentacao.formatddMMyyy(),
           style: TextStyle(fontSize: 14),
         ),
       ],
@@ -132,7 +132,7 @@ class EventoCard extends StatelessWidget {
           width: 4,
         ),
         Text(
-          eventoResumo.dataHora.formatHHmm(),
+          eventoResumo.dataHoraProgramada.formatHHmm(),
           style: TextStyle(fontSize: 14),
         ),
       ],
