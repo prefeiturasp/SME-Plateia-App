@@ -5,13 +5,14 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
+import 'package:sme_plateia/core/extensions/dartz_extensions.dart';
 import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
 import 'package:sme_plateia/features/auth/domain/repositories/i_authentication_repository.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
 
-@LazySingleton()
+@singleton
 class AuthCubit extends Cubit<AuthState> {
   final IAutenticacaoRepository _authenticationRepository;
 
@@ -33,10 +34,10 @@ class AuthCubit extends Cubit<AuthState> {
     Either<Failure, Autenticacao?> result = await _authenticationRepository.getUsuarioAutenticado();
 
     result.fold(
-      (l) => emit(AuthState.unauthenticated()),
-      (r) {
-        if (r != null) {
-          emit(AuthState.authenticated());
+      (falha) => emit(AuthState.unauthenticated()),
+      (usuario) {
+        if (usuario != null) {
+          emit(AuthState.authenticated(usuario));
         } else {
           emit(AuthState.unauthenticated());
         }
@@ -54,7 +55,8 @@ class AuthCubit extends Cubit<AuthState> {
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthState.unauthenticated());
       case AuthenticationStatus.authenticated:
-        return emit(AuthState.authenticated());
+        var usuario = await _authenticationRepository.getUsuarioAutenticado();
+        return emit(AuthState.authenticated(usuario.getRight()!));
       case AuthenticationStatus.unknown:
         return emit(const AuthState.unauthenticated());
     }

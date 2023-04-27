@@ -6,7 +6,7 @@ import 'package:sme_plateia/core/interfaces/i_usecase.dart';
 import 'package:sme_plateia/features/auth/domain/entities/autenticacao.dart';
 import 'package:sme_plateia/features/auth/domain/repositories/i_authentication_repository.dart';
 
-@injectable
+@Singleton()
 class AutenticarUseCase implements IUseCase<Autenticacao, Params> {
   final IAutenticacaoRepository repository;
 

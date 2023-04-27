@@ -12,11 +12,11 @@ watch:
 
 .PHONY: apk-dev
 apk-dev:
-	@flutter build apk --debug --flavor development --target lib/main_development.dart
+	@flutter build apk --debug --flavor development --target lib/main_development.dart --no-tree-shake-icons
 
 .PHONY: apk-stg
 apk-stg:
-	@flutter build apk --profile --flavor staging --target lib/main_staging.dart
+	@flutter build apk --profile --flavor staging --target lib/main_staging.dart --no-tree-shake-icons
 
 .PHONY: apk-prod
 apk-prod:

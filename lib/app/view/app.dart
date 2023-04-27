@@ -8,6 +8,10 @@ import 'package:sme_plateia/core/extensions/context_extensions.dart';
 import 'package:sme_plateia/core/utils/colors.dart';
 import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
+import 'package:sme_plateia/features/eventos/presentation/cubits/evento_detalhes/evento_detalhes_cubit.dart';
+import 'package:sme_plateia/features/eventos/presentation/cubits/evento_endereco/evento_endereco_cubit.dart';
+import 'package:sme_plateia/features/eventos/presentation/cubits/filtro/filtro_cubit.dart';
+import 'package:sme_plateia/features/voucher/presentation/cubits/voucher_cubit.dart';
 import 'package:sme_plateia/injector.dart';
 import 'package:sme_plateia/l10n/l10n.dart';
 import 'package:sme_plateia/shared/flash/presentation/blocs/cubit/flash_cubit.dart';
@@ -20,7 +24,12 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl<AuthCubit>()),
+        BlocProvider(create: (context) => sl<VoucherCubit>()),
+        BlocProvider(create: (context) => sl<VoucherFileCubit>()),
         BlocProvider(create: (context) => sl<FlashCubit>()),
+        BlocProvider(create: (context) => sl<FiltroCubit>()),
+        BlocProvider(create: (context) => sl<EventoDetalhesCubit>()),
+        BlocProvider(create: (context) => sl<EventoEnderecoCubit>()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -42,6 +51,15 @@ class App extends StatelessWidget {
           builder: (context, child) {
             return MaterialApp.router(
               scaffoldMessengerKey: rootScaffoldMessengerKey,
+              theme: ThemeData(
+                scaffoldBackgroundColor: TemaUtil.corDeFundo,
+                appBarTheme: const AppBarTheme(color: AppColor.primary),
+                colorScheme: ColorScheme.fromSwatch(
+                  accentColor: AppColor.primary,
+                ),
+                fontFamily: GoogleFonts.poppins().fontFamily,
+                textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp, displayColor: AppColor.primary),
+              ),
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -52,7 +70,7 @@ class App extends StatelessWidget {
                 return Theme(
                   data: ThemeData(
                     primaryColor: TemaUtil.amarelo01,
-                    appBarTheme: const AppBarTheme(
+                    appBarTheme: AppBarTheme(
                       iconTheme: IconThemeData(color: TemaUtil.preto01),
                       foregroundColor: TemaUtil.preto01,
                       color: TemaUtil.amarelo01,
@@ -67,7 +85,7 @@ class App extends StatelessWidget {
                       style: TextButton.styleFrom(
                         backgroundColor: TemaUtil.amarelo01,
                         foregroundColor: TemaUtil.preto02,
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           fontSize: 14,
                         ),
                         shape: RoundedRectangleBorder(

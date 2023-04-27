@@ -9,6 +9,8 @@ abstract class IAutenticacaoLocalDataSource {
   Future<void> cacheToken(AutenticacaoModel loginModel);
   Future<AutenticacaoModel?> getLastToken();
   Future<bool> apagarToken();
+
+  Future<void> atualizarAccessToken(String newAccessToken);
 }
 
 @Injectable(as: IAutenticacaoLocalDataSource)
@@ -36,5 +38,18 @@ class AutenticacaoLocalDataSource implements IAutenticacaoLocalDataSource {
   @override
   Future<bool> apagarToken() async {
     return await sharedPreferences.remove(CACHED_TOKEN);
+  }
+
+  @override
+  Future<void> atualizarAccessToken(newAccessToken) async {
+    AutenticacaoModel? autenticacaoModel = await getLastToken();
+
+    if (autenticacaoModel != null) {
+      AutenticacaoModel newModel = autenticacaoModel.copyWith(
+        accessToken: newAccessToken,
+      );
+
+      await cacheToken(newModel);
+    }
   }
 }

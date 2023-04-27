@@ -19,8 +19,6 @@
 # Visual Studio Code related
 .classpath
 .project
-.settings/
-.vscode/*
 
 # Flutter repo-specific
 /bin/cache/
@@ -127,6 +125,7 @@ app.*.map.json
 **.config.dart
 **.freezed.dart
 **.g.dart
+**.gr.dart
 **.gen.dart
 
 # Exceptions to the above rules.
@@ -147,3 +146,7 @@ firebase_options*.dart
 GoogleService-Info.plist
 google-services.json
 firebase.json
+
+# Env
+.env
+env.g.dart
