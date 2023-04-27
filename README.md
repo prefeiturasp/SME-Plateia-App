@@ -1,24 +1,60 @@
-# Flutter Clean Architecture Project Template: Basic Template
 
-***A Very Opinionated Flutter Project Template***
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) 
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
-![coverage][coverage_badge]
-[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![License: MIT][license_badge]][license_link]
 
-Powered by the [Very Good CLI][very_good_cli_link] 🤖
+# App Plateia
 
----
+O App Plateia é um aplicativo criado para facilitar a visualização das inscrições do site do [Plateia](https://plateia.sme.prefeitura.sp.gov.br/).
 
-## Getting Started 🚀
 
-This project contains 3 flavors:
+
+## Funcionalidades
+
+* Acessar os eventos incritos
+* Visualizar detalhes do eventos
+* Visualizar e salvar o voucher do evento
+
+
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+`URL_API` - URL da API de acesso
+
+`URL_RECUPERAR_SENHA` - URL de recuperação de senha do Plateia
+
+
+## Instalação
+
+Instale App Plateia com Flutter
+
+```shell
+  flutter pub get
+  flutter packages pub run build_runner build --delete-conflicting-outputs
+```
+    
+## Configure o Firebase
+
+```shell
+# Development
+./firebase.sh app-plateia-dev development br.gov.sp.prefeitura.sme.plateia.dev br.gov.sp.prefeitura.sme.plateia.dev
+
+# Staging                                              
+./firebase.sh app-plateia-hom staging br.gov.sp.prefeitura.sme.plateia.stg br.gov.sp.prefeitura.sme.plateia.stg
+
+# Production
+./firebase.sh app-plateia-prd production br.gov.sp.prefeitura.sme.plateia br.gov.sp.prefeitura.sme.plateia
+```
+## Execução
+
+Este projeto possui 3 flavors:
 
 - development
 - staging
 - production
 
-To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands:
+Para executar o tipo desejado, use a configuração de inicialização no VSCode/Android Studio ou use os seguintes comandos:
 
 ```sh
 # Development
@@ -31,18 +67,11 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
+## Makefile Command
 
-_\*Template works on iOS, Android, Web, Linux, and Windows._
+Este projeto está equipado com o comando Makefile para encurtar a escrita do comando, para ver o comando disponível, consulte [Makefile](https://github.com/prefeiturasp/SME-Plateia-App/blob/master/Makefile).
 
-
----
-
-## Makefile Command 💻
-
-This project is equipped with Makefile command to shorten command writing, to see available command please refer to [Makefile][makefile_link].
-Please change the Environment Variable such as: `${FIREBASE_EMAIL}`, etc., in the file to your need.
-
-To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands:
+Para executar o tipo desejado, use a configuração de inicialização no VSCode/Android Studio ou use os seguintes comandos:
 
 ```sh
 # run build_runner once
@@ -66,26 +95,8 @@ $ make fix
 # check fix
 $ make check-fix
 ```
+## Referência
 
----
+ - [Site Plateia](https://plateia.sme.prefeitura.sp.gov.br/)
+ - [Flutter](https://flutter.dev/)
 
-## Running Tests 🧪
-
-To run all unit and widget tests use the following command:
-
-```sh
-# Run test with coverage
-$ flutter test --coverage --test-randomize-ordering-seed random
-```
-
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
-
-```sh
-# Generate Coverage Report
-$ genhtml coverage/lcov.info -o coverage/
-
-# Open Coverage Report
-$ open coverage/index.html
-```
-
----
