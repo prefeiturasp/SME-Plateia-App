@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/core/utils/web_view.dart';
+import 'package:sme_plateia/env.dart';
 import 'package:sme_plateia/shared/presentation/widgets/rodape.dart';
 import 'package:sme_plateia/shared/presentation/widgets/text_button.dart';
 
@@ -63,6 +63,6 @@ class _EsqueceuSenhaPageState extends State<EsqueceuSenhaPage> {
   }
 
   _recuperarSenha() async {
-    await launchURL(context, Endpoint.recuperarSenha);
+    await launchURL(context, Env.URL_RECUPERAR_SENHA);
   }
 }

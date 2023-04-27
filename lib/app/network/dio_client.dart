@@ -5,8 +5,8 @@ import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
 import 'package:sme_plateia/core/storages/local_storages.dart';
-import 'package:sme_plateia/core/utils/constants.dart';
 import 'package:sme_plateia/app/network/dio_interceptors/auth_interceptor.dart';
+import 'package:sme_plateia/env.dart';
 
 @module
 abstract class DioClient {
@@ -14,7 +14,7 @@ abstract class DioClient {
   Future<Dio> setup(LocalStorage localStorage) async {
     final options = BaseOptions(
       responseType: ResponseType.json,
-      baseUrl: Endpoint.baseUrl,
+      baseUrl: Env.URL_API,
     );
 
     final dio = Dio(options);

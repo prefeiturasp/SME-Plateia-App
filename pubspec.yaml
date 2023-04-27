@@ -21,6 +21,7 @@ dependencies:
   intl: ^0.18.0
   rxdart: ^0.27.5
   uuid: ^3.0.6
+  envied: ^0.3.0
 
   # Scrool Listagem infinita
   infinite_scroll_pagination: ^3.2.0
@@ -115,6 +116,9 @@ dev_dependencies:
   # Banco de dados
   floor_generator: ^1.4.1
 
+  # Env
+  envied_generator: ^0.3.0
+
 dependency_overrides:
   xml: ^6.2.2
   intl: ^0.18.0
@@ -139,3 +143,7 @@ flutter:
     - assets/google_fonts/
     - assets/icons/
     - assets/images/
+
+scripts:
+  build-clean: flutter packages pub run build_runner clean
+  build: flutter packages pub run build_runner build --delete-conflicting-outputs
