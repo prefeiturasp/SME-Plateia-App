@@ -28,7 +28,7 @@ jobs:
       - name: 🐦 Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.3.10
+          flutter-version: 3.7.11
           channel: stable
           cache: true
 
