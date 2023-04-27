@@ -1,0 +1,39 @@
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - implicit_dynamic_parameter
+      json_serializable:
+        generate_for:
+          - lib/**.codegen.dart
+          - lib/**.model.dart
+        options:
+          # field_rename: snake
+          explicit_to_json: true
+      freezed:freezed:
+        generate_for:
+          - lib/**/blocs/**.dart
+          - lib/**/cubits/**.dart
+          - lib/**.entity.dart
+          - lib/**.model.dart
+          - lib/**.codegen.dart
+      injectable_generator:injectable_config_builder:
+        generate_for:
+          - lib/injector.dart
+      retrofit_generator:retrofit:
+        generate_for:
+          - lib/**_service.dart
+      auto_route_generator:auto_router_generator:
+        generate_for:
+          - lib/app/router/app_router.dart
+          - lib/**/presentation/pages/**.dart
+      floor_generator:floor_generator:
+        generate_for:
+          - lib/core/database/app_database.dart
+          - lib/**.model.dart
+
+      # mockito|mockBuilder:
+      #   generate_for:
+      #     - test/**.dart

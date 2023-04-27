@@ -1,0 +1,19 @@
+{
+  "access": "123456",
+  "refresh": "refresh",
+  "user": {
+    "entityid": "6CF424DC-8EC3-E011-9B36-00155D033206",
+    "login": "1845721",
+    "crypt": "3",
+    "name": "Nome",
+    "rf": "12345678",
+    "email": null,
+    "tel": null,
+    "isadmin": false,
+    "eventduedate": "2017-06-17T21:00:00-03:00",
+    "punishmentduedate": null,
+    "state": 1,
+    "createdate": "2016-01-21T00:38:15.217000-02:00",
+    "updatedate": "2017-06-13T09:37:14.143000-03:00"
+  }
+}
