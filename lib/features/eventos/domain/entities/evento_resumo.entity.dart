@@ -5,14 +5,16 @@ class EventoResumo {
   @PrimaryKey(autoGenerate: true)
   final int id;
   final String nome;
-  final DateTime dataHora;
+  final DateTime dataHoraProgramada;
+  final DateTime dataHoraApresentacao;
   final String local;
   final String urlPoster;
 
   EventoResumo({
     required this.id,
     required this.nome,
-    required this.dataHora,
+    required this.dataHoraProgramada,
+    required this.dataHoraApresentacao,
     required this.local,
     required this.urlPoster,
   });

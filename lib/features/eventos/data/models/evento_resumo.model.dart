@@ -14,11 +14,12 @@ class EventoResumoModel with _$EventoResumoModel {
   factory EventoResumoModel({
     @JsonKey(name: "id") required int id,
     @JsonKey(name: "local") required String local,
-    @JsonKey(name: "schedule") required DateTime dataHora,
+    @JsonKey(name: "schedule") required DateTime dataHoraProgramada,
+    @JsonKey(name: "presentationdate") required DateTime dataHoraApresentacao,
     @JsonKey(name: "showid") required EventoModel evento,
-    @JsonKey(name: "presentationdate") required DateTime dataApresentacao,
     @JsonKey(name: "cityid") required EventoCidadeModel cidade,
   }) = _EventoResumoModel;
+
   factory EventoResumoModel.fromJson(Map<String, dynamic> json) => _$EventoResumoModelFromJson(json);
 
   EventoResumo toDomain() {
@@ -32,7 +33,8 @@ class EventoResumoModel with _$EventoResumoModel {
 
     return EventoResumo(
       id: id,
-      dataHora: dataHora,
+      dataHoraProgramada: dataHoraProgramada,
+      dataHoraApresentacao: dataHoraApresentacao,
       nome: evento.nome,
       local: local,
       urlPoster: urlPoster,
