@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:sme_plateia/app/router/app_router.dart';
 import 'package:sme_plateia/app/router/app_router.gr.dart';
-import 'package:sme_plateia/core/utils/constants.dart';
+import 'package:sme_plateia/env.dart';
 import 'package:sme_plateia/features/auth/data/datasources/autenticacao_local_datasource.dart';
 import 'package:sme_plateia/features/auth/data/models/autenticacao.model.dart';
 import 'package:sme_plateia/injector.dart';
@@ -109,7 +109,7 @@ class AuthInterceptor extends QueuedInterceptor {
     final refreshToken = authData!.refreshToken;
 
     final response = await _dio.post(
-      "${Endpoint.baseUrl}/autenticacao/token/atualizar/",
+      "${Env.URL_API}/autenticacao/token/atualizar/",
       data: {'refresh': refreshToken},
     );
 
