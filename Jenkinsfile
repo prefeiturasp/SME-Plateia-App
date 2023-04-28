@@ -55,6 +55,7 @@ pipeline {
             file(credentialsId: 'plateia-app_key-properties', variable: 'APPKEYPROPERTIES'),
             file(credentialsId: 'plateia-app_firebase_options_development', variable: 'FIREBASEDEV'),
             file(credentialsId: 'plateia-app_upload-keystore-jks', variable: 'APPKEYUPLOAD'),
+            file(credentialsId: "plateia-app_env_${branchname}", variable: 'env'),
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONDEV} android/app/src/development/google-services.json'
@@ -62,6 +63,13 @@ pipeline {
             sh 'cp ${FIREBASEDEV} lib/app/firebase/firebase_options_development.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
+            sh 'if [ -d "env" ]; then rm -f env; fi'
+            sh 'cp ${env} env'
+            sh 'chmod a+r+x env && . $(realpath env)'
+            sh 'if [ -d "env" ]; then rm -f env; fi'
+            sh 'echo ################'
+            sh 'env'
+            sh 'echo ################'
             sh 'flutter clean'
             sh 'flutter pub get'
             sh 'flutter packages pub run build_runner build --delete-conflicting-outputs'
