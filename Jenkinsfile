@@ -28,7 +28,7 @@ pipeline {
             }
         }
       }
-
+      
       stage('Build APK Dev') {
         when { 
           anyOf { 
@@ -41,6 +41,7 @@ pipeline {
             file(credentialsId: 'plateia-app_key-properties', variable: 'APPKEYPROPERTIES'),
             file(credentialsId: 'plateia-app_firebase_options_development', variable: 'FIREBASEDEV'),
             file(credentialsId: 'plateia-app_upload-keystore-jks', variable: 'APPKEYUPLOAD'),
+            file(credentialsId: "plateia-app_env_${branchname}", variable: 'env'),
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONDEV} android/app/src/development/google-services.json'
@@ -48,11 +49,14 @@ pipeline {
             sh 'cp ${FIREBASEDEV} lib/app/firebase/firebase_options_development.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
+            sh 'if [ -d ".env" ]; then rm -f .env; fi'
+            sh 'cp ${env} .env'
             sh 'flutter clean'
             sh 'flutter pub get'
             sh 'flutter packages pub run build_runner build --delete-conflicting-outputs'
             sh "flutter build apk --build-name=${APP_VERSION} --build-number=${BUILD_NUMBER} --release --flavor=development --target lib/main_development.dart --no-tree-shake-icons"
             sh "ls -ltra build/app/outputs/flutter-apk/"
+            sh 'if [ -d ".env" ]; then rm -f .env; fi'
             stash includes: 'build/app/outputs/flutter-apk/**/*.apk', name: 'appbuild'
           }
         }
@@ -70,6 +74,7 @@ pipeline {
             file(credentialsId: 'plateia-app_key-properties', variable: 'APPKEYPROPERTIES'),
             file(credentialsId: 'plateia-app_firebase_options_staging', variable: 'FIREBASEHOM'),
             file(credentialsId: 'plateia-app_upload-keystore-jks', variable: 'APPKEYUPLOAD'),
+            file(credentialsId: "plateia-app_env_${branchname}", variable: 'env'),
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONHOM} android/app/src/staging/google-services.json'
@@ -77,11 +82,14 @@ pipeline {
             sh 'cp ${FIREBASEHOM} lib/app/firebase/firebase_options_staging.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
+            sh 'if [ -d ".env" ]; then rm -f .env; fi'
+            sh 'cp ${env} .env'
             sh 'flutter clean'
             sh 'flutter pub get'
             sh 'flutter packages pub run build_runner build --delete-conflicting-outputs'
             sh "flutter build apk --build-name=${APP_VERSION} --build-number=${BUILD_NUMBER} --release --flavor=staging --target lib/main_staging.dart --no-tree-shake-icons"
             sh "ls -ltra build/app/outputs/flutter-apk/"
+            sh 'if [ -d ".env" ]; then rm -f .env; fi'
             stash includes: 'build/app/outputs/flutter-apk/**/*.apk', name: 'appbuild'
           }
         }
@@ -97,6 +105,7 @@ pipeline {
             file(credentialsId: 'plateia-app_key-properties', variable: 'APPKEYPROPERTIES'),
             file(credentialsId: 'plateia-app_firebase_options_production', variable: 'FIREBASEPROD'),
             file(credentialsId: 'plateia-app_upload-keystore-jks', variable: 'APPKEYUPLOAD'),
+            file(credentialsId: "plateia-app_env_${branchname}", variable: 'env'),
     ]) {
             sh 'cd ${WORKSPACE}'
             sh 'cp ${GOOGLEJSONPROD} android/app/src/production/google-services.json'
@@ -104,11 +113,14 @@ pipeline {
             sh 'cp ${FIREBASEPROD} lib/app/firebase/firebase_options_production.dart '
             sh 'cp ${APPKEYPROPERTIES} android/key.properties'
             sh 'cp ${APPKEYUPLOAD} android/app/upload-keystore.jks'
+            sh 'if [ -d ".env" ]; then rm -f .env; fi'
+            sh 'cp ${env} .env'
             sh 'flutter clean'
             sh 'flutter pub get'
             sh 'flutter packages pub run build_runner build --delete-conflicting-outputs'
             sh "flutter build apk --build-name=${APP_VERSION} --build-number=${BUILD_NUMBER} --release --flavor=production --target lib/main_production.dart --no-tree-shake-icons"
             sh "ls -ltra build/app/outputs/flutter-apk/"
+            sh 'if [ -d ".env" ]; then rm -f .env; fi'
             stash includes: 'build/app/outputs/flutter-apk/**/*.apk', name: 'appbuild'
           }
         }
