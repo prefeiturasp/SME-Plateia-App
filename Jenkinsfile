@@ -28,6 +28,20 @@ pipeline {
             }
         }
       }
+      
+      stage('Envs') {
+        when { anyOf { branch 'master'; branch 'develop'; branch 'release'; } }
+        steps {
+          script {
+            withCredentials([file(credentialsId: "plateia-app_env_${branchname}", variable: 'env')]) {            
+              sh 'if [ -d "env" ]; then rm -f env; fi'
+              sh 'cp ${env} env'
+              sh 'chmod a+r+x env && . $(realpath env)'
+              sh 'if [ -d "env" ]; then rm -f env; fi'
+            }
+          }
+        }          
+      }
 
       stage('Build APK Dev') {
         when { 
