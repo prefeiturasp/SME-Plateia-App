@@ -251,7 +251,7 @@ pipeline {
         if (env.BRANCH_NAME.toLowerCase() == 'develop' || env.BRANCH_NAME.toLowerCase() == 'release') {
           archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/**/*.apk', fingerprint: true
         } else if (env.BRANCH_NAME.toLowerCase() == 'master') {
-          archiveArtifacts artifacts: 'build/app/outputs/productionRelease/**/*.aab', fingerprint: true
+          archiveArtifacts artifacts: 'build/app/outputs/bundle/productionRelease/**/*.aab', fingerprint: true
         }
       }
     }
