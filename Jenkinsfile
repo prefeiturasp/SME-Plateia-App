@@ -119,9 +119,9 @@ pipeline {
             sh 'flutter pub get'
             sh 'flutter packages pub run build_runner build --delete-conflicting-outputs'
             sh "flutter build appbundle --build-name=${APP_VERSION} --build-number=${BUILD_NUMBER} --release --flavor=production --target lib/main_production.dart --no-tree-shake-icons"
-            sh "ls -ltra build/app/outputs/bundle/release/"
+            sh "ls -ltra build/app/outputs/bundle/productionRelease/"
             sh 'if [ -d ".env" ]; then rm -f .env; fi'
-            stash includes: 'build/app/outputs/bundle/release/**/*.aab', name: 'appbuild'
+            stash includes: 'build/app/outputs/bundle/productionRelease/**/*.aab', name: 'appbuild'
           }
         }
       }
@@ -232,7 +232,7 @@ pipeline {
                         unstash 'appbuild'
                     }
                     sh ("echo \"app-${env.branchname}.aab\"")
-                    sh ("github-release upload --security-token "+"$token"+" --user prefeiturasp --repo SME-Plateia-App --tag ${APP_VERSION}-prod --name "+"app-${APP_VERSION}-prod.aab"+" --file tmp/build/app/outputs/bundle/release/app.aab --replace")
+                    sh ("github-release upload --security-token "+"$token"+" --user prefeiturasp --repo SME-Plateia-App --tag ${APP_VERSION}-prod --name "+"app-${APP_VERSION}-prod.aab"+" --file tmp/build/app/outputs/bundle/productionRelease/app-production-release.aab --replace")
                 }
             } 
             catch (err) {
@@ -251,7 +251,7 @@ pipeline {
         if (env.BRANCH_NAME.toLowerCase() == 'develop' || env.BRANCH_NAME.toLowerCase() == 'release') {
           archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/**/*.apk', fingerprint: true
         } else if (env.BRANCH_NAME.toLowerCase() == 'master') {
-          archiveArtifacts artifacts: 'build/app/outputs/**/*.aab', fingerprint: true
+          archiveArtifacts artifacts: 'build/app/outputs/productionRelease/**/*.aab', fingerprint: true
         }
       }
     }
