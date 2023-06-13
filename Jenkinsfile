@@ -247,10 +247,12 @@ pipeline {
   post {
     always {
       echo 'One way or another, I have finished'
-      if (env.BRANCH_NAME.toLowerCase() == 'develop' || env.BRANCH_NAME.toLowerCase() == 'release') {
-        archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/**/*.apk', fingerprint: true
-      } else if (env.BRANCH_NAME.toLowerCase() == 'master') {
-        archiveArtifacts artifacts: 'build/app/outputs/**/*.aab', fingerprint: true
+      script{
+        if (env.BRANCH_NAME.toLowerCase() == 'develop' || env.BRANCH_NAME.toLowerCase() == 'release') {
+          archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/**/*.apk', fingerprint: true
+        } else if (env.BRANCH_NAME.toLowerCase() == 'master') {
+          archiveArtifacts artifacts: 'build/app/outputs/**/*.aab', fingerprint: true
+        }
       }
     }
     success {
