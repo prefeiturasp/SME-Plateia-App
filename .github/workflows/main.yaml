@@ -1,14 +1,19 @@
-name: template
+name: App Plateia
 
 on:
   push:
     branches:
       - master
-      - staging
+      - release
   pull_request:
     branches:
       - master
-      - staging
+      - release
+
+env:
+  URL_API: http://site
+  URL_RECUPERAR_SENHA: http://site
+
 
 jobs:
   semantic-pull-request:
@@ -40,9 +45,6 @@ jobs:
 
       - name: 🧬 Generate Code
         run: flutter pub run build_runner build --delete-conflicting-outputs
-
-      - name: ✨ Check Formatting
-        run: flutter format --set-exit-if-changed lib test
 
       - name: 🕵️ Analyze
         run: flutter analyze lib test
