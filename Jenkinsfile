@@ -118,10 +118,10 @@ pipeline {
             sh 'flutter clean'
             sh 'flutter pub get'
             sh 'flutter packages pub run build_runner build --delete-conflicting-outputs'
-            sh "flutter build apk --build-name=${APP_VERSION} --build-number=${BUILD_NUMBER} --release --flavor=production --target lib/main_production.dart --no-tree-shake-icons"
-            sh "ls -ltra build/app/outputs/flutter-apk/"
+            sh "flutter build appbundle --build-name=${APP_VERSION} --build-number=${BUILD_NUMBER} --release --flavor=production --target lib/main_production.dart --no-tree-shake-icons"
+            sh "ls -ltra build/app/outputs/bundle/productionRelease/"
             sh 'if [ -d ".env" ]; then rm -f .env; fi'
-            stash includes: 'build/app/outputs/flutter-apk/**/*.apk', name: 'appbuild'
+            stash includes: 'build/app/outputs/bundle/productionRelease/**/*.aab', name: 'appbuild'
           }
         }
       }
@@ -231,8 +231,8 @@ pipeline {
                     dir('tmp'){
                         unstash 'appbuild'
                     }
-                    sh ("echo \"app-${env.branchname}.apk\"")
-                    sh ("github-release upload --security-token "+"$token"+" --user prefeiturasp --repo SME-Plateia-App --tag ${APP_VERSION}-prod --name "+"app-${APP_VERSION}-prod.apk"+" --file tmp/build/app/outputs/flutter-apk/app-production-release.apk --replace")
+                    sh ("echo \"app-${env.branchname}.aab\"")
+                    sh ("github-release upload --security-token "+"$token"+" --user prefeiturasp --repo SME-Plateia-App --tag ${APP_VERSION}-prod --name "+"app-${APP_VERSION}-prod.aab"+" --file tmp/build/app/outputs/bundle/productionRelease/app-production-release.aab --replace")
                 }
             } 
             catch (err) {
@@ -247,7 +247,13 @@ pipeline {
   post {
     always {
       echo 'One way or another, I have finished'
-      archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/**/*.apk', fingerprint: true
+      script{
+        if (env.BRANCH_NAME.toLowerCase() == 'develop' || env.BRANCH_NAME.toLowerCase() == 'release') {
+          archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/**/*.apk', fingerprint: true
+        } else if (env.BRANCH_NAME.toLowerCase() == 'master') {
+          archiveArtifacts artifacts: 'build/app/outputs/bundle/productionRelease/**/*.aab', fingerprint: true
+        }
+      }
     }
     success {
       telegramSend("${JOB_NAME}...O Build ${BUILD_DISPLAY_NAME} - Esta ok !!!\n Consulte o log para detalhes -> [Job logs](${env.BUILD_URL}console)\n\n Uma nova versão da aplicação esta disponivel!!!")
