@@ -147,3 +147,4 @@ flutter:
 scripts:
   build-clean: flutter packages pub run build_runner clean
   build: flutter packages pub run build_runner build --delete-conflicting-outputs
+  generate-icons: flutter pub run flutter_launcher_icons
