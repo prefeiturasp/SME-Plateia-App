@@ -28,22 +28,30 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: 44),
-            Center(child: Assets.images.logo.image()),
-            SizedBox(height: 66),
-            Expanded(
-              child: BlocProvider(
-                create: (_) => LoginCubit(
-                  context.read<AuthCubit>(),
-                  sl(),
-                ),
-                child: LoginForm(),
+        child: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 44),
+                  Center(child: Assets.images.logo.image()),
+                  SizedBox(height: 66),
+                  Expanded(
+                    child: BlocProvider(
+                      create: (_) => LoginCubit(
+                        context.read<AuthCubit>(),
+                        sl(),
+                      ),
+                      child: LoginForm(),
+                    ),
+                  ),
+                  Rodape(),
+                ],
               ),
             ),
-            Rodape(),
           ],
         ),
       ),
