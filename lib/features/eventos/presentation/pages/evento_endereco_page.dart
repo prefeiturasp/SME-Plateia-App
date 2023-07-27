@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:sme_plateia/core/utils/colors.dart';
 import 'package:sme_plateia/features/eventos/presentation/cubits/evento_endereco/evento_endereco_cubit.dart';
 
 import 'package:sme_plateia/gen/assets.gen.dart';
@@ -57,6 +59,18 @@ class EventoEnderecoPage extends HookWidget {
                     loading: () => Center(
                       child: CircularProgressIndicator(),
                     ),
+                    notFound: () {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+                        child: Center(
+                          child: Text('Problema ao carregar mapa. Clique no endereço acima para ver opções.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: AppColor.orangeDark,
+                              )),
+                        ),
+                      );
+                    },
                     loaded: (location) {
                       return FlutterMap(
                         mapController: _mapController,
@@ -73,8 +87,8 @@ class EventoEnderecoPage extends HookWidget {
                             markers: [
                               Marker(
                                 point: location,
-                                width: 70,
-                                height: 70,
+                                width: 70.w,
+                                height: 70.h,
                                 anchorPos: AnchorPos.align(AnchorAlign.top),
                                 builder: (context) => GestureDetector(
                                   onTap: () async {
@@ -112,7 +126,7 @@ class EventoEnderecoPage extends HookWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Assets.icons.local.svg(width: 16),
+          Assets.icons.local.svg(width: 16.w),
           SizedBox(width: 8),
           Expanded(
             child: Column(

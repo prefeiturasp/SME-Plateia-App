@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sme_plateia/app/router/app_router.gr.dart';
 import 'package:sme_plateia/features/auth/data/datasources/autenticacao_local_datasource.dart';
 import 'package:sme_plateia/features/auth/presentation/cubits/auth/auth_cubit.dart';
@@ -10,8 +11,10 @@ import 'package:sme_plateia/injector.dart';
 class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
   final String titulo;
 
+  final height = kToolbarHeight + 8 * 5;
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + 8 * 5);
+  Size get preferredSize => Size.fromHeight(height);
 
   const Cabecalho(this.titulo, {super.key});
 
@@ -19,7 +22,7 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       // 24 for default icon size
-      toolbarHeight: kToolbarHeight + 8 * 5,
+      toolbarHeight: height,
       centerTitle: false,
       leadingWidth: 0,
       titleSpacing: 0,
@@ -47,7 +50,7 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
 
                     return Text(
                       nome,
-                      style: TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 14.spMin),
                     );
                   },
                 ),
@@ -68,7 +71,7 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
                     _buildBackButton(context),
                     Text(
                       titulo,
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(fontSize: 24.spMin),
                     ),
                   ],
                 ),
@@ -81,7 +84,7 @@ class Cabecalho extends StatelessWidget implements PreferredSizeWidget {
                     children: [
                       Text(
                         'Sair',
-                        style: TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 14.spMin),
                       ),
                       SizedBox(width: 8),
                       Assets.icons.sair.svg(),
