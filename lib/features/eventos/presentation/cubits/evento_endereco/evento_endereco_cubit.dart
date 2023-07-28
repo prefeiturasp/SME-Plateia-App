@@ -25,6 +25,39 @@ class EventoEnderecoCubit extends Cubit<EventoEnderecoState> {
     }
 
     emit(EventoEnderecoState.loading());
+
+    var result = await encontrarGeopoint(endereco);
+
+    result ??= await encontrarGeopoint(endereco.replaceAll(RegExp('\\(.*?\\)'), ''));
+
+    if (result == null) {
+      var regex = RegExp(r'((.*), (\d*))');
+      String? ruaNumero = regex.firstMatch(endereco)?.group(1);
+
+      result ??= await encontrarGeopoint(ruaNumero);
+    }
+
+    if (result == null) {
+      var regex = RegExp(r'\(([^\)]+)\)');
+      String? dentroParenteses = regex.firstMatch(endereco)?.group(1);
+
+      result ??= await encontrarGeopoint(dentroParenteses);
+    }
+
+    if (result != null) {
+      LatLng local = LatLng(result.lat, result.lon);
+
+      emit(EventoEnderecoState.loaded(local));
+    } else {
+      emit(EventoEnderecoState.notFound());
+    }
+  }
+
+  Future<Place?> encontrarGeopoint(String? endereco) async {
+    if (endereco == null || endereco.isEmpty) {
+      return null;
+    }
+
     final List<Place> searchResult = await Nominatim.searchByName(
       query: endereco,
       limit: 1,
@@ -33,9 +66,10 @@ class EventoEnderecoCubit extends Cubit<EventoEnderecoState> {
       nameDetails: true,
     );
 
-    Place result = searchResult.first;
-    LatLng local = LatLng(result.lat, result.lon);
+    if (searchResult.isNotEmpty) {
+      return searchResult.first;
+    }
 
-    emit(EventoEnderecoState.loaded(local));
+    return null;
   }
 }
