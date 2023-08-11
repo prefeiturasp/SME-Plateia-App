@@ -92,6 +92,8 @@ class EventoDetalhesPage extends HookWidget {
       errorBuilder: (context, error, stackTrace) {
         return Assets.images.eventoGenerico.image(
           fit: BoxFit.cover,
+          height: 196,
+          width: MediaQuery.of(context).size.height,
         );
       },
     );
