@@ -49,6 +49,7 @@ class EventosPage extends HookWidget {
       child: Scaffold(
         appBar: Cabecalho('Meus Eventos'),
         body: CustomScrollView(
+          primary: true,
           slivers: [
             // Formulario de filtro
             _buildFormularioFiltro(context, controllerNomeEvento, controllerLocalEvento, pagingController),

@@ -35,13 +35,10 @@ configureCacheImage() async {
   );
 }
 
-Future<void> bootstrap(
-  FutureOr<Widget> Function() builder, {
+setup({
   required String environment,
   FirebaseOptions? firebaseOptions,
 }) async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   await configureDependencies(environment: environment);
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
@@ -66,9 +63,19 @@ Future<void> bootstrap(
 
   // Dependencies
   await configureCacheImage();
+}
 
+Future<void> bootstrap(
+  FutureOr<Widget> Function() builder, {
+  required String environment,
+  FirebaseOptions? firebaseOptions,
+}) async {
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await setup(environment: environment, firebaseOptions: firebaseOptions);
+      return runApp(await builder());
+    },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
