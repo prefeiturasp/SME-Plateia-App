@@ -239,6 +239,9 @@ pipeline {
                     }
                     sh ("echo \"app-${env.branchname}.apk\"")
                     sh ("github-release upload --security-token "+"$token"+" --user prefeiturasp --repo SME-Plateia-App --tag ${APP_VERSION}-prod --name "+"app-${APP_VERSION}-prod.apk"+" --file tmp/build/app/outputs/flutter-apk/app-production-release.apk --replace")
+                    
+                    sh ("echo \"app-${env.branchname}.aab\"")
+                    sh ("github-release upload --security-token "+"$token"+" --user prefeiturasp --repo SME-Plateia-App --tag ${APP_VERSION}-prod --name "+"app-${APP_VERSION}-prod.aab"+" --file tmp/build/app/outputs/bundle/productionRelease/app-production-release.aab --replace")
                 }
             } 
             catch (err) {
