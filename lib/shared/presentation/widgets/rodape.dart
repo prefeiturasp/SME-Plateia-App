@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sme_plateia/gen/assets.gen.dart';
 
 class Rodape extends StatelessWidget {
   const Rodape({super.key});
@@ -10,7 +11,9 @@ class Rodape extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         SizedBox(height: 24.h),
-        Image.asset('assets/images/logo_saopaulo.png'),
+        Assets.images.logoSaopaulo.image(
+          height: 40.h,
+        ),
         SizedBox(height: 24.h),
       ],
     );
