@@ -16,7 +16,6 @@ abstract class EventoRemoteService {
     @Query('local') String? local,
     @Query('nome') String? nome,
     @Query('page') int? pagina,
-    @Query('periodo_inicio') String? periodoInicio,
-    @Query('periodo_fim') String? periodoFim,
+    @Query('ativos') int? ativos,
   });
 }
