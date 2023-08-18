@@ -126,8 +126,10 @@ pipeline {
             sh "ls -ltra build/app/outputs/bundle/productionRelease/"
 
             sh 'if [ -d ".env" ]; then rm -f .env; fi'
-            stash includes: 'build/app/outputs/bundle/productionRelease/**/*.aab', name: 'appbuild'
-            stash includes: 'build/app/outputs/flutter-apk/**/*.apk', name: 'appbuild'
+            stash includes: [
+                'build/app/outputs/bundle/productionRelease/**/*.aab',
+                'build/app/outputs/flutter-apk/**/*.apk'
+            ], name: 'appbuild'
           }
         }
       }
