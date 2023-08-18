@@ -27,21 +27,11 @@ class EventoRepository implements IEventoRepository {
   }) async {
     try {
       if (await networkInfo.isConnected) {
-        DateTime? inicio;
-        DateTime? fim;
-
-        if (periodo != null && periodo != EnumEventoPeriodo.todos) {
-          var hoje = DateTime.now();
-          inicio = hoje.subtract(Duration(days: periodo.dias));
-          fim = hoje;
-        }
-
         final result = await eventoRemoteDataSource.obterEventos(
           nome: nome,
           local: local,
           pagina: pagina,
-          periodoInicio: inicio,
-          periodoFim: fim,
+          ativos: periodo!.ativo,
         );
 
         final List<EventoResumoModel> listEventosResumoModel = result;
