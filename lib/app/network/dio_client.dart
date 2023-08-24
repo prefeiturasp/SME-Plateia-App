@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:sme_plateia/core/domain/failures/failure.codegen.dart';
@@ -60,10 +61,16 @@ handleNertorkError(DioError e) {
     switch (e.response!.statusCode) {
       case 401:
       case 403:
-        if ((e.response!.data as Map).containsKey('errors')) {
-          message = e.response!.data['errors'][0];
-        } else {
-          message = e.response!.data['detail'];
+      case 500:
+        try {
+          if ((e.response!.data as Map).containsKey('errors')) {
+            message = e.response!.data['errors'][0];
+          } else {
+            message = e.response!.data['detail'];
+          }
+        } catch (e) {
+          debugPrint(e.toString());
+          throw Failure.serverFailure(message: message);
         }
 
         break;

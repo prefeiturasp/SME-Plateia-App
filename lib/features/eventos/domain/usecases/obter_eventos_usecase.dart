@@ -37,7 +37,7 @@ class Params extends Equatable {
 
   Params({
     this.nome = '',
-    this.periodo = EnumEventoPeriodo.essaSemana,
+    this.periodo = EnumEventoPeriodo.proximosEventos,
     this.local = '',
     this.pagina = 1,
   });

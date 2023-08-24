@@ -1,15 +1,14 @@
 import 'package:sme_plateia/core/interfaces/i_dropdown_item.dart';
 
 enum EnumEventoPeriodo implements IDropdownItem<EnumEventoPeriodo> {
-  todos(-1, 'Todos'),
-  essaSemana(7, 'Essa semana'),
-  esseMes(30, 'Esse mês');
+  proximosEventos(1, 'Próximos eventos'),
+  eventosPassados(0, 'Eventos passados');
 
-  const EnumEventoPeriodo(this.dias, this.nome);
+  const EnumEventoPeriodo(this.ativo, this.nome);
 
   @override
   final String nome;
-  final int dias;
+  final int ativo;
 
   @override
   List<EnumEventoPeriodo> get data => values;
