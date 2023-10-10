@@ -133,7 +133,11 @@ pipeline {
       }
 
       stage('Tag Github Dev') {
-        agent { label 'master' }
+        agent { kubernetes { 
+              label 'builder'
+              defaultContainer 'builder'
+            }
+          }
         when { anyOf {  branch 'develop'; }}
         steps{
           script{
@@ -150,7 +154,11 @@ pipeline {
       }
 
       stage('Tag Github Hom') {
-        agent { label 'master' }
+        agent { kubernetes { 
+              label 'builder'
+              defaultContainer 'builder'
+            }
+          }
         when { anyOf {  branch 'release'; }}
         steps{
           script{
@@ -167,7 +175,11 @@ pipeline {
       }     
 
       stage('Tag Github Prod') {
-        agent { label 'master' }
+        agent { kubernetes { 
+              label 'builder'
+              defaultContainer 'builder'
+            }
+          }
         when { anyOf {  branch 'master'; }}
         steps{
           script{
@@ -184,7 +196,11 @@ pipeline {
       }   
 
       stage('Release Github Dev') {
-        agent { label 'master' }
+        agent { kubernetes { 
+              label 'builder'
+              defaultContainer 'builder'
+            }
+          }
         when { anyOf {  branch 'develop'; }}
         steps{
           script{
@@ -205,7 +221,11 @@ pipeline {
       }  
 
       stage('Release Github Hom') {
-        agent { label 'master' }
+        agent { kubernetes { 
+              label 'builder'
+              defaultContainer 'builder'
+            }
+          }
         when { anyOf {  branch 'release'; }}
         steps{
           script{
@@ -227,7 +247,11 @@ pipeline {
       }
       
       stage('Release Github Prod') {
-        agent { label 'master' }
+        agent { kubernetes { 
+              label 'builder'
+              defaultContainer 'builder'
+            }
+          }
         when { anyOf {  branch 'master'; }}
         steps{
           script{
