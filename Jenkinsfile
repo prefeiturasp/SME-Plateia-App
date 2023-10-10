@@ -3,11 +3,11 @@ pipeline {
       branchname =  env.BRANCH_NAME.toLowerCase()
     }
 
-    agent {
-      node { 
-        label 'SME-AGENT-FLUTTER'
-      }
-    }
+   agent { kubernetes { 
+              label 'flutter3106'
+              defaultContainer 'flutter3106'
+            }
+          }
     
     options {
       buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
@@ -126,10 +126,8 @@ pipeline {
             sh "ls -ltra build/app/outputs/bundle/productionRelease/"
 
             sh 'if [ -d ".env" ]; then rm -f .env; fi'
-            stash includes: [
-                'build/app/outputs/bundle/productionRelease/**/*.aab',
-                'build/app/outputs/flutter-apk/**/*.apk'
-            ], name: 'appbuild'
+            stash includes: 'build/app/outputs/bundle/productionRelease/**/*.aab', name: 'appbuild'
+            stash includes: 'build/app/outputs/flutter-apk/**/*.apk', name: 'appbuild'
           }
         }
       }
@@ -284,4 +282,3 @@ pipeline {
     }
   }
 }
-
