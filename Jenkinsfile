@@ -3,11 +3,11 @@ pipeline {
       branchname =  env.BRANCH_NAME.toLowerCase()
     }
 
-    agent {
-      node { 
-        label 'SME-AGENT-FLUTTER'
-      }
-    }
+   agent { kubernetes { 
+              label 'flutter3106'
+              defaultContainer 'flutter3106'
+            }
+          }
     
     options {
       buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
@@ -282,4 +282,3 @@ pipeline {
     }
   }
 }
-
